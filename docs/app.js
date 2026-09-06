@@ -131,6 +131,8 @@ async function api(method, path, body) {
 async function detectMode() {
   if (new URLSearchParams(location.search).get('standalone') === '1') return 'local';
   if (location.protocol === 'file:') return 'local';
+  // ローカル版は必ず localhost で動く。それ以外は探しに行かない（無駄な404を出さない）
+  if (!['localhost', '127.0.0.1', '[::1]'].includes(location.hostname)) return 'local';
   try {
     const res = await fetch('/api/all', { method: 'GET' });
     if (res.ok) { await res.json(); return 'server'; }
