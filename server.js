@@ -10,11 +10,18 @@ const fs = require('fs');
 const fsp = fs.promises;
 const path = require('path');
 const url = require('url');
+const os = require('os');
+const crypto = require('crypto');
+const { spawn } = require('child_process');
 
 const ROOT = __dirname;
 const APP_DIR = path.join(ROOT, 'docs');
 const DATA_DIR = path.join(ROOT, 'data');
 const PORT = Number(process.env.MOAI_PORT || 4173);
+
+// 実行APIは「AIを起動する」ため、他サイトから叩かれないようトークンで守る。
+// トークンは index.html に差し込まれるので、同一オリジンの画面だけが読める。
+const RUN_TOKEN = crypto.randomBytes(24).toString('hex');
 
 // 読み書きを許可するコレクション（=data配下のJSONファイル名）
 const COLLECTIONS = ['config', 'channels', 'agents', 'tasks', 'inbox', 'messages', 'calendar', 'metrics', 'reports'];
@@ -93,6 +100,11 @@ async function serveStatic(res, pathname) {
     return send(res, 403, { error: 'forbidden' });
   }
   try {
+    // index.html だけは実行用トークンを差し込んで返す（同一オリジンの画面しか読めない）
+    if (path.extname(file) === '.html') {
+      const html = (await fsp.readFile(file, 'utf8')).replace('__MOAI_TOKEN__', RUN_TOKEN);
+      return send(res, 200, html, { 'Content-Type': MIME['.html'] });
+    }
     const data = await fsp.readFile(file);
     send(res, 200, data, { 'Content-Type': MIME[path.extname(file)] || 'application/octet-stream' });
   } catch {
@@ -171,10 +183,271 @@ async function handleApi(req, res, parts, query) {
   return send(res, 405, { error: 'method not allowed' });
 }
 
+/* =========================================================
+   実行エンジン — Claude Code CLI を呼び出してキューを処理する
+   ========================================================= */
+
+// Claude Code の実行ファイルを探す。見つからなければ null。
+function resolveClaudeBin() {
+  if (process.env.MOAI_CLAUDE_BIN && fs.existsSync(process.env.MOAI_CLAUDE_BIN)) {
+    return process.env.MOAI_CLAUDE_BIN;
+  }
+  const home = os.homedir();
+  const isWin = process.platform === 'win32';
+  const candidates = [];
+
+  // デスクトップアプリ同梱版（バージョンつきフォルダなので新しい順に見る）
+  const bundledRoots = isWin
+    ? [path.join(process.env.APPDATA || path.join(home, 'AppData', 'Roaming'), 'Claude', 'claude-code')]
+    : [path.join(home, 'Library', 'Application Support', 'Claude', 'claude-code')];
+  for (const root of bundledRoots) {
+    try {
+      const versions = fs.readdirSync(root)
+        .filter((d) => /^\d+\.\d+\.\d+$/.test(d))
+        .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
+      for (const v of versions) candidates.push(path.join(root, v, isWin ? 'claude.exe' : 'claude'));
+    } catch { /* 無ければ次を見る */ }
+  }
+
+  // 単体インストール版
+  candidates.push(
+    path.join(home, '.local', 'bin', isWin ? 'claude.exe' : 'claude'),
+    path.join(home, '.claude', 'local', isWin ? 'claude.exe' : 'claude'),
+    '/usr/local/bin/claude',
+    '/opt/homebrew/bin/claude',
+  );
+  if (isWin) {
+    candidates.push(path.join(process.env.APPDATA || '', 'npm', 'claude.cmd'));
+  }
+
+  for (const c of candidates) {
+    try { if (c && fs.existsSync(c)) return c; } catch { /* 続行 */ }
+  }
+  return null;
+}
+
+// 権限プリセット。既定は「node コマンドだけ許可」で、余計なことをさせない。
+const PERMISSION_PRESETS = {
+  safe: {
+    label: 'おまかせ（推奨）',
+    args: ['--permission-mode', 'acceptEdits', '--allowed-tools',
+      'Bash(node *)', 'Read', 'Write', 'Edit', 'Glob', 'Grep', 'WebSearch', 'WebFetch', 'Task', 'Agent', 'Skill'],
+  },
+  full: {
+    label: 'すべて許可（ブラウザ投稿まで任せる）',
+    args: ['--permission-mode', 'bypassPermissions'],
+  },
+};
+
+const run = {
+  status: 'idle',      // idle | running | done | error | stopped
+  startedAt: null,
+  endedAt: null,
+  prompt: '',
+  preset: 'safe',
+  log: [],             // 画面に出す進行状況
+  result: '',
+  error: null,
+  child: null,
+};
+
+function pushLog(kind, text) {
+  if (!text) return;
+  run.log.push({ at: nowIso(), kind, text: String(text).slice(0, 4000) });
+  if (run.log.length > 400) run.log.splice(0, run.log.length - 400);
+}
+
+// stream-json の1行を、人が読める進行状況に変える
+function digestStreamLine(line) {
+  let ev;
+  try { ev = JSON.parse(line); } catch { return; }
+  if (ev.type === 'system' && ev.subtype === 'init') {
+    pushLog('info', `AIを起動しました（model: ${ev.model || '既定'}）`);
+    return;
+  }
+  if (ev.type === 'assistant' && ev.message && Array.isArray(ev.message.content)) {
+    for (const c of ev.message.content) {
+      if (c.type === 'text' && c.text.trim()) pushLog('say', c.text.trim());
+      if (c.type === 'tool_use') {
+        const name = c.name || 'tool';
+        let detail = '';
+        if (c.input) {
+          if (c.input.command) detail = String(c.input.command).slice(0, 160);
+          else if (c.input.description) detail = String(c.input.description).slice(0, 160);
+          else if (c.input.query) detail = String(c.input.query).slice(0, 160);
+          else if (c.input.subagent_type) detail = String(c.input.subagent_type);
+          else if (c.input.skill) detail = String(c.input.skill);
+        }
+        pushLog('tool', detail ? `${name}: ${detail}` : name);
+      }
+    }
+    return;
+  }
+  if (ev.type === 'result') {
+    if (ev.is_error) {
+      run.error = ev.result || 'AIの実行がエラーで終了しました';
+      pushLog('error', run.error);
+    } else if (ev.result) {
+      run.result = ev.result;
+      pushLog('done', ev.result);
+    }
+  }
+}
+
+/* このサーバー自体が Claude Code から起動されている場合、セッション固有の環境変数を
+   子プロセスが引き継ぐと「認証は親が持っている」と誤認して未ログイン扱いになる。
+   CLAUDE_CONFIG_DIR 以外の CLAUDE* を落として、独立したセッションとして起動する。 */
+function cleanEnv() {
+  const env = { ...process.env };
+  for (const key of Object.keys(env)) {
+    if (key === 'CLAUDE_CONFIG_DIR') continue;
+    if (/^CLAUDE/i.test(key) || key === 'AI_AGENT') delete env[key];
+  }
+  return env;
+}
+
+/* ログイン状態の確認。毎回起動すると重いので30秒キャッシュする。 */
+const auth = { checkedAt: 0, loggedIn: null, method: '' };
+function checkAuth(force) {
+  if (!force && Date.now() - auth.checkedAt < 30000) return auth;
+  const bin = resolveClaudeBin();
+  auth.checkedAt = Date.now();
+  if (!bin) { auth.loggedIn = null; auth.method = ''; return auth; }
+  try {
+    const r = require('child_process').spawnSync(bin, ['auth', 'status'], {
+      env: cleanEnv(), encoding: 'utf8', windowsHide: true, timeout: 20000,
+    });
+    const m = (r.stdout || '').match(/\{[\s\S]*\}/);
+    if (m) {
+      const j = JSON.parse(m[0]);
+      auth.loggedIn = !!j.loggedIn;
+      auth.method = j.authMethod || '';
+    } else {
+      auth.loggedIn = null;
+    }
+  } catch { auth.loggedIn = null; }
+  return auth;
+}
+
+function startRun({ prompt, preset }) {
+  const bin = resolveClaudeBin();
+  if (!bin) {
+    throw new Error('Claude Code が見つかりませんでした。インストール済みなら、環境変数 MOAI_CLAUDE_BIN に実行ファイルのパスを設定してください。');
+  }
+  const p = PERMISSION_PRESETS[preset] ? preset : 'safe';
+
+  run.status = 'running';
+  run.startedAt = nowIso();
+  run.endedAt = null;
+  run.prompt = prompt;
+  run.preset = p;
+  run.log = [];
+  run.result = '';
+  run.error = null;
+
+  pushLog('info', `指示を実行します: ${prompt}`);
+
+  const args = ['-p', prompt, '--output-format', 'stream-json', '--verbose', ...PERMISSION_PRESETS[p].args];
+  const child = spawn(bin, args, {
+    cwd: ROOT,
+    windowsHide: true,
+    stdio: ['ignore', 'pipe', 'pipe'],
+    env: cleanEnv(),
+  });
+  run.child = child;
+
+  let buf = '';
+  child.stdout.on('data', (chunk) => {
+    buf += chunk.toString('utf8');
+    const lines = buf.split('\n');
+    buf = lines.pop() || '';
+    for (const line of lines) if (line.trim()) digestStreamLine(line.trim());
+  });
+  child.stderr.on('data', (chunk) => {
+    const t = chunk.toString('utf8').trim();
+    if (t) pushLog('error', t);
+  });
+  child.on('error', (e) => {
+    run.status = 'error';
+    run.error = e.message;
+    run.endedAt = nowIso();
+    pushLog('error', `起動に失敗しました: ${e.message}`);
+  });
+  child.on('close', (code) => {
+    run.child = null;
+    run.endedAt = nowIso();
+    if (run.status === 'stopped') { pushLog('info', '中断しました'); return; }
+    if (code === 0 && !run.error) {
+      run.status = 'done';
+      pushLog('info', '実行が完了しました。承認キューを確認してください。');
+    } else {
+      run.status = 'error';
+      if (!run.error) run.error = `AIが異常終了しました（終了コード ${code}）`;
+      pushLog('error', run.error);
+    }
+  });
+}
+
+function runSnapshot() {
+  return {
+    status: run.status,
+    startedAt: run.startedAt,
+    endedAt: run.endedAt,
+    prompt: run.prompt,
+    preset: run.preset,
+    log: run.log,
+    result: run.result,
+    error: run.error,
+    available: !!resolveClaudeBin(),
+    bin: resolveClaudeBin() || '',
+    loggedIn: auth.loggedIn,
+    authMethod: auth.method,
+    loginHelper: path.join(ROOT, process.platform === 'win32' ? 'login-claude.bat' : 'login-claude.sh'),
+    needsLogin: auth.loggedIn === false || !!(run.error && /not logged in|\/login/i.test(run.error)),
+    presets: Object.entries(PERMISSION_PRESETS).map(([k, v]) => ({ key: k, label: v.label })),
+  };
+}
+
+async function handleRun(req, res, parts) {
+  // 実行系はトークン必須。他サイトからのリクエストは通さない。
+  if (req.method !== 'GET' && req.headers['x-moai-token'] !== RUN_TOKEN) {
+    return send(res, 403, { error: '不正なリクエストです（トークンが一致しません）' });
+  }
+  if (req.method === 'GET') {
+    checkAuth(parts[2] === 'auth'); // /api/run/auth は必ず取り直す
+    return send(res, 200, runSnapshot());
+  }
+
+  if (parts[2] === 'stop') {
+    if (run.child) {
+      run.status = 'stopped';
+      run.child.kill();
+      return send(res, 200, { ok: true });
+    }
+    return send(res, 200, { ok: true, note: '実行中の処理はありません' });
+  }
+
+  if (run.status === 'running') {
+    return send(res, 409, { error: 'すでに実行中です。終わるまでお待ちください。' });
+  }
+
+  const body = await readBody(req);
+  const prompt = (body.prompt || '/moai').toString().slice(0, 2000);
+  try {
+    startRun({ prompt, preset: body.preset });
+    return send(res, 202, runSnapshot());
+  } catch (e) {
+    run.status = 'error';
+    run.error = e.message;
+    return send(res, 500, { error: e.message });
+  }
+}
+
 const server = http.createServer(async (req, res) => {
   const parsed = url.parse(req.url, true);
   const parts = parsed.pathname.split('/').filter(Boolean);
   try {
+    if (parts[0] === 'api' && parts[1] === 'run') return await handleRun(req, res, parts);
     if (parts[0] === 'api') return await handleApi(req, res, parts, parsed.query);
     if (req.method !== 'GET') return send(res, 405, { error: 'method not allowed' });
     return await serveStatic(res, parsed.pathname);

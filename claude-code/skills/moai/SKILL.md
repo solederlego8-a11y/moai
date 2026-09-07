@@ -7,6 +7,9 @@ description: MOAI（AIマーケティング司令室）に溜まった指示キ�
 
 ブラウザで開いた MOAI（`http://localhost:4173`）に積まれた指示を、Claude Code が実際に実行して結果を返すためのスキル。
 
+> 画面の「▶ AIに実行させる」ボタンからも、このスキルが同じ形で呼び出される（サーバーが `claude -p "/moai"` を起動する）。
+> どちらの経路でも手順は同じ。
+
 - ワークスペース: MOAI を置いたフォルダ（以下 `<MOAI>`）
 - データ: `<MOAI>/data/*.json`（**必ず** `node <MOAI>/cli.js` 経由で更新する。手編集すると壊れる）
 - 画面の起動: `node <MOAI>/server.js`

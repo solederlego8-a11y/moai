@@ -32,7 +32,7 @@ function toast(msg, isErr = false) {
 
 /* モードによって案内文を変える */
 const queuedHint = () => (S.mode === 'server'
-  ? 'Claude Code で /moai を実行してください'
+  ? '「指示する」画面の「AIに実行させる」を押すと処理されます'
   : '「指示する」画面からコピーして、お使いのAIに貼り付けてください');
 const queuedMsg = () => 'キューに積みました。' + queuedHint();
 
@@ -190,6 +190,179 @@ async function enqueue({ text, agentId = '', channelId = '', title = '' }) {
   });
 }
 
+/* =========================================================
+   実行エンジン（ローカル版のみ）
+   画面の「実行」ボタンから Claude Code を起動し、進行状況を出す
+   ========================================================= */
+async function runApi(method, sub, body) {
+  const res = await fetch(`/api/run${sub}`, {
+    method,
+    headers: { 'Content-Type': 'application/json', 'X-MOAI-Token': window.MOAI_TOKEN || '' },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(json.error || `実行に失敗しました (${res.status})`);
+  return json;
+}
+
+function elapsed(from, to) {
+  if (!from) return '';
+  const ms = (to ? new Date(to) : new Date()) - new Date(from);
+  const s = Math.max(0, Math.floor(ms / 1000));
+  return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+}
+
+const LOG_ICON = { info: 'ℹ️', tool: '⚙️', say: '💬', done: '✅', error: '⚠️' };
+
+function runPanelHtml() {
+  if (S.mode !== 'server') {
+    return `<div class="small muted">いまは<b>ブラウザ版</b>です。指示は保存されますが、AIの自動実行にはローカル版（無料）が必要です。</div>
+      <div class="small muted" style="margin-top:6px">ブラウザ版のままでも、指示をコピーして ChatGPT / Claude に貼り付け、結果を承認キューに書き戻す使い方ができます。</div>
+      <div class="row" style="margin-top:8px"><button class="btn sm" id="copy-queue">キューをまとめてコピー</button>
+        <a class="btn sm" href="https://github.com/solederlego8-a11y/moai#readme" target="_blank" rel="noopener">ローカル版の入れ方</a></div>`;
+  }
+  const r = S.run;
+  if (!r) return '<div class="small muted">実行エンジンを確認しています…</div>';
+
+  if (!r.available) {
+    return `<div class="small" style="color:var(--warn)">Claude Code の実行ファイルが見つかりませんでした。</div>
+      <div class="small muted" style="margin-top:6px">インストール済みの場合は、環境変数 <span class="mono">MOAI_CLAUDE_BIN</span> に実行ファイルのパスを設定してサーバーを再起動してください。</div>`;
+  }
+
+  const running = r.status === 'running';
+  const logs = (r.log || []).slice(-12).reverse();
+  const logHtml = logs.length
+    ? `<div style="max-height:230px;overflow-y:auto;margin-top:10px">${logs.map((l) => `
+        <div class="row" style="align-items:flex-start;gap:7px;padding:4px 0;border-bottom:1px solid var(--border)">
+          <span>${LOG_ICON[l.kind] || '•'}</span>
+          <div style="flex:1;min-width:0">
+            <div class="small" style="white-space:pre-wrap;word-break:break-word;${l.kind === 'error' ? 'color:var(--danger)' : ''}">${esc(l.text)}</div>
+            <div class="small muted">${fmtDate(l.at)}</div>
+          </div>
+        </div>`).join('')}</div>`
+    : '';
+
+  const statusPill = {
+    idle: '<span class="pill">待機中</span>',
+    running: '<span class="pill running">実行中</span>',
+    done: '<span class="pill approved">完了</span>',
+    error: '<span class="pill rejected">エラー</span>',
+    stopped: '<span class="pill">中断</span>',
+  }[r.status] || '';
+
+  return `
+    <div class="row" style="margin-bottom:8px">${statusPill}
+      ${r.startedAt ? `<span class="small muted mono">${elapsed(r.startedAt, running ? null : r.endedAt)}</span>` : ''}
+      <div style="flex:1"></div>
+    </div>
+    ${running
+      ? `<div class="row"><button class="btn danger" id="run-stop">中断する</button>
+           <span class="small muted">AIが作業中です。終わると承認キューに結果が入ります。</span></div>`
+      : `<div class="row">
+           <button class="btn primary" id="run-start">▶ AIに実行させる</button>
+           <select id="run-preset" style="width:auto;min-width:180px">
+             ${(r.presets || []).map((p) => `<option value="${esc(p.key)}" ${p.key === (r.preset || 'safe') ? 'selected' : ''}>${esc(p.label)}</option>`).join('')}
+           </select>
+         </div>
+         <div class="small muted" style="margin-top:6px">キューにある指示を上から順に実行します。生成物は承認キューに入り、承認するまで公開されません。</div>`}
+    ${r.needsLogin && !running ? `
+      <div class="card" style="margin-top:10px;border-color:var(--warn);background:var(--warn-soft)">
+        <b class="small">最初に1回だけ、ログインが必要です</b>
+        <div class="small" style="margin-top:6px">MOAIが起動するAIは、まだログインされていません（<span class="mono">authMethod: none</span>）。
+          デスクトップアプリのログインとは別に、1回だけ済ませる必要があります。</div>
+        <div class="small" style="margin-top:8px"><b>いちばん簡単な方法：</b>下のファイルをエクスプローラーからダブルクリックしてください。
+          黒い画面が開き、ブラウザで許可を押すだけで終わります。</div>
+        <div class="mono" style="margin-top:6px;padding:8px;background:var(--panel);border:1px solid var(--border);border-radius:8px;word-break:break-all">${esc(r.loginHelper || 'login-claude.bat')}</div>
+        <div class="row" style="margin-top:8px">
+          <button class="btn sm" id="copy-login">パスをコピー</button>
+          <button class="btn sm primary" id="check-login">ログイン状態を確認</button>
+        </div>
+        <div class="small muted" style="margin-top:8px">うまくいかない場合は、コマンドプロンプトで
+          <span class="mono">${esc(r.bin ? `"${r.bin}" auth login` : 'claude auth login')}</span> を直接実行してください。</div>
+      </div>`
+      : (r.error && !running ? `<div class="small" style="color:var(--danger);margin-top:8px">${esc(r.error)}</div>` : '')}
+    ${r.loggedIn === true && !running ? '<div class="small" style="color:var(--ok);margin-top:8px">✔ ログイン済み。すぐ実行できます。</div>' : ''}
+    ${logHtml}`;
+}
+
+function renderRunPanel() {
+  const el = document.getElementById('run-panel');
+  if (!el) return;
+  el.innerHTML = runPanelHtml();
+  wireRunPanel(el);
+}
+
+function wireRunPanel(root) {
+  const start = $('#run-start', root);
+  if (start) start.onclick = async () => {
+    const preset = $('#run-preset', root) ? $('#run-preset', root).value : 'safe';
+    const pending = items('inbox').filter((i) => i.status === 'pending').length;
+    if (!pending && !confirm('実行待ちの指示がありません。今週の戦略立案を実行しますか？')) return;
+    try {
+      S.run = await runApi('POST', '', { prompt: pending ? '/moai' : '/moai 今週の戦略を立てて', preset });
+      renderRunPanel();
+      toast('実行を開始しました');
+    } catch (e) { toast(e.message, true); }
+  };
+
+  const stop = $('#run-stop', root);
+  if (stop) stop.onclick = async () => {
+    try { await runApi('POST', '/stop'); toast('中断しました'); } catch (e) { toast(e.message, true); }
+  };
+
+  const cq = $('#copy-queue', root);
+  if (cq) cq.onclick = copyQueueToClipboard;
+
+  const cl = $('#copy-login', root);
+  if (cl) cl.onclick = async () => {
+    const p = (S.run && S.run.loginHelper) || 'login-claude.bat';
+    try { await navigator.clipboard.writeText(p); toast('コピーしました。エクスプローラーのアドレス欄に貼り付けてEnterでも開けます'); }
+    catch { toast('コピーできませんでした', true); }
+  };
+
+  const ck = $('#check-login', root);
+  if (ck) ck.onclick = async () => {
+    ck.textContent = '確認中…';
+    try {
+      S.run = await runApi('GET', '/auth');
+      renderRunPanel();
+      toast(S.run.loggedIn ? 'ログインできています。実行できます' : 'まだログインされていません', !S.run.loggedIn);
+    } catch (e) { toast(e.message, true); }
+  };
+}
+
+async function pollRun() {
+  if (S.mode !== 'server') return;
+  try {
+    const snap = await runApi('GET', '');
+    const wasRunning = S.run && S.run.status === 'running';
+    S.run = snap;
+    renderRunPanel();
+    if (wasRunning && snap.status !== 'running') {
+      await refresh(false); // 生成結果を画面に反映する
+      toast(snap.status === 'done' ? '実行が完了しました。承認キューを確認してください' : (snap.error || '実行が終了しました'), snap.status !== 'done');
+    }
+  } catch (e) { /* サーバー停止中などは黙って次回に回す */ }
+}
+
+async function copyQueueToClipboard() {
+  const q = items('inbox').filter((i) => i.status === 'pending');
+  if (!q.length) return toast('実行待ちの指示がありません', true);
+  const c = cfg();
+  const text = [
+    'あなたはマーケティング運用の担当者です。以下の前提を守って、指示にひとつずつ答えてください。',
+    '',
+    `【トーン】${(c.brand && c.brand.tone) || ''}`,
+    `【禁止】${((c.brand && c.brand.ngWords) || []).join(' / ')}`,
+    `【ルール】\n- ${((c.brand && c.brand.rules) || []).join('\n- ')}`,
+    '',
+    '【指示】',
+    ...q.map((x, i) => `${i + 1}. ${x.text}（担当: ${agentName(x.agentId)} / 対象: ${channelName(x.channelId)}）`),
+  ].join('\n');
+  try { await navigator.clipboard.writeText(text); toast('コピーしました。AIに貼り付けてください'); }
+  catch { toast('コピーできませんでした', true); }
+}
+
 /* ---------- モーダル ---------- */
 function modal(title, innerHtml, onMount) {
   const root = $('#modal-root');
@@ -297,7 +470,7 @@ function pageDashboard() {
   const kpis = [
     { l: '総フォロワー', v: nfmt(totalFollowers), f: `${ch.length}チャネル合計` },
     { l: '承認待ち', v: nfmt(reviewCount), f: reviewCount ? '確認してください' : '滞留なし' },
-    { l: '実行待ち指示', v: nfmt(pending), f: pending ? 'Claude Codeで /moai' : 'キューは空' },
+    { l: '実行待ち指示', v: nfmt(pending), f: pending ? (S.mode === 'server' ? '「AIに実行させる」で処理' : 'コピーしてAIに貼る') : 'キューは空' },
     { l: '今月の収益', v: '¥' + nfmt(rev), f: target ? `目標 ¥${nfmt(target)}（達成率 ${Math.round((rev / target) * 100)}%）` : '目標未設定' },
   ];
 
@@ -338,7 +511,8 @@ function pageDashboard() {
   <div class="page-head">
     <div><h1>ダッシュボード</h1><p>${esc((cfg().brand && cfg().brand.mission) || '')}</p></div>
     <div class="spacer"></div>
-    <button class="btn primary" id="quick-instruct">＋ AIに指示する</button>
+    <button class="btn" id="quick-instruct">＋ AIに指示する</button>
+    <button class="btn primary" id="go-run">▶ AIに実行させる${pending ? `（${pending}件）` : ''}</button>
   </div>
 
   <div class="grid kpi" style="margin-bottom:16px">
@@ -524,7 +698,9 @@ function pageChat() {
     </div>`).join('') : '<div class="small muted" style="padding:8px 0">実行待ちの指示はありません</div>';
 
   return `<div class="page-head">
-      <div><h1>指示する</h1><p>日本語で書くだけ。指示は実行キューに積まれ、Claude Code で <span class="mono">/moai</span> と打つと順に実行されます</p></div>
+      <div><h1>指示する</h1><p>日本語で書くだけ。${S.mode === 'server'
+        ? '指示は実行キューに積まれ、右の「AIに実行させる」を押すと順に処理されます'
+        : '指示は実行キューに積まれます。まとめてコピーして、お使いのAIに貼り付けてください'}</p></div>
     </div>
     <div class="grid cols2">
       <div class="card">
@@ -547,13 +723,7 @@ function pageChat() {
             <div style="flex:1"></div><span class="pill">${queue.length}件</span></div>
           ${queueHtml}
           <div class="divider"></div>
-          ${S.mode === 'server'
-            ? `<div class="small muted">Claude Code のターミナルで次を実行すると、上のキューが順に処理されます。</div>
-               <div class="mono" style="margin-top:6px;padding:8px;background:var(--panel-2);border:1px solid var(--border);border-radius:8px">/moai</div>`
-            : `<div class="small muted">いまは<b>ブラウザ版</b>です。指示は保存されますが、AIが自動で実行するにはローカル版（無料）が必要です。</div>
-               <div class="small muted" style="margin-top:6px">ブラウザ版のままでも、指示をコピーして ChatGPT / Claude に貼り付け、結果を承認キューに書き戻す使い方ができます。</div>
-               <div class="row" style="margin-top:8px"><button class="btn sm" id="copy-queue">キューをまとめてコピー</button>
-                 <a class="btn sm" href="https://github.com/solederlego8-a11y/moai#readme" target="_blank" rel="noopener">ローカル版の入れ方</a></div>`}
+          <div id="run-panel"></div>
         </div>
         <div class="card">
           <b>指示の書き方のコツ</b>
@@ -709,6 +879,7 @@ function render() {
   main.innerHTML = (pages[S.page] || pageDashboard)();
   wire(main);
   bindSparkTooltips(main);
+  renderRunPanel();
 }
 
 function briefModal({ agentId = '', channelId = '' }) {
@@ -735,6 +906,8 @@ function wire(root) {
   root.querySelectorAll('[data-brief]').forEach((b) => b.onclick = () => briefModal({ channelId: b.dataset.brief }));
   root.querySelectorAll('[data-brief-agent]').forEach((b) => b.onclick = () => briefModal({ agentId: b.dataset.briefAgent }));
   const qi = $('#quick-instruct', root); if (qi) qi.onclick = () => briefModal({});
+  const gr = $('#go-run', root);
+  if (gr) gr.onclick = () => { S.page = 'chat'; location.hash = 'chat'; render(); };
 
   root.querySelectorAll('[data-approve]').forEach((b) => b.onclick = () => mutate(async () => {
     await api('PATCH', `/tasks/${b.dataset.approve}`, { status: 'approved', __log: { by: 'user', action: '承認' } });
@@ -942,25 +1115,6 @@ function wire(root) {
     };
   }
 
-  const cq = $('#copy-queue', root);
-  if (cq) cq.onclick = async () => {
-    const q = items('inbox').filter((i) => i.status === 'pending');
-    if (!q.length) return toast('実行待ちの指示がありません', true);
-    const c = cfg();
-    const text = [
-      'あなたはマーケティング運用の担当者です。以下の前提を守って、指示にひとつずつ答えてください。',
-      '',
-      `【トーン】${(c.brand && c.brand.tone) || ''}`,
-      `【禁止】${((c.brand && c.brand.ngWords) || []).join(' / ')}`,
-      `【ルール】\n- ${((c.brand && c.brand.rules) || []).join('\n- ')}`,
-      '',
-      '【指示】',
-      ...q.map((x, i) => `${i + 1}. ${x.text}（担当: ${agentName(x.agentId)} / 対象: ${channelName(x.channelId)}）`),
-    ].join('\n');
-    try { await navigator.clipboard.writeText(text); toast('コピーしました。AIに貼り付けてください'); }
-    catch { toast('コピーできませんでした', true); }
-  };
-
   const rr = $('#req-report', root);
   if (rr) rr.onclick = () => mutate(async () => {
     await enqueue({ text: '全チャネルの今週の実績を分析し、来週の優先施策を3つに絞った週次レポートを作成して reports に保存して', agentId: 'ag_growth', title: '週次レポート作成' });
@@ -1014,6 +1168,10 @@ function wire(root) {
   if (S.mode === 'server') {
     // Claude Code がファイルを書き換えた結果を自動で拾う（入力中・モーダル表示中は描画を保留）
     setInterval(() => refresh(true), 5000);
+    // 実行の進行状況。実行中は細かく、待機中はゆっくり見に行く
+    pollRun();
+    setInterval(() => { if (!S.run || S.run.status === 'running') pollRun(); }, 2000);
+    setInterval(() => { if (S.run && S.run.status !== 'running') pollRun(); }, 15000);
   } else {
     // ブラウザ版は別タブでの変更だけ拾えばよい
     window.addEventListener('storage', (e) => { if (e.key && e.key.startsWith(LS_KEY)) refresh(true); });
