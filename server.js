@@ -329,6 +329,82 @@ function checkAuth(force) {
   return auth;
 }
 
+/* =========================================================
+   ログイン — 画面から完結させる
+   claude auth login は「ブラウザで許可 → 表示されたコードを貼り戻す」方式なので、
+   URLを画面に出し、コードを受け取って子プロセスの標準入力へ渡す。
+   ========================================================= */
+const login = { phase: 'idle', url: '', message: '', child: null, buf: '', timer: null };
+
+function loginSnapshot() {
+  return { phase: login.phase, url: login.url, message: login.message };
+}
+
+function endLogin(phase, message) {
+  login.phase = phase;
+  login.message = message || '';
+  if (login.timer) { clearTimeout(login.timer); login.timer = null; }
+  if (login.child) { try { login.child.kill(); } catch { /* 済み */ } login.child = null; }
+}
+
+function startLogin() {
+  const bin = resolveClaudeBin();
+  if (!bin) throw new Error('Claude Code が見つかりませんでした。');
+  if (login.phase === 'waiting_code') return loginSnapshot();
+
+  endLogin('idle', '');
+  login.url = '';
+  login.buf = '';
+  login.phase = 'starting';
+
+  const child = spawn(bin, ['auth', 'login'], {
+    cwd: ROOT, windowsHide: true, stdio: ['pipe', 'pipe', 'pipe'], env: cleanEnv(),
+  });
+  login.child = child;
+
+  const onData = (chunk) => {
+    login.buf += chunk.toString('utf8');
+    const m = login.buf.match(/https:\/\/claude\.(?:com|ai)\/[^\s"']*oauth[^\s"']*/);
+    if (m && !login.url) {
+      login.url = m[0];
+      login.phase = 'waiting_code';
+    }
+    if (/invalid|failed|error/i.test(login.buf) && login.phase !== 'done') {
+      // 失敗の文言が出たら、そのまま画面に出す
+      const line = login.buf.split('\n').reverse().find((l) => /invalid|failed|error/i.test(l));
+      if (line) login.message = line.trim().slice(0, 200);
+    }
+  };
+  child.stdout.on('data', onData);
+  child.stderr.on('data', onData);
+
+  child.on('error', (e) => endLogin('error', `起動に失敗しました: ${e.message}`));
+  child.on('close', () => {
+    login.child = null;
+    const st = checkAuth(true);
+    if (st.loggedIn) endLogin('done', 'ログインできました');
+    else if (login.phase !== 'error') endLogin('error', login.message || 'ログインが完了しませんでした。もう一度お試しください。');
+  });
+
+  // 10分放置したら片づける
+  login.timer = setTimeout(() => {
+    if (login.phase === 'waiting_code') endLogin('error', '時間切れです。もう一度やり直してください。');
+  }, 10 * 60 * 1000);
+
+  return loginSnapshot();
+}
+
+function submitLoginCode(code) {
+  if (!login.child || login.phase !== 'waiting_code') {
+    throw new Error('ログインが開始されていません。もう一度「ログインを開始」を押してください。');
+  }
+  const clean = String(code).trim();
+  if (!clean) throw new Error('コードが空です');
+  login.phase = 'verifying';
+  login.child.stdin.write(clean + '\n');
+  return loginSnapshot();
+}
+
 function startRun({ prompt, preset }) {
   const bin = resolveClaudeBin();
   if (!bin) {
@@ -403,6 +479,7 @@ function runSnapshot() {
     loggedIn: auth.loggedIn,
     authMethod: auth.method,
     loginHelper: path.join(ROOT, process.platform === 'win32' ? 'login-claude.bat' : 'login-claude.sh'),
+    login: loginSnapshot(),
     needsLogin: auth.loggedIn === false || !!(run.error && /not logged in|\/login/i.test(run.error)),
     presets: Object.entries(PERMISSION_PRESETS).map(([k, v]) => ({ key: k, label: v.label })),
   };
@@ -416,6 +493,20 @@ async function handleRun(req, res, parts) {
   if (req.method === 'GET') {
     checkAuth(parts[2] === 'auth'); // /api/run/auth は必ず取り直す
     return send(res, 200, runSnapshot());
+  }
+
+  if (parts[2] === 'login') {
+    try {
+      if (parts[3] === 'code') {
+        const body = await readBody(req);
+        submitLoginCode(body.code);
+      } else {
+        startLogin();
+      }
+      return send(res, 200, runSnapshot());
+    } catch (e) {
+      return send(res, 400, { error: e.message });
+    }
   }
 
   if (parts[2] === 'stop') {

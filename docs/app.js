@@ -265,31 +265,67 @@ function runPanelHtml() {
            </select>
          </div>
          <div class="small muted" style="margin-top:6px">キューにある指示を上から順に実行します。生成物は承認キューに入り、承認するまで公開されません。</div>`}
-    ${r.needsLogin && !running ? `
-      <div class="card" style="margin-top:10px;border-color:var(--warn);background:var(--warn-soft)">
-        <b class="small">最初に1回だけ、ログインが必要です</b>
-        <div class="small" style="margin-top:6px">MOAIが起動するAIは、まだログインされていません（<span class="mono">authMethod: none</span>）。
-          デスクトップアプリのログインとは別に、1回だけ済ませる必要があります。</div>
-        <div class="small" style="margin-top:8px"><b>いちばん簡単な方法：</b>下のファイルをエクスプローラーからダブルクリックしてください。
-          黒い画面が開き、ブラウザで許可を押すだけで終わります。</div>
-        <div class="mono" style="margin-top:6px;padding:8px;background:var(--panel);border:1px solid var(--border);border-radius:8px;word-break:break-all">${esc(r.loginHelper || 'login-claude.bat')}</div>
-        <div class="row" style="margin-top:8px">
-          <button class="btn sm" id="copy-login">パスをコピー</button>
-          <button class="btn sm primary" id="check-login">ログイン状態を確認</button>
-        </div>
-        <div class="small muted" style="margin-top:8px">うまくいかない場合は、コマンドプロンプトで
-          <span class="mono">${esc(r.bin ? `"${r.bin}" auth login` : 'claude auth login')}</span> を直接実行してください。</div>
-      </div>`
+    ${r.needsLogin && !running ? loginCardHtml(r)
       : (r.error && !running ? `<div class="small" style="color:var(--danger);margin-top:8px">${esc(r.error)}</div>` : '')}
     ${r.loggedIn === true && !running ? '<div class="small" style="color:var(--ok);margin-top:8px">✔ ログイン済み。すぐ実行できます。</div>' : ''}
     ${logHtml}`;
 }
 
+/* ログイン用カード。ブラウザで許可 → 出てきたコードをここに貼る、で完結する。 */
+function loginCardHtml(r) {
+  const L = r.login || { phase: 'idle' };
+  const head = `<b class="small">最初に1回だけ、ログインが必要です</b>
+    <div class="small" style="margin-top:6px">MOAIが起動するAIは、まだログインされていません。
+      デスクトップアプリのログインとは別に、1回だけ済ませる必要があります。</div>`;
+
+  let body = '';
+  if (L.phase === 'waiting_code' || L.phase === 'verifying') {
+    body = `
+      <div class="small" style="margin-top:10px"><b>手順は2つだけです。</b></div>
+      <div class="small" style="margin-top:6px">① 下のリンクを開いて、許可（Authorize / 承認）を押す</div>
+      <div style="margin-top:4px"><a class="btn sm primary" href="${esc(L.url)}" target="_blank" rel="noopener">ログインページを開く</a>
+        <button class="btn sm" id="copy-login-url">リンクをコピー</button></div>
+      <div class="small" style="margin-top:10px">② 画面に出てくる<b>コードをコピーして、下に貼り付けてください</b></div>
+      <div class="row" style="margin-top:6px">
+        <input type="text" id="login-code" placeholder="ここにコードを貼り付け" style="flex:1;min-width:180px" ${L.phase === 'verifying' ? 'disabled' : ''}>
+        <button class="btn primary" id="submit-code" ${L.phase === 'verifying' ? 'disabled' : ''}>${L.phase === 'verifying' ? '確認中…' : '送信'}</button>
+      </div>
+      ${L.message ? `<div class="small" style="color:var(--danger);margin-top:6px">${esc(L.message)}</div>` : ''}`;
+  } else if (L.phase === 'starting') {
+    body = '<div class="small muted" style="margin-top:10px">ログインページを準備しています…</div>';
+  } else {
+    body = `
+      <div class="row" style="margin-top:10px">
+        <button class="btn primary" id="start-login">ログインを開始</button>
+        <button class="btn sm" id="check-login">状態を確認</button>
+      </div>
+      <div class="small muted" style="margin-top:6px">ブラウザで許可を押し、表示されたコードをこの画面に貼り付けるだけです。</div>
+      ${L.message ? `<div class="small" style="color:var(--danger);margin-top:6px">${esc(L.message)}</div>` : ''}`;
+  }
+
+  return `<div class="card" style="margin-top:10px;border-color:var(--warn);background:var(--warn-soft)">${head}${body}</div>`;
+}
+
 function renderRunPanel() {
   const el = document.getElementById('run-panel');
   if (!el) return;
+  // 入力中の値とカーソル位置は描き直しても失わないようにする
+  const active = document.activeElement;
+  const keepId = active && el.contains(active) && active.tagName === 'INPUT' ? active.id : null;
+  const keepValue = keepId ? active.value : null;
+  const keepPos = keepId ? active.selectionStart : null;
+
   el.innerHTML = runPanelHtml();
   wireRunPanel(el);
+
+  if (keepId) {
+    const next = el.querySelector('#' + keepId);
+    if (next) {
+      next.value = keepValue;
+      next.focus();
+      try { next.setSelectionRange(keepPos, keepPos); } catch { /* 数値入力などは無視 */ }
+    }
+  }
 }
 
 function wireRunPanel(root) {
@@ -313,12 +349,36 @@ function wireRunPanel(root) {
   const cq = $('#copy-queue', root);
   if (cq) cq.onclick = copyQueueToClipboard;
 
-  const cl = $('#copy-login', root);
-  if (cl) cl.onclick = async () => {
-    const p = (S.run && S.run.loginHelper) || 'login-claude.bat';
-    try { await navigator.clipboard.writeText(p); toast('コピーしました。エクスプローラーのアドレス欄に貼り付けてEnterでも開けます'); }
+  const sl = $('#start-login', root);
+  if (sl) sl.onclick = async () => {
+    sl.textContent = '準備中…';
+    try { S.run = await runApi('POST', '/login'); renderRunPanel(); }
+    catch (e) { toast(e.message, true); }
+  };
+
+  const cu = $('#copy-login-url', root);
+  if (cu) cu.onclick = async () => {
+    const u = S.run && S.run.login ? S.run.login.url : '';
+    try { await navigator.clipboard.writeText(u); toast('リンクをコピーしました'); }
     catch { toast('コピーできませんでした', true); }
   };
+
+  const sc = $('#submit-code', root);
+  if (sc) {
+    const submit = async () => {
+      const input = $('#login-code', root);
+      const code = input ? input.value.trim() : '';
+      if (!code) return toast('コードを貼り付けてください', true);
+      try {
+        S.run = await runApi('POST', '/login/code', { code });
+        renderRunPanel();
+        toast('確認しています…');
+      } catch (e) { toast(e.message, true); }
+    };
+    sc.onclick = submit;
+    const input = $('#login-code', root);
+    if (input) input.addEventListener('keydown', (e) => { if (e.key === 'Enter') submit(); });
+  }
 
   const ck = $('#check-login', root);
   if (ck) ck.onclick = async () => {
@@ -1170,7 +1230,11 @@ function wire(root) {
     setInterval(() => refresh(true), 5000);
     // 実行の進行状況。実行中は細かく、待機中はゆっくり見に行く
     pollRun();
-    setInterval(() => { if (!S.run || S.run.status === 'running') pollRun(); }, 2000);
+    setInterval(() => {
+      const busy = !S.run || S.run.status === 'running'
+        || (S.run.login && ['starting', 'waiting_code', 'verifying'].includes(S.run.login.phase));
+      if (busy) pollRun();
+    }, 2000);
     setInterval(() => { if (S.run && S.run.status !== 'running') pollRun(); }, 15000);
   } else {
     // ブラウザ版は別タブでの変更だけ拾えばよい
