@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<!-- ga4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KQ4656R9XE"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-KQ4656R9XE', { anonymize_ip: true });
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIマーケティングの運用ループを無料で回す手順｜計画→依頼→承認→投稿→計測 | MOAI ブログ</title>
+<meta name="description" content="有料のAIマーケティング運用ツールがやっている「計画→AIへの依頼→承認→投稿→計測」のループを、無料のMOAIと手元のAI（ChatGPT・Claude）だけで回す手順を、1週間の運用例・承認の基準・実績の記録方法まで具体的に解説します。">
+<link rel="canonical" href="https://solederlego8-a11y.github.io/moai/blog/ai-marketing-unyo-loop-muryo.html">
+<meta property="og:title" content="AIマーケティングの運用ループを無料で回す手順">
+<meta property="og:description" content="計画→AIへの依頼→承認→投稿→計測のループを、無料ツールだけで回す方法。">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"AIマーケティングの運用ループを無料で回す手順｜計画→依頼→承認→投稿→計測","datePublished":"2026-09-18","dateModified":"2026-09-18","author":{"@type":"Organization","name":"MOAI"},"publisher":{"@type":"Organization","name":"MOAI"},"mainEntityOfPage":"https://solederlego8-a11y.github.io/moai/blog/ai-marketing-unyo-loop-muryo.html"}
+</script>
+<style>
+:root{--bg:#f6f7f9;--paper:#fff;--ink:#1a1d23;--muted:#5b6472;--line:#e3e6eb;--accent:#2f6bff;--accent-soft:#eaf0ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--paper:#161a21;--ink:#e8ebf0;--muted:#9aa3b2;--line:#2a3140;--accent:#5b8cff;--accent-soft:#1b2740}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.9}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+header.top{display:flex;align-items:center;gap:12px;margin-bottom:28px;font-size:14px}
+header.top a{color:var(--muted);text-decoration:none}header.top a:hover{color:var(--accent)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px 28px}
+h1{font-size:26px;line-height:1.45;margin:0 0 8px}.meta{color:var(--muted);font-size:13px;margin:0 0 24px}
+h2{font-size:20px;margin:36px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}h3{font-size:16.5px;margin:24px 0 8px}
+p{margin:0 0 16px}ul,ol{margin:0 0 16px;padding-left:22px}li{margin:0 0 6px}
+.tldr{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 24px}.tldr ul{margin:6px 0 0}
+.tw{overflow-x:auto;margin:0 0 20px}table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--accent-soft)}
+.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font-weight:700;margin:8px 0 20px}
+a{color:var(--accent)}footer{margin-top:28px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a href="../">🗿 MOAI</a><span>›</span><a href="./">ブログ</a></header>
+<article class="card">
+<h1>AIマーケティングの運用ループを無料で回す手順｜計画→依頼→承認→投稿→計測</h1>
+<p class="meta">公開: 2026-09-18 ・ 更新: 2026-09-18 ・ MOAI 編集部</p>
+
+<div class="tldr"><strong>要点</strong>
+<ul>
+<li>有料のAIマーケティング運用ツールが提供しているのは「計画→AIへの依頼→承認→投稿→計測」の1本のループ。このループ自体は、無料のMOAIと手元のAI（ChatGPT・Claude）で回せる</li>
+<li>止まる原因は「依頼が毎回ゼロから」「承認の基準がない」「実績を記録していない」の3つ。ループの各段階に置き場を作ると止まらない</li>
+<li>最初は1チャネル・週2本から。設定画面のミッション・トーン・禁止ワードを先に書くと、AIへの依頼の質が安定する</li>
+<li>データはブラウザの中にだけ保存される。週1回の書き出しを運用に入れる</li>
+</ul></div>
+
+<h2>有料ツールがやっていることを分解する</h2>
+<p>月1万〜7万円ほどの商用AIマーケティングツールは、機能が多く見えますが、やっていることは次の5段階のループに集約されます。</p>
+<div class="tw"><table><thead><tr><th>段階</th><th>やること</th><th>商用ツールでの見え方</th></tr></thead><tbody>
+<tr><td>1. 計画</td><td>いつ・どのチャネルに・何を出すか決める</td><td>コンテンツカレンダー</td></tr>
+<tr><td>2. 依頼</td><td>AIに文章・構成・調査を頼む</td><td>AIアシスタント・テンプレート</td></tr>
+<tr><td>3. 承認</td><td>生成物を人が読み、直し、公開可否を決める</td><td>承認ワークフロー</td></tr>
+<tr><td>4. 投稿</td><td>各チャネルに公開する</td><td>予約投稿・連携</td></tr>
+<tr><td>5. 計測</td><td>フォロワー・PV・収益を記録し、次の計画に戻す</td><td>ダッシュボード・レポート</td></tr>
+</tbody></table></div>
+<p>このうち費用がかかる本質的な部分は「4. 投稿」の各SNSとのAPI連携と、AIのAPI利用料です。それ以外の4段階は、置き場と手順があれば無料で成り立ちます。MOAIは、この4段階（計画・依頼・承認・計測）の置き場を1画面にまとめ、投稿だけを人の手に残した設計です。</p>
+
+<h2>MOAIの画面と、ループの段階の対応</h2>
+<div class="tw"><table><thead><tr><th>ループの段階</th><th>MOAIの画面</th><th>置くもの</th></tr></thead><tbody>
+<tr><td>計画</td><td>カレンダー・チャネル</td><td>運用メディアの登録、いつ何を出すか</td></tr>
+<tr><td>依頼</td><td>指示する・AIチーム・設定</td><td>日本語の依頼文、担当（ライター・SEOリサーチャーなど8種）、ブランドの前提</td></tr>
+<tr><td>承認</td><td>承認キュー・タスク</td><td>AIの生成物、承認／差し戻し／却下の記録</td></tr>
+<tr><td>投稿</td><td>（人が各媒体で行う）</td><td>タスクを「公開済み」に移す</td></tr>
+<tr><td>計測</td><td>ダッシュボード・チャネル・レポート</td><td>日々の実績値、週次分析</td></tr>
+</tbody></table></div>
+<p>ブラウザ版はURLを開くだけで使え、データはそのブラウザの中にだけ保存されます。ローカル版（Node.jsで起動）では、AIへの依頼を画面のボタンから自動実行できます。この記事はブラウザ版を前提に、AIへの依頼はChatGPTやClaudeに貼り付ける方法で説明します。</p>
+
+<h2>始める前に決める3つ（設定画面）</h2>
+<p>ループが止まる最大の原因は、AIへの依頼が毎回ゼロからになることです。MOAIの「設定」に次の3つを書いておくと、すべての依頼に自動で引き継がれ、依頼文は「今回やること」だけで済むようになります。</p>
+<ol>
+<li><strong>ミッション</strong>: 誰に、何を届けるメディアか。例「賃貸で一人暮らしをする20〜30代に、防災グッズの置き場所と選び方を伝える」</li>
+<li><strong>トーン</strong>: 文体と禁止事項。例「です・ます調。断定しない。体験談を捏造しない。数字は出典付き」</li>
+<li><strong>禁止ワード・運用ルール</strong>: 使わない表現（「絶対」「No.1」）、広告表記のルール、公開前の確認者</li>
+</ol>
+<p>この3つは、商用ツールでは「ブランドボイス設定」と呼ばれる機能に当たります。一度書けば、以後の生成物のばらつきが減り、承認の差し戻しも減ります。</p>
+
+<h2>1週間の運用例（1チャネル・週2本）</h2>
+<div class="tw"><table><thead><tr><th>曜日</th><th>段階</th><th>やること</th><th>所要時間</th></tr></thead><tbody>
+<tr><td>月</td><td>計画</td><td>カレンダーで今週の2本のテーマと公開日を決める。チャネルの先週の実績を見て、伸びたテーマを1本入れる</td><td>15分</td></tr>
+<tr><td>月</td><td>依頼</td><td>「指示する」で2本分の依頼を書き、担当（ライター）とチャネルを選んでキューに積む。「キューをまとめてコピー」でAIに貼る</td><td>15分</td></tr>
+<tr><td>火</td><td>承認</td><td>AIの出力を承認キューに貼り、読む。直しが要る箇所は「差し戻し」に修正指示を書いて再依頼</td><td>20分</td></tr>
+<tr><td>水・金</td><td>投稿</td><td>承認済みの本文を各媒体に投稿し、タスクを「公開済み」へ</td><td>各5分</td></tr>
+<tr><td>土</td><td>計測</td><td>チャネル画面に今週の実績（フォロワー・PV・収益）を記録。ダッシュボードで推移を見る</td><td>10分</td></tr>
+<tr><td>土</td><td>保全</td><td>設定画面からデータを書き出して保存</td><td>2分</td></tr>
+</tbody></table></div>
+<p>合計で週1時間半前後です。「毎日投稿」から始めると依頼と承認の負担で止まるため、週2本を4週間続けることを最初の目標にします。</p>
+
+<h2>依頼文の書き方: 差し戻しを減らす型</h2>
+<p>AIへの依頼は、次の5項目がそろっていると、1回目の出力で承認できる確率が上がります。</p>
+<ul>
+<li><strong>目的と読者</strong>: 設定のミッションを前提に、今回の記事で誰のどんな疑問に答えるか</li>
+<li><strong>形式</strong>: 見出し構成、文字数、表・箇条書きの有無、末尾のCTA</li>
+<li><strong>根拠の扱い</strong>: 数字や制度に触れる場合は出典URLを添える、不明なら「要確認」と書かせる</li>
+<li><strong>禁止事項</strong>: 設定の禁止ワードに加え、その記事固有の注意（体験談を書かない、価格を断定しないなど）</li>
+<li><strong>参考</strong>: 過去の承認済み記事のURLや、競合の構成のメモ</li>
+</ul>
+<p>MOAIの「AIチーム」には、SEOリサーチャー・ライター・競合アナリストなど役割の違う8人の担当がいます。調査は先にリサーチャーへ、その結果を添えてライターへ、と2段階に分けると、1回の依頼が小さくなり、承認も楽になります。</p>
+
+<h2>承認の基準を先に決める</h2>
+<p>承認キューで迷う時間が長いと、ループはここで止まります。承認・差し戻し・却下の基準を先に決めておきます。</p>
+<div class="tw"><table><thead><tr><th>判定</th><th>基準</th><th>その後</th></tr></thead><tbody>
+<tr><td>承認</td><td>ミッション・トーンに合い、事実の誤り・禁止ワードがなく、直しが5分以内で済む</td><td>自分で微修正して公開へ</td></tr>
+<tr><td>差し戻し</td><td>構成や方向は合っているが、根拠不足・冗長・形式違いがある</td><td>修正指示を1〜3行書いて再依頼</td></tr>
+<tr><td>却下</td><td>ミッションに合わない、事実が確認できない、捏造の体験談や実績が含まれる</td><td>依頼文を書き直す。設定の禁止事項に追記</td></tr>
+</tbody></table></div>
+<p>特に「体験談・実績・専門家の監修を捏造していないか」は必ず見ます。生成AIは求められると自然に作ってしまうため、設定のトーンに「体験談を書かない」と明記し、承認時にも確認します。景品表示法やステルスマーケティング規制に関わる表記（広告である旨、根拠のない効果表現）も、この段階で止めます。</p>
+
+<h2>計測: 何を記録すれば次の計画に使えるか</h2>
+<p>チャネル画面には、日々の実績値を記録できます。全部を記録しようとすると続かないため、チャネルごとに2〜3指標に絞ります。</p>
+<div class="tw"><table><thead><tr><th>チャネル</th><th>記録する指標</th><th>次の計画への使い方</th></tr></thead><tbody>
+<tr><td>ブログ</td><td>PV、検索からの流入、収益</td><td>流入の多い記事の関連テーマを次の依頼に</td></tr>
+<tr><td>Instagram・Threads</td><td>フォロワー、保存数、プロフィールクリック</td><td>保存の多い型を繰り返す</td></tr>
+<tr><td>X</td><td>インプレッション、プロフィールクリック、リンククリック</td><td>クリックの多い時間帯・型を固定</td></tr>
+<tr><td>YouTube</td><td>視聴回数、平均視聴時間、登録者</td><td>視聴時間の長いテーマを深掘り</td></tr>
+<tr><td>note・有料コンテンツ</td><td>PV、購入数、売上</td><td>購入につながった無料記事の導線を強化</td></tr>
+</tbody></table></div>
+<p>ダッシュボードは登録した実績の推移をグラフで表示します。週1回の記録を4週間続けると、「どのテーマ・型が伸びるか」が見え始め、月曜の計画がデータにもとづくものに変わります。レポート画面には、週次の振り返りや競合調査をAIに依頼した結果を保管し、翌月の計画で参照します。</p>
+
+<h2>止まったときの立て直し方</h2>
+<ul>
+<li><strong>依頼が書けない</strong>: 設定のミッション・トーンが空のことが多い。まず設定を埋め、依頼は「今回のテーマと形式」だけにする</li>
+<li><strong>承認キューがたまる</strong>: 依頼の本数が承認の時間を超えている。週の本数を減らし、1本ずつ承認する</li>
+<li><strong>投稿だけ止まる</strong>: 承認済みの本文があるのに媒体に出していない。投稿の曜日を固定し、カレンダーに入れる</li>
+<li><strong>実績を記録していない</strong>: 計画がデータなしになり、テーマ選びで迷う。土曜10分の記録を運用に戻す</li>
+<li><strong>データが消えた</strong>: ブラウザの履歴・サイトデータの削除で消える。設定画面から書き出したファイルを読み込む。書き出しを週1回の運用に入れる</li>
+</ul>
+
+<h2>ローカル版に移るタイミング</h2>
+<p>ブラウザ版で4週間ループが回ったら、ローカル版を検討します。ローカル版はNode.jsで起動し、データがPCのファイルに保存され、AIへの依頼を画面のボタンから自動で実行できます（Claude Codeのスキルとして動作）。「依頼をコピーしてAIに貼り、結果を承認キューに貼り戻す」手作業がなくなるため、依頼と承認の時間が半分近くに減ります。データはブラウザ版から書き出し・読み込みで引っ越せます。</p>
+<p>逆に、週2本の運用で手作業が苦にならないなら、ブラウザ版のままで問題ありません。ローカル版は「本数を増やしたい」「複数チャネルを回したい」段階で必要になります。</p>
+
+<h2>商用ツールとMOAIの機能の対応</h2>
+<div class="tw"><table><thead><tr><th>機能</th><th>商用ツール（月1万〜7万円）</th><th>MOAI（無料）</th></tr></thead><tbody>
+<tr><td>コンテンツカレンダー</td><td>あり</td><td>カレンダー画面</td></tr>
+<tr><td>ブランドボイス設定</td><td>あり</td><td>設定画面（ミッション・トーン・禁止ワード）</td></tr>
+<tr><td>AIによる下書き生成</td><td>ツール内蔵のAI</td><td>ブラウザ版は手元のAIに貼り付け、ローカル版は自動実行</td></tr>
+<tr><td>承認ワークフロー</td><td>あり</td><td>承認キュー（承認・差し戻し・却下）</td></tr>
+<tr><td>SNSへの予約投稿・API連携</td><td>あり</td><td>なし（各媒体で手動投稿）</td></tr>
+<tr><td>実績のダッシュボード</td><td>各媒体から自動取得</td><td>手入力した実績をグラフ化</td></tr>
+<tr><td>複数人での共同編集</td><td>あり</td><td>なし（1人1ブラウザ／1台のPC）</td></tr>
+<tr><td>データの保存先</td><td>ベンダーのサーバー</td><td>自分のブラウザまたはPC</td></tr>
+</tbody></table></div>
+<p>差が出るのは「投稿の自動化」「実績の自動取得」「共同編集」の3つです。運用が1〜2人で、投稿本数が週数本なら、この3つがなくても運用は回ります。逆に、チーム運用や1日複数投稿が前提なら、商用ツールの価値が出ます。</p>
+
+<h2>ローカル版のセットアップ（10分）</h2>
+<ol>
+<li>Node.js をインストールする（公式サイトからLTS版）</li>
+<li>GitHubのリポジトリをダウンロード（Code → Download ZIP）して展開する</li>
+<li>展開したフォルダで <code>node server.js</code> を実行する（Windowsは <code>start-moai.bat</code> をダブルクリック）</li>
+<li>ブラウザで <code>http://localhost:4173</code> を開く。画面はブラウザ版と同じ</li>
+<li>ブラウザ版で使っていたデータは、設定画面から書き出したファイルを読み込んで引き継ぐ</li>
+</ol>
+<p>データは <code>data/</code> フォルダのJSONファイルに保存され、画面が5秒ごとに読み直します。ファイルを直接編集せず、画面またはCLI（<code>node cli.js</code>）から操作してください。依存パッケージはなく、インストール後にネットワーク接続は必要ありません（AIへの依頼を自動実行する場合を除く）。</p>
+
+<h2>よくある質問</h2>
+<h3>Q. 本当に無料ですか。何で成り立っていますか</h3>
+<p>MOAI自体は無料・オープンソース（MIT）で、サーバー代も月額もアカウント登録も不要です。AIへの依頼に使うChatGPTやClaudeの利用料は、それぞれのサービスの料金体系に従います（無料枠でも運用できます）。</p>
+<h3>Q. データはどこに保存されますか</h3>
+<p>ブラウザ版では、そのブラウザの中（localStorage）にだけ保存され、外部には送信されません。ローカル版では自分のPCのファイルに保存されます。どちらも他人と共有されることはありませんが、ブラウザのデータ削除で消えるため、定期的な書き出しが必要です。</p>
+<h3>Q. 複数人で使えますか</h3>
+<p>ブラウザ版は1人1ブラウザの前提です。複数人で運用する場合は、ローカル版を1台のPCで動かして画面を共有するか、書き出したデータを受け渡す形になります。</p>
+<h3>Q. 商用ツールから乗り換えられますか</h3>
+<p>計画・依頼・承認・計測の4段階は移せます。SNSへの予約投稿やAPI連携はMOAIにはないため、投稿は各媒体で手作業になります。投稿本数が多く連携が必須なら、商用ツールを残す判断もあります。</p>
+<h3>Q. 生成AIの出力をそのまま公開しても問題ありませんか</h3>
+<p>おすすめしません。事実の誤り、捏造された体験談、広告表記の漏れは、承認の段階で人が止める必要があります。MOAIの承認キューは、この「人が読む工程」を省かないために置いてあります。</p>
+
+<p><a class="cta" href="../">MOAIをブラウザで開く（無料・登録不要）</a></p>
+<p>ソースコードと詳しい使い方は <a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHubリポジトリ</a> にあります。</p>
+</article>
+<footer>© 2026 MOAI ・ <a href="./">ブログ一覧</a> ・ <a href="https://solederlego8-a11y.github.io/">運営メディア一覧</a></footer>
+</div>
+</body>
+</html>
