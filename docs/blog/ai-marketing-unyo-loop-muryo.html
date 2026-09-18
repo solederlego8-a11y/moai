@@ -37,6 +37,10 @@ p{margin:0 0 16px}ul,ol{margin:0 0 16px;padding-left:22px}li{margin:0 0 6px}
 .cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font-weight:700;margin:8px 0 20px}
 a{color:var(--accent)}footer{margin-top:28px;color:var(--muted);font-size:13px}
 </style>
+<!-- faq-schema -->
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "本当に無料ですか。何で成り立っていますか", "acceptedAnswer": {"@type": "Answer", "text": "MOAI自体は無料・オープンソース（MIT）で、サーバー代も月額もアカウント登録も不要です。AIへの依頼に使うChatGPTやClaudeの利用料は、それぞれのサービスの料金体系に従います（無料枠でも運用できます）。"}}, {"@type": "Question", "name": "データはどこに保存されますか", "acceptedAnswer": {"@type": "Answer", "text": "ブラウザ版では、そのブラウザの中（localStorage）にだけ保存され、外部には送信されません。ローカル版では自分のPCのファイルに保存されます。どちらも他人と共有されることはありませんが、ブラウザのデータ削除で消えるため、定期的な書き出しが必要です。"}}, {"@type": "Question", "name": "複数人で使えますか", "acceptedAnswer": {"@type": "Answer", "text": "ブラウザ版は1人1ブラウザの前提です。複数人で運用する場合は、ローカル版を1台のPCで動かして画面を共有するか、書き出したデータを受け渡す形になります。"}}, {"@type": "Question", "name": "商用ツールから乗り換えられますか", "acceptedAnswer": {"@type": "Answer", "text": "計画・依頼・承認・計測の4段階は移せます。SNSへの予約投稿やAPI連携はMOAIにはないため、投稿は各媒体で手作業になります。投稿本数が多く連携が必須なら、商用ツールを残す判断もあります。"}}, {"@type": "Question", "name": "生成AIの出力をそのまま公開しても問題ありませんか", "acceptedAnswer": {"@type": "Answer", "text": "おすすめしません。事実の誤り、捏造された体験談、広告表記の漏れは、承認の段階で人が止める必要があります。MOAIの承認キューは、この「人が読む工程」を省かないために置いてあります。"}}, {"@type": "Question", "name": "AIチームの8人はどう使い分ければいいですか", "acceptedAnswer": {"@type": "Answer", "text": "依頼の種類で分けます。テーマ探しや検索意図の整理はSEOリサーチャー、本文はライター、他社の投稿の傾向を知りたいときは競合アナリスト、というように、1つの依頼を1人の担当に絞ると、出力の質が安定します。担当ごとの役割は「AIチーム」画面の説明で確認できます。"}}]}
+</script>
 </head>
 <body>
 <div class="wrap">
