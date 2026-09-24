@@ -25,6 +25,10 @@ h1{font-size:24px;margin:0 0 8px}.lead{color:var(--muted);margin:0 0 24px}
 .card h2{font-size:17px;margin:0 0 6px;color:var(--accent)}.card p{margin:0;color:var(--muted);font-size:14px}.card .d{font-size:12px;color:var(--muted);margin-top:8px;display:block}
 footer{margin-top:28px;color:var(--muted);font-size:13px}a{color:var(--accent)}
 </style>
+<!-- ga4-cv -->
+<script>
+if(typeof gtag==='function'){document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||a.hasAttribute('data-cv-tracked'))return;var h=a.href||'';var has=function(s){return h.indexOf(s)>-1;};var asp=has('a8.net')?'a8':(has('rakuten.co.jp')||has('r10.to'))?'rakuten':(has('amazon.co.jp')||has('amzn.'))?'amazon':'';if(asp){gtag('event','affiliate_click',{asp:asp,link_url:h,link_text:(a.innerText||'').trim().slice(0,80),page_path:location.pathname});}else if(has('buy.stripe.com')){gtag('event','begin_checkout',{link_url:h,page_path:location.pathname});}},true);document.addEventListener('submit',function(e){var f=e.target;gtag('event','generate_lead',{form_id:f.id||f.getAttribute('data-subject')||f.action||'',page_path:location.pathname});},true);}
+</script>
 </head>
 <body><div class="wrap">
 <header class="top"><a href="../">🗿 MOAI</a> › ブログ</header>
