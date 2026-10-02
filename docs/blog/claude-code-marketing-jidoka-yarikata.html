@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<!-- ga4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSXEBHJSG1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BSXEBHJSG1', { anonymize_ip: true });
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Codeでマーケティングを自動化するやり方｜導入5ステップと承認つき運用 | MOAI ブログ</title>
+<meta name="description" content="Claude Codeでマーケティング業務（SEO調査・記事の下書き・SNS投稿文・週次レポート）を自動化するやり方を、無料のMOAIと組み合わせる導入5ステップ、権限設定、指示の書き方、CLIコマンドまで解説します。">
+<link rel="canonical" href="https://solederlego8-a11y.github.io/moai/blog/claude-code-marketing-jidoka-yarikata.html">
+<meta property="og:title" content="Claude Codeでマーケティングを自動化するやり方">
+<meta property="og:description" content="Claude Codeでマーケティング業務（SEO調査・記事の下書き・SNS投稿文・週次レポート）を自動化するやり方を、無料のMOAIと組み合わせる導入5ステップ、権限設定、指示の書き方、CLIコマンドまで解説します。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://solederlego8-a11y.github.io/moai/blog/claude-code-marketing-jidoka-yarikata.html">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Codeでマーケティングを自動化するやり方｜導入5ステップと承認つき運用", "datePublished": "2026-10-02", "dateModified": "2026-10-02", "author": {"@type": "Organization", "name": "MOAI"}, "publisher": {"@type": "Organization", "name": "MOAI"}, "mainEntityOfPage": "https://solederlego8-a11y.github.io/moai/blog/claude-code-marketing-jidoka-yarikata.html"}
+</script>
+<style>
+:root{--bg:#f6f7f9;--paper:#fff;--ink:#1a1d23;--muted:#5b6472;--line:#e3e6eb;--accent:#2f6bff;--accent-soft:#eaf0ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--paper:#161a21;--ink:#e8ebf0;--muted:#9aa3b2;--line:#2a3140;--accent:#5b8cff;--accent-soft:#1b2740}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.9}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+header.top{display:flex;align-items:center;gap:12px;margin-bottom:28px;font-size:14px}
+header.top a{color:var(--muted);text-decoration:none}header.top a:hover{color:var(--accent)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px 28px}
+h1{font-size:26px;line-height:1.45;margin:0 0 8px}.meta{color:var(--muted);font-size:13px;margin:0 0 24px}
+h2{font-size:20px;margin:36px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}h3{font-size:16.5px;margin:24px 0 8px}
+p{margin:0 0 16px}ul,ol{margin:0 0 16px;padding-left:22px}li{margin:0 0 6px}
+.tldr{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 24px}.tldr ul{margin:6px 0 0}
+.tw{overflow-x:auto;margin:0 0 20px}table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--accent-soft)}
+.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font-weight:700;margin:8px 0 20px}
+a{color:var(--accent)}footer{margin-top:28px;color:var(--muted);font-size:13px}
+</style>
+<!-- ga4-cv -->
+<script>
+if(typeof gtag==='function'){document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||a.hasAttribute('data-cv-tracked'))return;var h=a.href||'';var has=function(s){return h.indexOf(s)>-1;};var asp=has('a8.net')?'a8':(has('rakuten.co.jp')||has('r10.to'))?'rakuten':(has('amazon.co.jp')||has('amzn.'))?'amazon':'';if(asp){gtag('event','affiliate_click',{asp:asp,link_url:h,link_text:(a.innerText||'').trim().slice(0,80),page_path:location.pathname});}else if(has('buy.stripe.com')){gtag('event','begin_checkout',{link_url:h,page_path:location.pathname});}},true);document.addEventListener('submit',function(e){var f=e.target;gtag('event','generate_lead',{form_id:f.id||f.getAttribute('data-subject')||f.action||'',page_path:location.pathname});},true);}
+</script>
+<!-- faq-schema -->
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "MOAIを使うのにお金はかかりますか", "acceptedAnswer": {"@type": "Answer", "text": "MOAI自体は無料のオープンソース（MITライセンス）です。Claude Code の利用には、Anthropicが案内する利用条件・料金が適用されます。"}}, {"@type": "Question", "name": "Claude Codeが勝手にSNSへ投稿することはありますか", "acceptedAnswer": {"@type": "Answer", "text": "既定の「おまかせ」プリセットでは、許可されたツールが読み書き・検索・nodeコマンドなどに限られています。また同梱スキルは、承認されていないタスクを公開しないルールで動きます。生成物は承認キューに入り、人が承認するまで公開されません。"}}, {"@type": "Question", "name": "自分で作ったサブエージェントやスキルを使えますか", "acceptedAnswer": {"@type": "Answer", "text": "使えます。各担当がどのサブエージェント・スキルを呼ぶかは、担当ごとの割り当て先（初期データでは docs/seed.js の backend.target）で決まっており、ここを自分のサブエージェント名やスキル名にすると置き換えられます。新しい担当を増やす場合は claude-code/agents/ にエージェント定義を足します。担当を「おまかせ」にして指示を積めば、Claude Code が指示の内容から担当を選びます。"}}, {"@type": "Question", "name": "macOSでも動きますか", "acceptedAnswer": {"@type": "Answer", "text": "Node.jsが動く環境なら動作します。ログインは node login.js、スキルとエージェントのコピーは cp コマンドで行います。"}}, {"@type": "Question", "name": "毎日決まった時刻に自動で実行できますか", "acceptedAnswer": {"@type": "Answer", "text": "MOAI自体にはスケジュール実行の機能はありません。指示を積んでおき、決まった時刻にボタンを押すか、Claude Code 側で /moai を実行する運用になります。"}}]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a href="../">🗿 MOAI</a><span>›</span><a href="./">ブログ</a></header>
+<article class="card">
+<h1>Claude Codeでマーケティングを自動化するやり方｜導入5ステップと承認つき運用</h1>
+<p class="meta">公開: 2026-10-02 ・ 更新: 2026-10-02 ・ MOAI 編集部</p>
+
+<div class="tldr"><strong>要点</strong>
+<ul>
+<li>Claude Codeは、日本語の指示でファイルの読み書き・調べもの・コマンド実行までこなすAnthropicのAIエージェント。マーケティングでは調査・下書き・レポート作成の自動化に向く</li>
+<li>自動化で詰まりやすいのは「指示が毎回ばらばら」「生成物が散らばる」「勝手に公開される不安」の3点。指示の置き場と承認の関門を先に作ると安定する</li>
+<li>オープンソースのMOAIを使うと、画面で積んだ指示を Claude Code が順に処理し、生成物は承認キューに戻る。承認していないものは公開されない</li>
+<li>導入は「clone → node server.js → スキルとエージェントのコピー → 1回だけログイン → ▶ AIに実行させる」の5段階</li>
+</ul></div>
+
+<p>Claude Codeをマーケティングに使いたいと考えたとき、多くの人が最初につまずくのは「何から任せればいいか」と「どう運用に組み込むか」です。チャット画面で1回ずつ頼むだけなら手軽ですが、毎週の記事企画や競合調査を継続して任せるには、指示の書き方、生成物の置き場所、公開前の確認の仕組みを決めておく必要があります。</p>
+<p>この記事では、Claude Codeでマーケティング業務を自動化するやり方を、オープンソースのAIマーケティング司令室「MOAI」と組み合わせる手順で説明します。コマンドはすべてMOAIのリポジトリに実在するものだけを使っています。</p>
+
+<h2>Claude Codeとは何か、マーケティングで何を任せられるか</h2>
+<p>Claude Code は Anthropic が提供するAIエージェントで、ターミナルやデスクトップアプリから、日本語の指示でファイルの読み書き、Web検索、コマンドの実行などを行えます。提供形態・利用条件・料金は <a href="https://claude.com/claude-code" target="_blank" rel="noopener">Claude Code の公式ページ</a>と <a href="https://docs.claude.com/en/docs/claude-code/overview" target="_blank" rel="noopener">公式ドキュメント</a>で確認してください。</p>
+<p>マーケティング業務で任せやすいのは、次のような「材料を集めて、決まった形にまとめる」仕事です。</p>
+<div class="tw"><table><thead><tr><th>業務</th><th>任せる内容の例</th><th>人が残すべき判断</th></tr></thead><tbody>
+<tr><td>SEO調査</td><td>狙うキーワードの検索結果の傾向、上位記事の見出し構成の整理</td><td>どのテーマを書くか</td></tr>
+<tr><td>記事の下書き</td><td>構成案、本文の下書き、FAQ案</td><td>事実確認、公開の可否</td></tr>
+<tr><td>SNS投稿文</td><td>1本の記事から投稿文の案を複数作る</td><td>トーン、投稿するかどうか</td></tr>
+<tr><td>競合調査</td><td>公開情報から競合の発信テーマ・頻度を整理</td><td>自社の打ち手</td></tr>
+<tr><td>週次レポート</td><td>記録した実績の推移のまとめと次週の候補</td><td>優先順位の決定</td></tr>
+</tbody></table></div>
+<p>反対に、外部サイトへの投稿、メールの送信、広告費の操作のように、取り消しが難しい作業は、自動化の対象から外すか、人が最後に確認する形にするのが安全です。</p>
+
+<h2>自動化が続かない3つの理由と対策</h2>
+<h3>1. 指示が毎回ばらばら</h3>
+<p>ブランドの方針やトーン、禁止事項を毎回書かないと出力の質が揺れ、書くのが面倒になって続かなくなります。対策は、前提を1か所に書いておき、毎回の指示に自動で付けることです。MOAIでは「設定」画面のミッション・トーン・禁止ワード・運用ルールがこの役割を持ち、Claude Codeは処理の最初に <code>node cli.js context</code> でこれを読み込みます。</p>
+<h3>2. 生成物が散らばる</h3>
+<p>チャット履歴やフォルダに生成物が散らばると、どれが確認済みで、どれを公開したのか分からなくなります。対策は、生成物を必ず1つのキューに戻すことです。MOAIでは生成物は「承認待ち」のタスクとして承認キューに入り、承認済み→公開済みまで状態で追えます。</p>
+<h3>3. 勝手に公開される不安</h3>
+<p>AIに権限を渡しすぎると、確認していない文章が外に出る不安から、結局すべてを手作業に戻しがちです。対策は、AIの権限を絞り、公開の前に人の承認を必ず挟むことです。MOAIの同梱スキルは「承認されていないタスクを勝手に公開してはいけない」というルールで動き、実行時の権限も既定では絞られています（後述）。</p>
+
+<h2>導入手順</h2>
+<h3>必要なもの</h3>
+<ul>
+<li><a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a>（無料）</li>
+<li>Claude Code（利用条件は公式の案内を確認）</li>
+<li>git（なくても、GitHubから「Download ZIP」で取得できる）</li>
+</ul>
+
+<h3>ステップ1：MOAIを取得して起動する</h3>
+<pre><code>git clone https://github.com/solederlego8-a11y/moai.git
+cd moai
+node server.js</code></pre>
+<p>ブラウザで <code>http://localhost:4173</code> を開くと画面が出ます。停止は Ctrl + C です。Windowsでは <code>start-moai.bat</code> のダブルクリックでも起動します。依存パッケージはないため <code>npm install</code> は不要です。</p>
+
+<h3>ステップ2：スキルとAIエージェントを Claude Code に入れる</h3>
+<p>リポジトリの <code>claude-code/</code> フォルダに、MOAIの実行手順を書いたスキルと、役割別のAIエージェント定義が入っています。これを Claude Code の設定フォルダにコピーします。</p>
+<pre><code># Windows
+xcopy /E /I claude-code\skills\moai "%USERPROFILE%\.claude\skills\moai"
+xcopy /E /I claude-code\agents "%USERPROFILE%\.claude\agents"
+
+# macOS / Linux
+cp -r claude-code/skills/moai ~/.claude/skills/
+cp -r claude-code/agents/* ~/.claude/agents/</code></pre>
+<p>コピーされるエージェントは、SEOリサーチャー（<code>moai-seo-researcher</code>）、コンテンツライター（<code>moai-content-writer</code>）、SNSコピーライター（<code>moai-social-copywriter</code>）、競合アナリスト（<code>moai-competitor-analyst</code>）、グロース分析官（<code>moai-growth-analyst</code>）、収益ファネル設計（<code>moai-funnel-designer</code>）、動画・Reels企画（<code>moai-video-director</code>）の7つです。画面上の「戦略ディレクター」はスキル自身（メインの処理）が担当するため、AIチームは合計8人になります。</p>
+
+<h3>ステップ3：最初に1回だけログインする</h3>
+<p>MOAIは画面のボタンから Claude Code を起動します。そのために、一度だけログインが必要です。</p>
+<ul>
+<li>Windows：<code>login-claude.bat</code> をダブルクリック</li>
+<li>macOS / Linux：<code>node login.js</code></li>
+</ul>
+<p>ブラウザが開くので許可（Authorize）を押します。状態は <code>node login.js --status</code> でいつでも確認できます。デスクトップアプリでログイン済みでも、この手順は別に必要です（アプリの認証は、外部から起動したAIには引き継がれないため）。</p>
+
+<h3>ステップ4：前提を書き、指示を積む</h3>
+<ol>
+<li>「チャネル」で運用するメディアを登録する</li>
+<li>「設定」でミッション・トーン・禁止ワード・運用ルールを書く</li>
+<li>「指示する」で依頼を日本語で書き、担当（AIチームの誰か、または「おまかせ」）と対象チャネルを選んでキューに積む</li>
+</ol>
+
+<h3>ステップ5：「▶ AIに実行させる」を押す</h3>
+<p>「指示する」画面の「▶ AIに実行させる」を押すと、サーバーが Claude Code を起動し、キューの指示を古い順に処理します。どのツールを使い、何を調べているかが画面にそのまま表示されます。生成物は承認キューに戻ってくるので、読んでから承認・差し戻し・却下を選びます。Claude Code のターミナルから <code>/moai</code> と打っても同じ処理が動きます。</p>
+
+<h2>権限のプリセット：既定は「おまかせ（推奨）」</h2>
+<div class="tw"><table><thead><tr><th>プリセット</th><th>Claude Codeに許可する内容</th><th>向いている場面</th></tr></thead><tbody>
+<tr><td>おまかせ（推奨・既定）</td><td>ファイル編集の自動承認と、<code>node</code> コマンド、読み書き・検索・Web検索・Web取得・サブエージェント・スキルの使用に限定</td><td>調査・執筆・レポート作成</td></tr>
+<tr><td>すべて許可</td><td>権限確認をすべて省略</td><td>ブラウザ操作を伴う投稿まで任せる場合</td></tr>
+</tbody></table></div>
+<p>まずは「おまかせ」で運用し、外部への投稿は人が行うことをおすすめします。「すべて許可」は確認なしでどんな操作も実行できる状態になるため、何をさせるかを把握したうえで、必要なときだけ選んでください。</p>
+
+<h2>指示の書き方の例</h2>
+<p>1つの指示は「1人の担当に、1つの成果物」に絞ると、出力が安定します。調査と執筆は分けて積み、調査の結果を見てから執筆を頼むのが基本です。</p>
+<div class="tw"><table><thead><tr><th>担当</th><th>指示の例</th></tr></thead><tbody>
+<tr><td>SEOリサーチャー</td><td>「賃貸 防災 収納」で検索上位10件の見出し構成を表にまとめ、上位にない切り口を3つ挙げて</td></tr>
+<tr><td>コンテンツライター</td><td>先週のSEO調査レポートの切り口1で、4000字の記事の下書きを書いて。体験談は書かない。数字には出典URLを付ける</td></tr>
+<tr><td>SNSコピーライター</td><td>承認済みの記事「○○」から、Instagram用キャプションを3案。本文にURLは入れない</td></tr>
+<tr><td>競合アナリスト</td><td>指定した3アカウントの直近の発信テーマを、公開されている投稿から整理して</td></tr>
+<tr><td>グロース分析官</td><td>直近4週の実績の推移を見て、伸びているチャネルと止まっているチャネルを指摘して</td></tr>
+</tbody></table></div>
+
+<h2>CLIで直接操作する</h2>
+<p>ローカル版のデータは <code>data/*.json</code> に保存され、画面が5秒ごとに読み直します。手で編集すると壊れやすいため、Claude Code も人も、データの更新は同梱のCLI経由で行います。主なコマンドは次のとおりです。</p>
+<div class="tw"><table><thead><tr><th>コマンド</th><th>役割</th></tr></thead><tbody>
+<tr><td><code>node cli.js queue</code></td><td>実行待ちの指示を一覧</td></tr>
+<tr><td><code>node cli.js context</code></td><td>AIに渡す前提（設定・チャネル・KPI）を出力</td></tr>
+<tr><td><code>node cli.js task-add --title "..." --body-file out.md --status review</code></td><td>生成物を承認待ちタスクとして追加</td></tr>
+<tr><td><code>node cli.js task-set &lt;taskId&gt; --status published</code></td><td>タスクの状態を更新（公開済みなど）</td></tr>
+<tr><td><code>node cli.js report-add --title "..." --kind 週次 --body-file report.md</code></td><td>レポートを保管</td></tr>
+<tr><td><code>node cli.js metric --date 2026-10-02 --ch_instagram 132</code></td><td>実績を記録（チャネルIDをそのまま指定）</td></tr>
+<tr><td><code>node cli.js calendar-add --date 2026-10-10 --title "記事公開"</code></td><td>カレンダーに予定を追加</td></tr>
+</tbody></table></div>
+<p>長い本文はコマンドラインに直接書かず、一時ファイルに書いて <code>--body-file</code> で渡します。</p>
+
+<h2>うまく動かないとき</h2>
+<ul>
+<li><strong>「Claude Code が見つかりませんでした」と出る</strong>：インストール済みなら、環境変数 <code>MOAI_CLAUDE_BIN</code> に Claude Code の実行ファイルのパスを設定してから <code>node server.js</code> を起動し直す</li>
+<li><strong>ログインを求められる</strong>：<code>node login.js --status</code> で状態を確認し、未ログインならステップ3をやり直す</li>
+<li><strong>ポート4173が使われている</strong>：環境変数 <code>MOAI_PORT</code> で別のポート番号を指定して起動する</li>
+<li><strong>画面がエラーになる</strong>：<code>data/</code> のJSONを手で編集していないか確認する。更新はCLI経由で行う</li>
+<li><strong>担当が呼ばれない</strong>：エージェント定義を <code>~/.claude/agents/</code> にコピーしたか確認する</li>
+</ul>
+
+<h2>まずはブラウザ版で流れを確認してもよい</h2>
+<p>Claude Code の準備がまだなら、インストール不要のブラウザ版で、指示を積み、まとめてコピーしてAIに貼り、結果を承認する流れを先に試せます。画面はローカル版と同じで、書き出したデータはローカル版に読み込めます。ブラウザ版での回し方は <a href="chatgpt-sns-unyo-kanri-muryo.html">ChatGPTでのSNS運用を無料で一元管理する方法</a>で説明しています。</p>
+
+<h2>よくある質問</h2>
+<h3>Q. MOAIを使うのにお金はかかりますか</h3>
+<p>MOAI自体は無料のオープンソース（MITライセンス）です。Claude Code の利用には、Anthropicが案内する利用条件・料金が適用されます。</p>
+<h3>Q. Claude Codeが勝手にSNSへ投稿することはありますか</h3>
+<p>既定の「おまかせ」プリセットでは、許可されたツールが読み書き・検索・nodeコマンドなどに限られています。また同梱スキルは、承認されていないタスクを公開しないルールで動きます。生成物は承認キューに入り、人が承認するまで公開されません。</p>
+<h3>Q. 自分で作ったサブエージェントやスキルを使えますか</h3>
+<p>使えます。各担当がどのサブエージェント・スキルを呼ぶかは、担当ごとの割り当て先（初期データでは <code>docs/seed.js</code> の <code>backend.target</code>）で決まっており、ここを自分のサブエージェント名やスキル名にすると置き換えられます。新しい担当を増やす場合は <code>claude-code/agents/</code> にエージェント定義を足します。担当を「おまかせ」にして指示を積めば、Claude Code が指示の内容から担当を選びます。</p>
+<h3>Q. macOSでも動きますか</h3>
+<p>Node.jsが動く環境なら動作します。ログインは <code>node login.js</code>、スキルとエージェントのコピーは <code>cp</code> コマンドで行います。</p>
+<h3>Q. 毎日決まった時刻に自動で実行できますか</h3>
+<p>MOAI自体にはスケジュール実行の機能はありません。指示を積んでおき、決まった時刻にボタンを押すか、Claude Code 側で <code>/moai</code> を実行する運用になります。</p>
+
+<h2>今日から始める</h2>
+<p>リポジトリをクローンして <code>node server.js</code> を実行すれば、数分で画面が立ち上がります。役に立ったら、GitHubのリポジトリにスターを付けてもらえると開発の励みになります。</p>
+<p><a class="cta" href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHubでMOAIを入手する（無料・MIT）</a></p>
+<p>インストールせずに試すなら <a href="../">ブラウザ版のMOAI</a> を開いてください。</p>
+
+<h2>関連記事</h2>
+<ul>
+<li><a href="sns-toukou-shonin-flow-muryo.html">SNS投稿の承認フローを無料で作る方法</a></li>
+<li><a href="noimosai-daitai-muryo.html">NoimosAIの代替を無料で｜置き換えられる機能・できない機能</a></li>
+<li><a href="ai-marketing-unyo-loop-muryo.html">AIマーケティングの運用ループを無料で回す手順</a></li>
+</ul>
+</article>
+<footer>© 2026 MOAI ・ <a href="./">ブログ一覧</a> ・ <a href="../">アプリを開く</a> ・ <a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHub</a> ・ <a href="https://solederlego8-a11y.github.io/">運営メディア一覧</a></footer>
+</div>
+</body>
+</html>

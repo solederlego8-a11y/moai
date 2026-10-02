@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<!-- ga4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSXEBHJSG1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BSXEBHJSG1', { anonymize_ip: true });
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NoimosAIの代替を無料で｜オープンソースで置き換えられる機能・できない機能 | MOAI ブログ</title>
+<meta name="description" content="NoimosAIの公式料金（Pro $99〜/月）と機能を整理し、無料・オープンソースのMOAIと手元のAIで代替できる範囲、できない範囲（SNS連携・リスニング・チーム機能）、乗り換え手順を解説します。">
+<link rel="canonical" href="https://solederlego8-a11y.github.io/moai/blog/noimosai-daitai-muryo.html">
+<meta property="og:title" content="NoimosAIの代替を無料で｜置き換えられる機能・できない機能">
+<meta property="og:description" content="NoimosAIの公式料金（Pro $99〜/月）と機能を整理し、無料・オープンソースのMOAIと手元のAIで代替できる範囲、できない範囲（SNS連携・リスニング・チーム機能）、乗り換え手順を解説します。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://solederlego8-a11y.github.io/moai/blog/noimosai-daitai-muryo.html">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "NoimosAIの代替を無料で｜オープンソースで置き換えられる機能・できない機能", "datePublished": "2026-10-02", "dateModified": "2026-10-02", "author": {"@type": "Organization", "name": "MOAI"}, "publisher": {"@type": "Organization", "name": "MOAI"}, "mainEntityOfPage": "https://solederlego8-a11y.github.io/moai/blog/noimosai-daitai-muryo.html"}
+</script>
+<style>
+:root{--bg:#f6f7f9;--paper:#fff;--ink:#1a1d23;--muted:#5b6472;--line:#e3e6eb;--accent:#2f6bff;--accent-soft:#eaf0ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--paper:#161a21;--ink:#e8ebf0;--muted:#9aa3b2;--line:#2a3140;--accent:#5b8cff;--accent-soft:#1b2740}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.9}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+header.top{display:flex;align-items:center;gap:12px;margin-bottom:28px;font-size:14px}
+header.top a{color:var(--muted);text-decoration:none}header.top a:hover{color:var(--accent)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px 28px}
+h1{font-size:26px;line-height:1.45;margin:0 0 8px}.meta{color:var(--muted);font-size:13px;margin:0 0 24px}
+h2{font-size:20px;margin:36px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}h3{font-size:16.5px;margin:24px 0 8px}
+p{margin:0 0 16px}ul,ol{margin:0 0 16px;padding-left:22px}li{margin:0 0 6px}
+.tldr{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 24px}.tldr ul{margin:6px 0 0}
+.tw{overflow-x:auto;margin:0 0 20px}table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--accent-soft)}
+.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font-weight:700;margin:8px 0 20px}
+a{color:var(--accent)}footer{margin-top:28px;color:var(--muted);font-size:13px}
+</style>
+<!-- ga4-cv -->
+<script>
+if(typeof gtag==='function'){document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||a.hasAttribute('data-cv-tracked'))return;var h=a.href||'';var has=function(s){return h.indexOf(s)>-1;};var asp=has('a8.net')?'a8':(has('rakuten.co.jp')||has('r10.to'))?'rakuten':(has('amazon.co.jp')||has('amzn.'))?'amazon':'';if(asp){gtag('event','affiliate_click',{asp:asp,link_url:h,link_text:(a.innerText||'').trim().slice(0,80),page_path:location.pathname});}else if(has('buy.stripe.com')){gtag('event','begin_checkout',{link_url:h,page_path:location.pathname});}},true);document.addEventListener('submit',function(e){var f=e.target;gtag('event','generate_lead',{form_id:f.id||f.getAttribute('data-subject')||f.action||'',page_path:location.pathname});},true);}
+</script>
+<!-- faq-schema -->
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "MOAIはNoimosAIの公式な代替品ですか", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。MOAIはNoimosAIとは無関係のオープンソースツールです。同じような運用ループ（計画・依頼・承認・計測）を無料で回せるように作られていますが、機能は同一ではありません。SNS連携・リスニング・チーム機能は持っていません。"}}, {"@type": "Question", "name": "本当に費用はかかりませんか", "acceptedAnswer": {"@type": "Answer", "text": "MOAI自体は無料で、MITライセンスで公開されています。サーバー代や月額料金、アカウント登録もありません。AIへの依頼に使うChatGPT・Claude・Claude Codeの利用料は、それぞれの提供元の料金体系に従います。"}}, {"@type": "Question", "name": "NoimosAIの無料トライアルとMOAI、どちらを先に試すべきですか", "acceptedAnswer": {"@type": "Answer", "text": "先にMOAIで1週間運用し、足りない機能を書き出してからトライアルを始めると、有料ツールの限られたトライアル期間を「足りない機能の確認」に集中して使えます。料金やトライアル条件は公式ページで確認してください。"}}, {"@type": "Question", "name": "データを途中で別のツールに移せますか", "acceptedAnswer": {"@type": "Answer", "text": "MOAIのデータは「設定」からJSONファイルとして書き出せます。ブラウザ版とローカル版の間はそのまま読み込めます。他社ツールへの取り込み形式は各ツールの仕様によります。"}}, {"@type": "Question", "name": "日本語で使えますか", "acceptedAnswer": {"@type": "Answer", "text": "MOAIの画面とAIチームの説明は日本語です。指示も日本語で書けます。"}}]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a href="../">🗿 MOAI</a><span>›</span><a href="./">ブログ</a></header>
+<article class="card">
+<h1>NoimosAIの代替を無料で｜オープンソースで置き換えられる機能・できない機能</h1>
+<p class="meta">公開: 2026-10-02 ・ 更新: 2026-10-02 ・ MOAI 編集部</p>
+
+<div class="tldr"><strong>要点</strong>
+<ul>
+<li>NoimosAIは自律型AIエージェントでマーケティング業務を進めるオールインワン型の有料ツール。公式料金ページでは Pro $99・Team $249・Advanced $499（いずれも1ユーザーあたり月額）の3プランが案内されている（2026-10-02確認）</li>
+<li>「無料の代替」を探すときは、機能を全部そろえようとせず、自分の運用で本当に使う段階（計画・AIへの依頼・承認・計測・投稿）を先に決めると判断が早い</li>
+<li>オープンソースのMOAIは、計画・依頼・承認・計測の置き場を無料で用意し、AIの実行は手元のChatGPT・Claude、またはClaude Codeに任せる設計。SNSへの自動投稿・ソーシャルリスニング・チーム共同編集は持っていない</li>
+<li>まずはブラウザ版（登録不要）で1週間試し、足りない機能がはっきりしたら有料ツールのトライアルと比べる、という順番が失敗しにくい</li>
+</ul></div>
+
+<p>「NoimosAIのような自律型AIマーケティングツールを使いたいが、毎月の費用が見合うか分からない」「同じことを無料でできる方法はないか」。この記事は、そうした比較検討の段階にいる人に向けて、NoimosAIの公式情報を整理したうえで、無料で代わりになる組み合わせと、その限界を正直に書きます。</p>
+<p>先に立場を明らかにしておくと、この記事はオープンソースのAIマーケティング司令室「MOAI」の編集部が書いています。MOAIは無料で使えますが、NoimosAIと同じ機能をすべて持っているわけではありません。どこが置き換えられて、どこが置き換えられないのかを、表で確認できるようにしています。</p>
+
+<h2>NoimosAIとは：公式に案内されている内容</h2>
+<p>NoimosAIは、AGOS LABS TECHNOLOGIES LTD. が提供する「オールインワンAIマーケティング」ツールです（<a href="https://noimosai.com/ja" target="_blank" rel="noopener">公式サイト</a>のフッター表記）。公式サイトでは、コンテンツクリエイター、フリーランサー、スタートアップ、中小企業向けの製品として紹介されています。</p>
+<p>公式サイトに掲げられている主な機能は次のとおりです。</p>
+<ul>
+<li>専門特化したAIエージェントを配置し、マーケティング業務を自律的に進める機能</li>
+<li>ソーシャルメディア管理（トレンド分析、投稿作成、DM管理）</li>
+<li>SEO、GEO、競合戦略分析</li>
+<li>生成結果のレビュー・承認・タスク管理ができる作業フィード</li>
+<li>チャット形式での操作、カスタムダッシュボード</li>
+<li>チームでの協業（役割を設定した招待、ページ共有）、複数アプリとの連携</li>
+</ul>
+
+<h3>料金プラン（公式料金ページより）</h3>
+<div class="tw"><table><thead><tr><th>プラン</th><th>月額（1ユーザーあたり）</th><th>公式の想定ユーザー</th><th>主な上限</th></tr></thead><tbody>
+<tr><td>Pro</td><td>$99</td><td>ソロプレナー、コンテンツクリエイター、フリーランサー</td><td>ワークスペース2、月30,000 AIクレジット</td></tr>
+<tr><td>Team</td><td>$249</td><td>成長中の中小企業チーム、小規模代理店</td><td>ワークスペース5、月80,000 AIクレジット</td></tr>
+<tr><td>Advanced</td><td>$499</td><td>大規模に運用するマーケター、ミッドマーケット企業</td><td>ワークスペース10、月160,000 AIクレジット</td></tr>
+</tbody></table></div>
+<p>出典は <a href="https://noimosai.com/ja/pricing" target="_blank" rel="noopener">NoimosAI 公式料金ページ</a>（2026-10-02 閲覧）です。いずれのプランにも無料トライアルの案内があります。料金・上限・トライアル条件は変わる可能性があるため、契約前には必ず公式ページで最新の内容を確認してください。為替によって円での負担額も変わります。</p>
+
+<h2>「無料の代替」を探す前に決めること</h2>
+<p>代替ツールを探すときにありがちな失敗は、有料ツールの機能一覧を横に置いて、全部にチェックが付く無料ツールを探してしまうことです。そうしたツールはまず見つからず、比較だけで時間が過ぎます。順番を逆にして、自分の運用で実際に回している段階から書き出すと、必要なものが絞れます。</p>
+<p>AIを使ったマーケティング運用は、多くの場合、次の5段階の繰り返しです。</p>
+<ol>
+<li><strong>計画</strong>：いつ、どのチャネルに、何を出すかを決める</li>
+<li><strong>依頼</strong>：AIに調査・構成・本文・投稿文を頼む</li>
+<li><strong>承認</strong>：生成物を人が読み、直すか、出すか、捨てるかを決める</li>
+<li><strong>投稿</strong>：各チャネルに公開する</li>
+<li><strong>計測</strong>：フォロワー・アクセス・売上を記録し、次の計画に戻す</li>
+</ol>
+<p>この5段階のうち、あなたが「AIに自律的にやってほしい」のはどこか、「人が手でやっても構わない」のはどこか。そこを決めるのが最初の作業です。段階ごとの具体的な回し方は、<a href="ai-marketing-unyo-loop-muryo.html">AIマーケティングの運用ループを無料で回す手順</a>で詳しく説明しています。</p>
+
+<h3>判断の目安：3つの質問</h3>
+<ul>
+<li><strong>投稿を自動で予約・公開する必要があるか</strong>：1日に複数本、複数SNSへ出すなら、自動投稿の価値は大きい。週に数本なら手作業でも回る</li>
+<li><strong>複数人で同じ画面を触るか</strong>：上長やクライアントの承認を同じツール内でもらう必要があるなら、チーム機能を持つ有料ツールが向く</li>
+<li><strong>SNS上の会話を常時拾う必要があるか</strong>：ソーシャルリスニングやDM管理が業務の中心なら、それを持つツールを選ぶ</li>
+</ul>
+<p>3つとも「いいえ」なら、無料の組み合わせで十分に回る可能性が高いです。1つでも「はい」なら、その機能だけを持つ専用ツールを足すか、有料のオールインワン型を使う方が結果的に安く済むこともあります。</p>
+
+<h2>無料で代わりになる組み合わせ</h2>
+<p>NoimosAIのようなオールインワン型ツールの役割は、大きく「AIの頭脳」と「運用の置き場」に分けられます。無料で代替する場合は、この2つを別々に用意します。</p>
+<div class="tw"><table><thead><tr><th>役割</th><th>無料での用意の仕方</th><th>補足</th></tr></thead><tbody>
+<tr><td>AIの頭脳</td><td>ChatGPT・Claude などの対話AI（無料枠あり）、またはClaude Code</td><td>各サービスの利用条件・料金は提供元の案内に従う</td></tr>
+<tr><td>運用の置き場</td><td>MOAI（オープンソース・MITライセンス）</td><td>計画・依頼・承認・計測を1画面で管理。登録不要</td></tr>
+<tr><td>投稿</td><td>各SNS・ブログの管理画面から手動、または各SNSの公式予約投稿機能</td><td>MOAIはSNSへの自動投稿機能を持たない</td></tr>
+<tr><td>計測</td><td>各SNSの公式インサイト、Google アナリティクスなどの数字をMOAIに記録</td><td>MOAIは外部から数字を自動取得しない（手入力）</td></tr>
+</tbody></table></div>
+<p>有料ツールの価値の多くは、この4つを1つの画面とアカウントにまとめ、間をつなぐ手作業を減らしてくれる点にあります。無料の組み合わせでは、そのつなぎの一部を人が担います。逆に言えば、つなぎの手間が許容できる規模なら、月額費用をかけずに同じ運用の形を作れます。</p>
+
+<h2>MOAIで置き換えられること・置き換えられないこと</h2>
+<p>MOAIは「有料のAIマーケティング運用ツールと同じ運用ループを無料で使えるようにする」ことを目的に作られたオープンソースのツールです。公開ページを開くだけで使えるブラウザ版と、自分のPCで動かすローカル版があります。</p>
+<div class="tw"><table><thead><tr><th>やりたいこと</th><th>NoimosAI（公式の案内）</th><th>MOAI</th></tr></thead><tbody>
+<tr><td>役割の違うAI担当に仕事を振る</td><td>専門AIエージェントを配置</td><td>「AIチーム」に戦略・SEO・ライター・SNSコピー・競合・グロース・ファネル・動画の8担当</td></tr>
+<tr><td>AIが自律的に作業を進める</td><td>あり</td><td>ローカル版で「▶ AIに実行させる」を押すと Claude Code がキューを順に処理。ブラウザ版は指示をコピーして手元のAIに貼る</td></tr>
+<tr><td>生成物のレビュー・承認</td><td>作業フィードでレビュー・承認</td><td>承認キューで承認／差し戻し（修正指示つき）／却下</td></tr>
+<tr><td>タスク管理</td><td>あり</td><td>待機→実行中→承認待ち→承認済み→公開済みのカンバンと履歴</td></tr>
+<tr><td>ブランドの前提をAIに渡す</td><td>ユーザーデータとフィードバックから学習</td><td>設定画面のミッション・トーン・禁止ワード・運用ルールを毎回の指示に付ける</td></tr>
+<tr><td>ダッシュボード</td><td>カスタマイズ可能</td><td>記録した実績（フォロワー・PV・収益）の推移をグラフ表示</td></tr>
+<tr><td>SNS投稿・DM管理</td><td>あり</td><td>なし（投稿は各媒体で行う）</td></tr>
+<tr><td>ソーシャルリスニング</td><td>プランごとにキーワード数の上限あり</td><td>なし</td></tr>
+<tr><td>チームでの共同利用</td><td>役割設定での招待</td><td>なし（1人1ブラウザ、またはローカル版を1台のPCで）</td></tr>
+<tr><td>データの保存先</td><td>提供元のサービス上</td><td>自分のブラウザ、または自分のPCのファイル</td></tr>
+<tr><td>費用</td><td>月額 $99〜（1ユーザー）</td><td>無料（AIサービスの利用料は別）</td></tr>
+</tbody></table></div>
+<p>置き換えられないのは「SNSとの直接連携」「ソーシャルリスニング」「チーム機能」の3つです。この3つが業務の中心にある場合、MOAIは代替になりません。反対に、個人や少人数で、ブログやSNSに週数本を出す運用であれば、計画から計測までの形はMOAIで作れます。</p>
+
+<h2>乗り換え・併用の手順</h2>
+<h3>1. ブラウザ版で1週間試す（登録不要）</h3>
+<ol>
+<li><a href="../">MOAIの公開ページ</a>を開く。アカウント登録もインストールも要らない</li>
+<li>「チャネル」で運用しているメディアを登録する</li>
+<li>「設定」でミッション・トーン・禁止ワードを書く。これがAIへの指示に毎回付く</li>
+<li>「指示する」でやってほしいことを日本語で書き、担当とチャネルを選んでキューに積む</li>
+<li>「キューをまとめてコピー」を押し、ChatGPTやClaudeに貼り付ける</li>
+<li>「タスク」画面の「＋ タスクを追加」で作ったタスクを開き、返ってきた内容を「生成結果 / 本文」に貼って状態を「承認待ち」にする。承認キューで承認・差し戻し・却下を決める</li>
+</ol>
+<p>データはブラウザの中にだけ保存され、外部には送信されません。ただしブラウザの履歴やサイトデータを消すと一緒に消えるため、「設定」の「データを書き出す（JSON）」で定期的に保存しておきます。</p>
+
+<h3>2. 自動実行したくなったらローカル版へ</h3>
+<p>ブラウザ版では、AIへの貼り付けと結果の貼り戻しは手作業です。これを自動にしたい場合は、Node.js と Claude Code を用意してローカル版を使います。</p>
+<pre><code>git clone https://github.com/solederlego8-a11y/moai.git
+cd moai
+node server.js</code></pre>
+<p>ブラウザで <code>http://localhost:4173</code> を開くと同じ画面が出ます。同梱のスキルとAIエージェントを Claude Code に読み込ませ、最初に1回だけログイン（Windowsは <code>login-claude.bat</code>、macOS・Linuxは <code>node login.js</code>）を済ませれば、「指示する」画面の「▶ AIに実行させる」で、キューの指示が順に処理され、生成物は承認キューに戻ってきます。詳しい手順は <a href="claude-code-marketing-jidoka-yarikata.html">Claude Codeでマーケティングを自動化するやり方</a>にまとめています。</p>
+<p>ブラウザ版で書き出したJSONファイルは、ローカル版の「設定」から読み込めるため、試した分のデータはそのまま引き継げます。</p>
+
+<h3>3. 有料ツールと併用する場合</h3>
+<p>SNSの予約投稿やリスニングだけは有料ツールに任せ、記事や投稿文の企画・下書き・承認・実績の記録をMOAIで行う、という併用もできます。この場合、有料ツール側は投稿・分析の機能が中心のプランで足りるかを確認すると、費用を抑えやすくなります。</p>
+
+<h2>無料で運用するときの注意点</h2>
+<ul>
+<li><strong>AIの出力はそのまま出さない</strong>：事実の誤り、根拠のない数字、使っていない商品の体験談などが混ざることがあります。承認キューで人が読む工程を省かないでください</li>
+<li><strong>広告表記</strong>：アフィリエイトやPRを含む投稿は、景品表示法のステルスマーケティング規制に沿って広告であることを明示します（<a href="https://www.caa.go.jp/policies/policy/representation/fair_labeling/stealth_marketing/" target="_blank" rel="noopener">消費者庁：ステルスマーケティングに関する規制</a>）</li>
+<li><strong>データの保管</strong>：ブラウザ版は書き出しが唯一のバックアップです。週1回の書き出しを運用に入れておきます</li>
+<li><strong>AIサービスの規約</strong>：ChatGPTやClaudeに入力する内容は、それぞれのサービスの規約とデータの扱いに従います。顧客の個人情報など、入力すべきでない情報は入れないでください</li>
+</ul>
+
+<h2>どちらを選ぶべきか：判断表</h2>
+<div class="tw"><table><thead><tr><th>あなたの状況</th><th>おすすめ</th></tr></thead><tbody>
+<tr><td>1〜2人で運用、週数本、まず費用をかけずに形を作りたい</td><td>MOAI（ブラウザ版）から始める</td></tr>
+<tr><td>AIに調査・下書きを自動で回させたい、Claude Codeを使える</td><td>MOAI（ローカル版）</td></tr>
+<tr><td>SNSへの予約投稿・DM対応・リスニングが業務の中心</td><td>NoimosAIなど連携機能を持つ有料ツール（トライアルで確認）</td></tr>
+<tr><td>上長・クライアントの承認を同じツール内でもらう必要がある</td><td>チーム機能を持つ有料ツール</td></tr>
+<tr><td>判断がつかない</td><td>MOAIで1週間回し、足りなかった機能をメモしてから有料ツールのトライアルと比べる</td></tr>
+</tbody></table></div>
+
+<h2>よくある質問</h2>
+<h3>Q. MOAIはNoimosAIの公式な代替品ですか</h3>
+<p>いいえ。MOAIはNoimosAIとは無関係のオープンソースツールです。同じような運用ループ（計画・依頼・承認・計測）を無料で回せるように作られていますが、機能は同一ではありません。SNS連携・リスニング・チーム機能は持っていません。</p>
+<h3>Q. 本当に費用はかかりませんか</h3>
+<p>MOAI自体は無料で、MITライセンスで公開されています。サーバー代や月額料金、アカウント登録もありません。AIへの依頼に使うChatGPT・Claude・Claude Codeの利用料は、それぞれの提供元の料金体系に従います。</p>
+<h3>Q. NoimosAIの無料トライアルとMOAI、どちらを先に試すべきですか</h3>
+<p>先にMOAIで1週間運用し、足りない機能を書き出してからトライアルを始めると、有料ツールの限られたトライアル期間を「足りない機能の確認」に集中して使えます。料金やトライアル条件は公式ページで確認してください。</p>
+<h3>Q. データを途中で別のツールに移せますか</h3>
+<p>MOAIのデータは「設定」からJSONファイルとして書き出せます。ブラウザ版とローカル版の間はそのまま読み込めます。他社ツールへの取り込み形式は各ツールの仕様によります。</p>
+<h3>Q. 日本語で使えますか</h3>
+<p>MOAIの画面とAIチームの説明は日本語です。指示も日本語で書けます。</p>
+
+<h2>まずは無料で試す</h2>
+<p>登録不要のブラウザ版で、チャネルを1つ登録し、指示を1つ積むところまでなら数分で試せます。自動実行まで使いたい場合は、GitHubのリポジトリをクローンしてローカル版を起動してください。役に立ちそうなら、リポジトリにスターを付けてもらえると開発の励みになります。</p>
+<p><a class="cta" href="../">MOAIをブラウザで開く（無料・登録不要）</a></p>
+<p>ソースコード・導入手順は <a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHubリポジトリ（solederlego8-a11y/moai）</a> にあります。</p>
+
+<h2>関連記事</h2>
+<ul>
+<li><a href="ai-marketing-tool-muryo-opensource.html">AIマーケティングツールを無料・オープンソースで選ぶ基準</a></li>
+<li><a href="claude-code-marketing-jidoka-yarikata.html">Claude Codeでマーケティングを自動化するやり方</a></li>
+<li><a href="sns-toukou-shonin-flow-muryo.html">SNS投稿の承認フローを無料で作る方法</a></li>
+<li><a href="ai-marketing-unyo-loop-muryo.html">AIマーケティングの運用ループを無料で回す手順</a></li>
+</ul>
+</article>
+<footer>© 2026 MOAI ・ <a href="./">ブログ一覧</a> ・ <a href="../">アプリを開く</a> ・ <a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHub</a> ・ <a href="https://solederlego8-a11y.github.io/">運営メディア一覧</a></footer>
+</div>
+</body>
+</html>

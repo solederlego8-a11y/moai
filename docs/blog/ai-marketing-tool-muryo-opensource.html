@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<!-- ga4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSXEBHJSG1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BSXEBHJSG1', { anonymize_ip: true });
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIマーケティングツールを無料・オープンソースで選ぶ基準｜5つの確認項目と導入手順 | MOAI ブログ</title>
+<meta name="description" content="無料のAIマーケティングツールには「商用の無料プラン」と「オープンソース」の2種類がある。ライセンス・データの保存先・AI利用料など5つの確認項目と、MIT公開のMOAIの導入手順を解説します。">
+<link rel="canonical" href="https://solederlego8-a11y.github.io/moai/blog/ai-marketing-tool-muryo-opensource.html">
+<meta property="og:title" content="AIマーケティングツールを無料・オープンソースで選ぶ基準">
+<meta property="og:description" content="無料のAIマーケティングツールには「商用の無料プラン」と「オープンソース」の2種類がある。ライセンス・データの保存先・AI利用料など5つの確認項目と、MIT公開のMOAIの導入手順を解説します。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://solederlego8-a11y.github.io/moai/blog/ai-marketing-tool-muryo-opensource.html">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "AIマーケティングツールを無料・オープンソースで選ぶ基準｜5つの確認項目と導入手順", "datePublished": "2026-10-02", "dateModified": "2026-10-02", "author": {"@type": "Organization", "name": "MOAI"}, "publisher": {"@type": "Organization", "name": "MOAI"}, "mainEntityOfPage": "https://solederlego8-a11y.github.io/moai/blog/ai-marketing-tool-muryo-opensource.html"}
+</script>
+<style>
+:root{--bg:#f6f7f9;--paper:#fff;--ink:#1a1d23;--muted:#5b6472;--line:#e3e6eb;--accent:#2f6bff;--accent-soft:#eaf0ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--paper:#161a21;--ink:#e8ebf0;--muted:#9aa3b2;--line:#2a3140;--accent:#5b8cff;--accent-soft:#1b2740}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.9}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+header.top{display:flex;align-items:center;gap:12px;margin-bottom:28px;font-size:14px}
+header.top a{color:var(--muted);text-decoration:none}header.top a:hover{color:var(--accent)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px 28px}
+h1{font-size:26px;line-height:1.45;margin:0 0 8px}.meta{color:var(--muted);font-size:13px;margin:0 0 24px}
+h2{font-size:20px;margin:36px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}h3{font-size:16.5px;margin:24px 0 8px}
+p{margin:0 0 16px}ul,ol{margin:0 0 16px;padding-left:22px}li{margin:0 0 6px}
+.tldr{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 24px}.tldr ul{margin:6px 0 0}
+.tw{overflow-x:auto;margin:0 0 20px}table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--accent-soft)}
+.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font-weight:700;margin:8px 0 20px}
+a{color:var(--accent)}footer{margin-top:28px;color:var(--muted);font-size:13px}
+</style>
+<!-- ga4-cv -->
+<script>
+if(typeof gtag==='function'){document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||a.hasAttribute('data-cv-tracked'))return;var h=a.href||'';var has=function(s){return h.indexOf(s)>-1;};var asp=has('a8.net')?'a8':(has('rakuten.co.jp')||has('r10.to'))?'rakuten':(has('amazon.co.jp')||has('amzn.'))?'amazon':'';if(asp){gtag('event','affiliate_click',{asp:asp,link_url:h,link_text:(a.innerText||'').trim().slice(0,80),page_path:location.pathname});}else if(has('buy.stripe.com')){gtag('event','begin_checkout',{link_url:h,page_path:location.pathname});}},true);document.addEventListener('submit',function(e){var f=e.target;gtag('event','generate_lead',{form_id:f.id||f.getAttribute('data-subject')||f.action||'',page_path:location.pathname});},true);}
+</script>
+<!-- faq-schema -->
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "オープンソースなら完全に無料ですか", "acceptedAnswer": {"@type": "Answer", "text": "MOAI自体は無料です。ただし、AIへの依頼に使うChatGPT・Claude・Claude Codeの利用料は、それぞれの提供元の料金体系に従います。ブラウザ版は無料枠のAIに貼り付ける使い方もできます。"}}, {"@type": "Question", "name": "商用（仕事）で使っても問題ありませんか", "acceptedAnswer": {"@type": "Answer", "text": "MOAIはMITライセンスなので、商用利用も可能です。再配布する場合は著作権表示とライセンス文を残してください。AIサービス側の利用規約は別途確認が必要です。"}}, {"@type": "Question", "name": "プログラミングの知識は必要ですか", "acceptedAnswer": {"@type": "Answer", "text": "ブラウザ版は不要です。ローカル版は、ターミナルでコマンドを数行実行できれば動かせます。Windowsでは起動用のバッチファイルをダブルクリックするだけでも起動します。"}}, {"@type": "Question", "name": "データが外部に送られることはありますか", "acceptedAnswer": {"@type": "Answer", "text": "MOAIにはサーバーがなく、データはブラウザ版ならそのブラウザ、ローカル版なら自分のPCのファイルに保存されます。ただし、AIに貼り付けた内容や、Claude Codeに処理させた内容は、そのAIサービスに送られます。入力してよい情報かどうかは各サービスの規約に照らして判断してください。"}}, {"@type": "Question", "name": "不具合や要望はどこに伝えればいいですか", "acceptedAnswer": {"@type": "Answer", "text": "GitHubのリポジトリの Issues から伝えられます。オープンソースのため、修正を自分で加えて使うこともできます。"}}]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a href="../">🗿 MOAI</a><span>›</span><a href="./">ブログ</a></header>
+<article class="card">
+<h1>AIマーケティングツールを無料・オープンソースで選ぶ基準｜5つの確認項目と導入手順</h1>
+<p class="meta">公開: 2026-10-02 ・ 更新: 2026-10-02 ・ MOAI 編集部</p>
+
+<div class="tldr"><strong>要点</strong>
+<ul>
+<li>「無料のAIマーケティングツール」には、商用サービスの無料プランと、ソースコードが公開されたオープンソースの2種類がある。前者は上限やプラン変更の影響を受け、後者は自分の手元で動かし続けられる</li>
+<li>オープンソースを選ぶときは、ライセンス、データの保存先、AIの利用料が別にかかるか、動かすのに必要な環境、更新の状況の5点を確認する</li>
+<li>MOAIはMITライセンスのオープンソースで、ブラウザで開くだけのブラウザ版と、Node.jsで動かすローカル版がある。依存パッケージはなく、データは自分のブラウザかPCにだけ保存される</li>
+<li>AIの頭脳（ChatGPT・Claude・Claude Code）は別に用意する設計。SNSへの自動投稿機能はない</li>
+</ul></div>
+
+<p>AIを使ったマーケティングの道具を探すと、検索結果には「無料で使えるAIツール○選」といったまとめが多く並びます。ただ、その多くは商用サービスの無料プランで、使える回数や機能に上限があり、条件も提供元の判断で変わります。「長く使える無料の道具がほしい」「データを自分の手元に置きたい」という人にとっては、オープンソースという選択肢を知っておく価値があります。</p>
+<p>この記事では、無料プランとオープンソースの違い、オープンソースのAIマーケティングツールを選ぶときの確認項目、そして導入までの具体的な手順を、オープンソースのAIマーケティング司令室「MOAI」を例に説明します。</p>
+
+<h2>「無料プラン」と「オープンソース」は何が違うか</h2>
+<div class="tw"><table><thead><tr><th>比較項目</th><th>商用サービスの無料プラン</th><th>オープンソースのツール</th></tr></thead><tbody>
+<tr><td>費用</td><td>無料の範囲は提供元が決める。上限を超えると有料</td><td>ツール自体は無料。動かす環境やAIの利用料は別</td></tr>
+<tr><td>使い続けられるか</td><td>プランの変更・終了の影響を受ける</td><td>ソースコードが手元にあれば動かし続けられる</td></tr>
+<tr><td>データの置き場所</td><td>提供元のサーバー</td><td>ツールの設計による。手元に置けるものが多い</td></tr>
+<tr><td>改造</td><td>不可</td><td>ライセンスの範囲で可能</td></tr>
+<tr><td>サポート</td><td>提供元の窓口がある場合が多い</td><td>基本は自分で解決。リポジトリのIssueなど</td></tr>
+<tr><td>始めやすさ</td><td>アカウント登録だけで使えることが多い</td><td>ツールによる。インストールが必要なものもある</td></tr>
+</tbody></table></div>
+<p>どちらが優れているというより、向いている人が違います。サポートを受けながら短期間で成果を出したいなら商用サービス、長く同じ形で運用したい・データを手元に置きたい・自分の運用に合わせて改造したいならオープンソースが向きます。</p>
+<p>なお「オープンソース」は、単にソースコードが見られることではなく、再配布や改変の自由などを満たすライセンスで公開されていることを指します。定義は <a href="https://opensource.org/osd" target="_blank" rel="noopener">Open Source Initiative の The Open Source Definition</a> で確認できます。</p>
+
+<h2>オープンソースのAIマーケティングツールを選ぶ5つの確認項目</h2>
+<h3>1. ライセンス</h3>
+<p>商用利用ができるか、改造したものを公開する義務があるかは、ライセンスで決まります。MITライセンスは、著作権表示とライセンス文を残せば、商用利用・改変・再配布ができる、制約の少ないライセンスです（<a href="https://opensource.org/license/mit" target="_blank" rel="noopener">MIT License 本文</a>）。リポジトリの <code>LICENSE</code> ファイルを必ず確認してください。「ソースは公開されているが商用利用は不可」という形のツールもあります。</p>
+
+<h3>2. データの保存先</h3>
+<p>マーケティングの運用データには、ブランドの方針、未公開の企画、売上の数字などが含まれます。ツールがどこにデータを保存し、外部に送信するかを確認します。オープンソースであれば、ソースコードを読んで送信先を確かめることもできます。</p>
+
+<h3>3. AIの利用料が別にかかるか</h3>
+<p>AIマーケティングツールの多くは、文章生成などに外部のAIを使います。ツールが無料でも、AIのAPI利用料が従量課金でかかる設計のものがあります。自分のどのAIサービスの契約で動くのか、APIキーが必要か、を確認します。</p>
+
+<h3>4. 動かすのに必要な環境</h3>
+<p>サーバーの用意、データベースの構築、多数の依存パッケージのインストールが必要なツールは、導入と保守に時間がかかります。マーケティング担当者が自分で扱えるかどうかを、READMEの導入手順で判断します。</p>
+
+<h3>5. 更新の状況と規模</h3>
+<p>最終更新日、Issueへの対応、READMEの丁寧さを見ます。小規模なツールは機能が絞られている代わりに、仕組みを理解しやすく、自分で直しやすいという利点もあります。</p>
+
+<h2>MOAIをこの5項目で確認する</h2>
+<div class="tw"><table><thead><tr><th>確認項目</th><th>MOAIの場合</th></tr></thead><tbody>
+<tr><td>ライセンス</td><td>MIT License。商用利用・改変・再配布が可能</td></tr>
+<tr><td>データの保存先</td><td>ブラウザ版はそのブラウザの中だけ。ローカル版は自分のPCの <code>data/</code> フォルダのJSONファイル。MOAIにサーバーはなく、外部へ送信しない</td></tr>
+<tr><td>AIの利用料</td><td>MOAI自体はAIを内蔵しない。ブラウザ版は指示をコピーして手元のChatGPT・Claudeに貼る。ローカル版は自分の Claude Code を起動して実行する。いずれも各サービスの契約に従う</td></tr>
+<tr><td>必要な環境</td><td>ブラウザ版は不要（URLを開くだけ）。ローカル版は Node.js のみ。依存パッケージはゼロで <code>npm install</code> も不要</td></tr>
+<tr><td>規模</td><td>画面は <code>docs/</code> 内のHTML・JavaScript・CSS（フレームワーク不使用）、ローカル版サーバーはNode標準機能のみ。構成が小さく、改造しやすい</td></tr>
+</tbody></table></div>
+
+<h2>MOAIでできること</h2>
+<p>MOAIは、ブログ・Instagram・X・YouTubeなど複数のメディアの運用を、1つの画面で管理するためのツールです。「やることの整理」「AIへの依頼」「生成物の確認と承認」「実績の記録」をまとめて扱います。</p>
+<div class="tw"><table><thead><tr><th>画面</th><th>できること</th></tr></thead><tbody>
+<tr><td>ダッシュボード</td><td>全チャネルの数字（フォロワー・PV・収益）の推移をグラフで確認</td></tr>
+<tr><td>AIチーム</td><td>戦略ディレクター、SEOリサーチャー、コンテンツライター、SNSコピーライター、競合アナリスト、グロース分析官、収益ファネル設計、動画・Reels企画の8担当に仕事を依頼</td></tr>
+<tr><td>承認キュー</td><td>AIの生成物を読んで、承認／差し戻し（修正指示つき）／却下</td></tr>
+<tr><td>タスク</td><td>待機→実行中→承認待ち→承認済み→公開済みのカンバンと履歴</td></tr>
+<tr><td>指示する</td><td>日本語で依頼を書き、担当と対象チャネルを選んでキューに積む</td></tr>
+<tr><td>チャネル</td><td>運用メディアの登録と日々の実績の記録</td></tr>
+<tr><td>カレンダー</td><td>いつ何を出すかの計画</td></tr>
+<tr><td>レポート</td><td>週次分析・競合調査の保管</td></tr>
+<tr><td>設定</td><td>ミッション・トーン・禁止ワード・運用ルール。AIへの指示に毎回引き継がれる</td></tr>
+</tbody></table></div>
+<h3>できないこと</h3>
+<ul>
+<li>各SNSへの予約投稿・自動投稿（投稿は各媒体で人が行う）</li>
+<li>各SNSやアクセス解析からの数字の自動取得（実績は手入力）</li>
+<li>複数人でのリアルタイム共同編集</li>
+<li>ソーシャルリスニング、DM管理</li>
+</ul>
+<p>これらが必要な場合は、その機能を持つ専用ツールと併用するか、商用のオールインワン型ツールを検討してください。商用ツールとの比較の考え方は <a href="noimosai-daitai-muryo.html">NoimosAIの代替を無料で探すときの記事</a>で、機能対応表を使って説明しています。</p>
+
+<h2>導入手順：ブラウザ版（1分）</h2>
+<ol>
+<li><a href="../">https://solederlego8-a11y.github.io/moai/</a> を開く</li>
+<li>「チャネル」で運用しているメディアを登録する</li>
+<li>「設定」でミッションとトーンを書く</li>
+<li>「指示する」でやってほしいことを日本語で書く</li>
+<li>「キューをまとめてコピー」を押し、ChatGPT や Claude に貼り付ける</li>
+<li>「タスク」画面の「＋ タスクを追加」で作ったタスクを開き、返ってきた内容を「生成結果 / 本文」に貼って「承認待ち」にし、承認キューで確認・承認する</li>
+</ol>
+<p>アカウント登録もインストールも不要です。データはそのブラウザの中にだけ保存されるため、別のPCやブラウザでは見えません。ブラウザのサイトデータを消すとデータも消えるので、「設定」の「データを書き出す（JSON）」でこまめに保存してください。</p>
+
+<h2>導入手順：ローカル版（10分）</h2>
+<p>ローカル版では、データが自分のPCのファイルに保存され、AIへの依頼を画面のボタンから自動で実行できます。必要なのは <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a>（無料）と、自動実行させる場合は <a href="https://claude.com/claude-code" target="_blank" rel="noopener">Claude Code</a> です。</p>
+<pre><code>git clone https://github.com/solederlego8-a11y/moai.git
+cd moai
+node server.js</code></pre>
+<p>ブラウザで <code>http://localhost:4173</code> を開きます。停止は Ctrl + C です。Windowsなら <code>start-moai.bat</code> をダブルクリックしても起動します。gitを使わない場合は、GitHubのリポジトリページの「Code」→「Download ZIP」で取得して展開しても同じです。</p>
+<p>AIに自動実行させる場合は、同梱のスキルとエージェントを Claude Code に読み込ませ、最初に1回だけログインします。手順の詳細は <a href="claude-code-marketing-jidoka-yarikata.html">Claude Codeでマーケティングを自動化するやり方</a>にまとめています。</p>
+
+<h2>自分用に改造する</h2>
+<p>MITライセンスなので、自分の運用に合わせた改造も自由です。READMEで案内されている代表的な改造は次の2つです。</p>
+<ul>
+<li><strong>初期データを変える</strong>：<code>docs/seed.js</code> を書き換えると、最初に表示されるチャネルやAIチームの初期値を変えられる</li>
+<li><strong>AI担当者を増やす</strong>：<code>claude-code/agents/</code> にエージェント定義のファイルを足す</li>
+</ul>
+<p>ローカル版のデータ（<code>data/*.json</code>）は画面が5秒ごとに読み直すため、手で編集すると壊れたJSONがすぐエラーになります。データの読み書きは画面か、同梱のCLI（<code>node cli.js</code>）から行ってください。CLIには、実行待ちの指示の一覧（<code>queue</code>）、AIに渡す前提の出力（<code>context</code>）、タスクの追加（<code>task-add</code>）、実績の記録（<code>metric</code>）などのコマンドがあります。</p>
+
+<h2>オープンソースで運用するときの注意点</h2>
+<h3>バックアップは自分の責任</h3>
+<p>商用サービスと違い、データの保管は利用者に任されます。ブラウザ版は「設定」からの書き出しファイルが唯一のバックアップです。ローカル版は <code>data/</code> フォルダをまるごと別の場所にコピーしておけば復元できます。週に1回、計測の記録と同じタイミングで保存する習慣にしておくと忘れません。</p>
+<h3>更新は自分で取り込む</h3>
+<p>ローカル版を <code>git clone</code> で入れた場合、新しい版は <code>git pull</code> で取り込みます。ZIPで入れた場合は、新しいZIPを展開し、<code>data/</code> フォルダだけを移します。自分で改造している場合は、更新時に変更が上書きされないよう、改造した箇所を控えておきます。</p>
+<h3>AIの出力は人が確認する</h3>
+<p>ツールが無料でも、公開した内容の責任は運用者にあります。生成AIは、事実と異なる数字や、使っていない商品の体験談をもっともらしく書くことがあります。MOAIは承認キューで人が読んでから公開する流れを前提にしており、承認していない生成物が勝手に公開されることはありません。広告を含む投稿では、景品表示法のステルスマーケティング規制に沿った表示も確認します（<a href="https://www.caa.go.jp/policies/policy/representation/fair_labeling/stealth_marketing/" target="_blank" rel="noopener">消費者庁</a>）。</p>
+
+<h2>選び方のまとめ</h2>
+<div class="tw"><table><thead><tr><th>重視すること</th><th>向いている選択</th></tr></thead><tbody>
+<tr><td>今すぐ、登録なしで試したい</td><td>MOAIブラウザ版</td></tr>
+<tr><td>データを自分のPCに置き、AIに自動で作業させたい</td><td>MOAIローカル版 ＋ Claude Code</td></tr>
+<tr><td>SNSへの自動投稿や数字の自動取得が必須</td><td>連携機能を持つ商用ツール（無料プランで上限を確認）</td></tr>
+<tr><td>チームで承認を回したい</td><td>チーム機能を持つ商用ツール</td></tr>
+</tbody></table></div>
+
+<h2>よくある質問</h2>
+<h3>Q. オープンソースなら完全に無料ですか</h3>
+<p>MOAI自体は無料です。ただし、AIへの依頼に使うChatGPT・Claude・Claude Codeの利用料は、それぞれの提供元の料金体系に従います。ブラウザ版は無料枠のAIに貼り付ける使い方もできます。</p>
+<h3>Q. 商用（仕事）で使っても問題ありませんか</h3>
+<p>MOAIはMITライセンスなので、商用利用も可能です。再配布する場合は著作権表示とライセンス文を残してください。AIサービス側の利用規約は別途確認が必要です。</p>
+<h3>Q. プログラミングの知識は必要ですか</h3>
+<p>ブラウザ版は不要です。ローカル版は、ターミナルでコマンドを数行実行できれば動かせます。Windowsでは起動用のバッチファイルをダブルクリックするだけでも起動します。</p>
+<h3>Q. データが外部に送られることはありますか</h3>
+<p>MOAIにはサーバーがなく、データはブラウザ版ならそのブラウザ、ローカル版なら自分のPCのファイルに保存されます。ただし、AIに貼り付けた内容や、Claude Codeに処理させた内容は、そのAIサービスに送られます。入力してよい情報かどうかは各サービスの規約に照らして判断してください。</p>
+<h3>Q. 不具合や要望はどこに伝えればいいですか</h3>
+<p>GitHubのリポジトリの <a href="https://github.com/solederlego8-a11y/moai/issues" target="_blank" rel="noopener">Issues</a> から伝えられます。オープンソースのため、修正を自分で加えて使うこともできます。</p>
+
+<h2>まずはブラウザで開いてみる</h2>
+<p>登録不要・インストール不要のブラウザ版で、画面の構成と運用の流れを確かめられます。気に入ったら、GitHubのリポジトリにスターを付けるか、クローンしてローカル版を動かしてください。</p>
+<p><a class="cta" href="../">MOAIをブラウザで開く（無料・登録不要）</a></p>
+<p>ソースコード：<a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHubリポジトリ（solederlego8-a11y/moai）</a></p>
+
+<h2>関連記事</h2>
+<ul>
+<li><a href="noimosai-daitai-muryo.html">NoimosAIの代替を無料で｜置き換えられる機能・できない機能</a></li>
+<li><a href="chatgpt-sns-unyo-kanri-muryo.html">ChatGPTでのSNS運用を無料で一元管理する方法</a></li>
+<li><a href="ai-marketing-unyo-loop-muryo.html">AIマーケティングの運用ループを無料で回す手順</a></li>
+</ul>
+</article>
+<footer>© 2026 MOAI ・ <a href="./">ブログ一覧</a> ・ <a href="../">アプリを開く</a> ・ <a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHub</a> ・ <a href="https://solederlego8-a11y.github.io/">運営メディア一覧</a></footer>
+</div>
+</body>
+</html>
