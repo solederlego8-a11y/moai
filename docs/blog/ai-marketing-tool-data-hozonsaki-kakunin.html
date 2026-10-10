@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<!-- ga4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSXEBHJSG1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BSXEBHJSG1', { anonymize_ip: true });
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIマーケティングツールのデータ保存先を導入前に確認する方法｜ブラウザ版とローカル版の違い | MOAI ブログ</title>
+<meta name="description" content="AIマーケティングツールの導入前に、データの保存先・外部送信・削除・書き出しを確認する方法。MOAIのブラウザ版とローカル版の保存先の違いも具体的に説明する。">
+<link rel="canonical" href="https://solederlego8-a11y.github.io/moai/blog/ai-marketing-tool-data-hozonsaki-kakunin.html">
+<meta property="og:title" content="AIマーケティングツールのデータ保存先を導入前に確認する方法">
+<meta property="og:description" content="AIマーケティングツールの導入前に、データの保存先・外部送信・削除・書き出しを確認する方法。MOAIのブラウザ版とローカル版の保存先の違いも具体的に説明する。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://solederlego8-a11y.github.io/moai/blog/ai-marketing-tool-data-hozonsaki-kakunin.html">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "AIマーケティングツールのデータ保存先を導入前に確認する方法｜ブラウザ版とローカル版の違い", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "author": {"@type": "Organization", "name": "MOAI"}, "publisher": {"@type": "Organization", "name": "MOAI"}, "mainEntityOfPage": "https://solederlego8-a11y.github.io/moai/blog/ai-marketing-tool-data-hozonsaki-kakunin.html"}
+</script>
+<style>
+:root{--bg:#f6f7f9;--paper:#fff;--ink:#1a1d23;--muted:#5b6472;--line:#e3e6eb;--accent:#2f6bff;--accent-soft:#eaf0ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--paper:#161a21;--ink:#e8ebf0;--muted:#9aa3b2;--line:#2a3140;--accent:#5b8cff;--accent-soft:#1b2740}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.9}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+header.top{display:flex;align-items:center;gap:12px;margin-bottom:28px;font-size:14px}
+header.top a{color:var(--muted);text-decoration:none}header.top a:hover{color:var(--accent)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px 28px}
+h1{font-size:26px;line-height:1.45;margin:0 0 8px}.meta{color:var(--muted);font-size:13px;margin:0 0 24px}
+h2{font-size:20px;margin:36px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}h3{font-size:16.5px;margin:24px 0 8px}
+p{margin:0 0 16px}ul,ol{margin:0 0 16px;padding-left:22px}li{margin:0 0 6px}
+.tldr{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 24px}.tldr ul{margin:6px 0 0}
+.tw{overflow-x:auto;margin:0 0 20px}table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--accent-soft)}
+.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font-weight:700;margin:8px 0 20px}
+a{color:var(--accent)}footer{margin-top:28px;color:var(--muted);font-size:13px}
+</style>
+<!-- ga4-cv -->
+<script>
+if(typeof gtag==='function'){document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||a.hasAttribute('data-cv-tracked'))return;var h=a.href||'';var has=function(s){return h.indexOf(s)>-1;};var asp=has('a8.net')?'a8':(has('rakuten.co.jp')||has('r10.to'))?'rakuten':(has('amazon.co.jp')||has('amzn.'))?'amazon':'';if(asp){gtag('event','affiliate_click',{asp:asp,link_url:h,link_text:(a.innerText||'').trim().slice(0,80),page_path:location.pathname});}else if(has('buy.stripe.com')){gtag('event','begin_checkout',{link_url:h,page_path:location.pathname});}},true);document.addEventListener('submit',function(e){var f=e.target;gtag('event','generate_lead',{form_id:f.id||f.getAttribute('data-subject')||f.action||'',page_path:location.pathname});},true);}
+</script>
+<!-- faq-schema -->
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "MOAIに入力したデータは、開発者に見えますか", "acceptedAnswer": {"@type": "Answer", "text": "MOAIにはデータを受け取るサーバーがなく、ブラウザ版はあなたのブラウザの中、ローカル版はあなたのPCのファイルに保存されます。そのため、MOAIの側からあなたの入力内容が集められる仕組みはありません。ただし、前述のとおり、AIサービスに貼り付けた内容は、そのサービスに渡ります。"}}, {"@type": "Question", "name": "ブラウザ版のデータが消えたらどうなりますか", "acceptedAnswer": {"@type": "Answer", "text": "書き出したファイルがあれば、設定画面から読み込めます。書き出しがない場合は復元できないため、週1回の書き出しを運用に入れてください。"}}, {"@type": "Question", "name": "会社のPCで使っても大丈夫ですか", "acceptedAnswer": {"@type": "Answer", "text": "社内の情報取扱いルールに従ってください。MOAIはデータを外部に送りませんが、依頼文をAIサービスに貼る行為が社内ルールで許されているかは、別に確認が必要です。"}}, {"@type": "Question", "name": "複数の端末で同じデータを使えますか", "acceptedAnswer": {"@type": "Answer", "text": "自動の同期機能はありません。書き出したファイルを、別の端末のブラウザやローカル版で読み込む形になります。同時に複数人が編集する運用には向いていません。"}}, {"@type": "Question", "name": "本当に無料ですか", "acceptedAnswer": {"@type": "Answer", "text": "MOAI自体はMITライセンスのオープンソースで、費用はかかりません。AIへの依頼に使うChatGPTやClaudeの利用料は、各サービスの料金体系に従います。"}}]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a href="../">🗿 MOAI</a><span>›</span><a href="./">ブログ</a></header>
+<article class="card">
+<h1>AIマーケティングツールのデータ保存先を導入前に確認する方法｜ブラウザ版とローカル版の違い</h1>
+<p class="meta">公開: 2026-10-09 ・ 更新: 2026-10-09 ・ MOAI 編集部</p>
+
+<div class="tldr"><strong>要点</strong>
+<ul>
+<li>AIマーケティングツールの導入前に確認したいのは、データの「保存先」「外部への送信」「削除と書き出し」「AIに渡る範囲」の4点。ここを見ずに入れると、あとで乗り換えにくくなる</li>
+<li>MOAIのブラウザ版は、データをそのブラウザの中（localStorage）にだけ保存し、外部に送らない。ローカル版は、自分のPCの <code>data/*.json</code> に保存する。どちらもMOAIにサーバーはない</li>
+<li>ただし、依頼文をChatGPTやClaudeに貼る、またはClaude Codeで自動実行する場合、依頼文の内容は各AIサービスに渡る。個人情報や機密は依頼文に入れない運用が必要</li>
+<li>ブラウザ版はブラウザの履歴・サイトデータの削除で消えるため、週1回の書き出しが前提</li>
+</ul></div>
+
+<p>AIマーケティングツールを選ぶとき、機能や料金は比較しても、「データがどこに保存されるか」まで確認する人は多くありません。しかし、ブランドの方針、書きかけの記事、実績の数字、顧客に関する情報は、事業の資産です。保存先が分からないまま使い始めると、情報の取り扱いに迷ったり、乗り換えのときに取り出せなかったりします。</p>
+<p>この記事では、導入前に確認したい項目をチェックリストにまとめ、無料のオープンソースツール「MOAI」のブラウザ版とローカル版を例に、保存先の違いを具体的に説明します。他社製品の仕様は個別に異なり、変わることもあるため、各サービスの公式ドキュメントとプライバシーポリシーで必ず確認してください。</p>
+
+<h2>導入前に確認する4つのポイント</h2>
+<div class="tw"><table>
+<thead><tr><th>確認項目</th><th>見るポイント</th><th>確認する場所</th></tr></thead>
+<tbody>
+<tr><td>保存先</td><td>データはベンダーのサーバーか、自分のブラウザか、自分のPCか</td><td>公式ドキュメント、プライバシーポリシー、利用規約</td></tr>
+<tr><td>外部への送信</td><td>入力した内容が、誰に・何のために送られるか（AIの学習への利用を含む）</td><td>プライバシーポリシー、データ取扱いの説明、設定画面</td></tr>
+<tr><td>削除と書き出し</td><td>自分でデータを削除・書き出せるか。解約後はいつ消えるか</td><td>ヘルプ、利用規約</td></tr>
+<tr><td>AIに渡る範囲</td><td>AIへの依頼に、どの情報が自動で付くか</td><td>設定画面、実際の依頼文の内容</td></tr>
+</tbody></table></div>
+<p>4つのうち、見落とされやすいのが「AIに渡る範囲」です。ツールのデータが手元にあっても、AIに依頼した時点で、その依頼文はAIサービス側に送られます。保存先と送信先は、別々に確認します。</p>
+
+<h2>保存先は大きく3種類</h2>
+<div class="tw"><table>
+<thead><tr><th>保存先</th><th>特徴</th><th>気をつける点</th></tr></thead>
+<tbody>
+<tr><td>ベンダーのサーバー（クラウド型）</td><td>どの端末からも使える。共同編集や自動連携がしやすい</td><td>データの保持期間・削除方法・学習への利用を規約で確認する。解約後の扱いも要確認</td></tr>
+<tr><td>自分のブラウザの中</td><td>登録不要で使える。データが外に出ない</td><td>履歴やサイトデータの削除で消える。別の端末・別のブラウザでは見えない</td></tr>
+<tr><td>自分のPCのファイル</td><td>データを自分で管理できる。バックアップも自由</td><td>PCの故障・紛失に備えて、自分でバックアップを取る必要がある</td></tr>
+</tbody></table></div>
+<p>どれが優れているかではなく、運用の人数と、扱う情報の性質で選びます。複数人で同じ画面を編集するならクラウド型が向きます。1人で運用し、データを手元に置きたいなら、ブラウザやPCのファイルに保存するタイプが向きます。</p>
+
+<h2>MOAIのデータはどこに保存されるか</h2>
+<p>MOAIは2つのモードがあり、同じ画面で動きます。保存先は次のとおりです。</p>
+<div class="tw"><table>
+<thead><tr><th></th><th>ブラウザ版</th><th>ローカル版</th></tr></thead>
+<tbody>
+<tr><td>使い方</td><td>URLを開くだけ</td><td>自分のPCにダウンロードして起動</td></tr>
+<tr><td>必要なもの</td><td>なし</td><td>Node.js</td></tr>
+<tr><td>保存先</td><td>そのブラウザの中（localStorage）</td><td>自分のPCのファイル（<code>data/*.json</code>）</td></tr>
+<tr><td>サーバー</td><td>なし</td><td>自分のPCで動くローカルのサーバー（既定のポートは4173）</td></tr>
+<tr><td>AIの自動実行</td><td>なし（依頼をコピーしてAIに貼る）</td><td>あり（画面のボタンからClaude Codeを起動）</td></tr>
+<tr><td>消えるとき</td><td>ブラウザの履歴・サイトデータを削除したとき</td><td>ファイルを削除したとき</td></tr>
+</tbody></table></div>
+<p>どちらのモードでも、MOAIというサービス側にデータを集めるサーバーはありません。ブラウザ版のデータは、あなたのブラウザの中だけに保存されます。ローカル版では、データは <code>data/</code> フォルダのJSONファイルに置かれ、画面が5秒ごとに読み直します。ローカル版は、インストール後にネットワーク接続が必要ない作りですが、AIへの依頼を自動実行する場合は、Claude Codeを通してネットワークを使います。</p>
+<p>なお、ローカル版のデータは、リポジトリの設定でGitには含まれない扱いになっています。自分のデータを公開リポジトリに誤って載せないための配慮ですが、自分でリポジトリを改造して公開する場合は、データのフォルダを含めていないかを確認してください。</p>
+
+<h2>「外部に送られない」の範囲を正しく理解する</h2>
+<p>MOAIのデータはMOAIのサーバーに送られませんが、次の場面では、内容が他のサービスに渡ります。</p>
+<ul>
+<li><strong>ブラウザ版で、依頼をコピーしてChatGPTやClaudeに貼るとき</strong>：貼り付けた文章は、そのAIサービスに送られます。取り扱いは各サービスの規約・設定に従います</li>
+<li><strong>ローカル版で「▶ AIに実行させる」を押すとき</strong>：サーバーがClaude Codeを起動し、依頼文や設定の内容がAnthropicのサービスに渡ります。利用条件は公式の案内に従います</li>
+<li><strong>ブラウザ版・ローカル版で、ブラウザのサイト自体を読み込むとき</strong>：公開サイトのページ（HTML・JavaScript）を読み込むための通信は発生します。入力した内容がそれによって送信されるわけではありません</li>
+</ul>
+<p>つまり、「MOAIが保存するデータが外に出ない」ことと、「依頼文がAIサービスに渡る」ことは、別の話です。個人情報や機密情報は、依頼文や設定に入れないのが基本です。顧客の氏名やメールアドレスのような情報は、そもそもAIへの依頼に必要ないことが多く、入れない運用で十分に済みます。</p>
+
+<h2>依頼文に入れてはいけない情報の目安</h2>
+<div class="tw"><table>
+<thead><tr><th>入れてよい</th><th>入れない（または伏せる）</th></tr></thead>
+<tbody>
+<tr><td>ブランドの方針、トーン、禁止ワード</td><td>顧客の氏名・連絡先・住所</td></tr>
+<tr><td>公開済みの記事・投稿の文章</td><td>契約内容や取引先との未公開の取り決め</td></tr>
+<tr><td>公開されている競合の情報</td><td>パスワード、APIキー、社内の認証情報</td></tr>
+<tr><td>自分で集計した実績の数字（個人が特定されないもの）</td><td>個人が特定できるアクセスログ、問い合わせ内容そのもの</td></tr>
+</tbody></table></div>
+<p>迷うときは、「その文章を、そのままブログに載せても困らないか」を基準にします。困るなら、AIの依頼文に入れないか、固有名詞を伏せた形に書き換えます。</p>
+
+<h2>削除と書き出し：データを失わないために</h2>
+<p>ブラウザ版のデータは、次の操作で消える可能性があります。</p>
+<ul>
+<li>ブラウザの履歴やサイトデータを消去したとき</li>
+<li>ブラウザの設定で、サイトデータの保存を許可していないとき</li>
+<li>別のブラウザや別の端末で開いたとき（そこには見えないだけで、元のブラウザには残っている）</li>
+<li>プライベートウィンドウ（シークレットモード）を閉じたとき</li>
+</ul>
+<p>対策は、設定画面からの書き出しです。書き出したファイルは、別のブラウザやローカル版に読み込めます。運用に次の習慣を入れてください。</p>
+<ol>
+<li>週1回、実績を記録したあとに、設定画面からデータを書き出す</li>
+<li>書き出したファイルは、日付をファイル名に入れて保存する（上書きせず、直近の数世代を残す）</li>
+<li>月に1回、書き出したファイルを読み込めるか、別のブラウザで確かめる</li>
+</ol>
+<p>ローカル版では、<code>data/</code> フォルダをコピーしておけば、バックアップになります。ただし、ファイルを手で編集すると、画面がエラーになることがあります。更新は画面または同梱のCLI（<code>node cli.js</code>）から行います。</p>
+
+<h2>ブラウザ版とローカル版の選び方</h2>
+<div class="tw"><table>
+<thead><tr><th>こんなとき</th><th>おすすめ</th><th>理由</th></tr></thead>
+<tbody>
+<tr><td>まず試したい、インストールしたくない</td><td>ブラウザ版</td><td>URLを開くだけ。登録も不要</td></tr>
+<tr><td>週2本程度で、コピー＆貼り付けが苦にならない</td><td>ブラウザ版</td><td>手作業でも運用が回る</td></tr>
+<tr><td>依頼と承認の手間を減らしたい、本数を増やしたい</td><td>ローカル版</td><td>画面のボタンでAIが自動実行する</td></tr>
+<tr><td>データを自分のPCのファイルとして持ちたい</td><td>ローカル版</td><td>JSONファイルで保存され、バックアップも取りやすい</td></tr>
+<tr><td>端末をまたいで同じデータを見たい</td><td>どちらでも書き出しで移動</td><td>自動同期の機能はないため、ファイルで受け渡す</td></tr>
+</tbody></table></div>
+<p>ブラウザ版からローカル版へは、書き出し・読み込みでデータを引っ越せます。導入の流れは<a href="claude-code-marketing-jidoka-yarikata.html">Claude Codeでマーケティングを自動化するやり方</a>で、ステップごとに説明しています。選び方の全体像は<a href="ai-marketing-tool-muryo-opensource.html">AIマーケティングツールを無料・オープンソースで選ぶ基準</a>も参考にしてください。</p>
+
+<h2>導入後に月1回やる見直し</h2>
+<p>保存先の確認は、導入前に一度やって終わりではありません。ツールの更新や運用の変化で、前提が変わることがあります。月に1回、次の5点を見直します。</p>
+<ul>
+<li>書き出したファイルが、実際に読み込めるか（別のブラウザで試す）</li>
+<li>依頼文や設定に、入れるべきでない情報が紛れ込んでいないか</li>
+<li>使っているAIサービスの規約・設定（学習への利用など）に変更がないか</li>
+<li>ブラウザの自動クリーンアップ設定で、サイトデータが消えるようになっていないか</li>
+<li>ローカル版の場合、<code>data/</code> フォルダのバックアップが最新か</li>
+</ul>
+<p>この見直しは、10分もかかりません。ですが、データが消えたあとや、情報が意図しない場所に渡ったあとでは取り返せないため、小さな習慣として運用に入れておくことをおすすめします。</p>
+<p>また、運用する人が自分1人ではなくなったときは、データの置き場所と扱い方のルールを文章にして共有します。誰がデータを書き出すのか、書き出したファイルをどこに置くのか、AIに貼ってよい情報の範囲はどこまでか。この3点を決めておくだけでも、情報の扱いのばらつきを減らせます。</p>
+
+<h2>他のツールを検討するときにも使える質問リスト</h2>
+<p>MOAIに限らず、AIマーケティングツールを導入する前に、ベンダーに聞くか、公式ドキュメントで探したい質問です。</p>
+<ol>
+<li>入力したデータは、どこに保存されますか（国・事業者）</li>
+<li>入力した内容は、AIの学習に使われますか。使われないようにする設定はありますか</li>
+<li>データを自分で書き出せますか。どの形式ですか</li>
+<li>解約後、データはいつまで残り、いつ削除されますか</li>
+<li>データの削除を、自分で要求・実行できますか</li>
+<li>第三者（連携先のサービスなど）に、データが共有されますか</li>
+<li>障害や不具合でデータが失われたとき、復旧の手段はありますか</li>
+</ol>
+<p>回答が見つからない、あいまいな場合は、重要な情報を入れずに試用だけして判断を保留する、という選択もあります。解約や乗り換えのときに何を書き出すべきかは、<a href="ai-marketing-tool-kaiyaku-mae-data-ikou.html">AIマーケティングツールを解約する前に書き出すデータ</a>でチェックリストにまとめています。</p>
+
+<h2>よくある質問</h2>
+<h3>Q. MOAIに入力したデータは、開発者に見えますか</h3>
+<p>MOAIにはデータを受け取るサーバーがなく、ブラウザ版はあなたのブラウザの中、ローカル版はあなたのPCのファイルに保存されます。そのため、MOAIの側からあなたの入力内容が集められる仕組みはありません。ただし、前述のとおり、AIサービスに貼り付けた内容は、そのサービスに渡ります。</p>
+<h3>Q. ブラウザ版のデータが消えたらどうなりますか</h3>
+<p>書き出したファイルがあれば、設定画面から読み込めます。書き出しがない場合は復元できないため、週1回の書き出しを運用に入れてください。</p>
+<h3>Q. 会社のPCで使っても大丈夫ですか</h3>
+<p>社内の情報取扱いルールに従ってください。MOAIはデータを外部に送りませんが、依頼文をAIサービスに貼る行為が社内ルールで許されているかは、別に確認が必要です。</p>
+<h3>Q. 複数の端末で同じデータを使えますか</h3>
+<p>自動の同期機能はありません。書き出したファイルを、別の端末のブラウザやローカル版で読み込む形になります。同時に複数人が編集する運用には向いていません。</p>
+<h3>Q. 本当に無料ですか</h3>
+<p>MOAI自体はMITライセンスのオープンソースで、費用はかかりません。AIへの依頼に使うChatGPTやClaudeの利用料は、各サービスの料金体系に従います。</p>
+
+<h2>保存先が分かる状態で、無料で試す</h2>
+<p>ブラウザ版なら、データは自分のブラウザの中だけ。まず小さく試して、使い勝手と保存の仕組みを確かめられます。</p>
+<p><a class="cta" href="../">MOAIをブラウザで開く（無料・登録不要）</a></p>
+<p>ローカル版のソースコードは公開されているので、保存の仕組みも自分で確認できます。<a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHubリポジトリ</a>から入手でき、役に立ったらスターを付けてもらえると開発の励みになります。</p>
+
+<h2>関連記事</h2>
+<ul>
+<li><a href="ai-marketing-tool-kaiyaku-mae-data-ikou.html">AIマーケティングツールを解約する前に書き出すデータ</a></li>
+<li><a href="ai-agent-marketing-makasete-ikenai-gyomu.html">AIエージェントに任せてはいけないマーケティング業務</a></li>
+<li><a href="ai-marketing-unyo-loop-muryo.html">AIマーケティングの運用ループを無料で回す手順</a></li>
+</ul>
+</article>
+<footer>© 2026 MOAI ・ <a href="./">ブログ一覧</a> ・ <a href="../">アプリを開く</a> ・ <a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHub</a> ・ <a href="https://solederlego8-a11y.github.io/">運営メディア一覧</a></footer>
+</div>
+</body>
+</html>

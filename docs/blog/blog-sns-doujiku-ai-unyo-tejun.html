@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<!-- ga4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSXEBHJSG1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BSXEBHJSG1', { anonymize_ip: true });
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIでブログとSNSを同時に回す運用手順｜1本の記事から投稿文を作る週次フロー | MOAI ブログ</title>
+<meta name="description" content="ブログとSNSをAIで同時に運用する手順。1本の記事を軸に投稿文を派生させる週次フロー、依頼文の型、承認と実績記録の置き場を、無料のMOAIで整理する。">
+<link rel="canonical" href="https://solederlego8-a11y.github.io/moai/blog/blog-sns-doujiku-ai-unyo-tejun.html">
+<meta property="og:title" content="AIでブログとSNSを同時に回す運用手順">
+<meta property="og:description" content="ブログとSNSをAIで同時に運用する手順。1本の記事を軸に投稿文を派生させる週次フロー、依頼文の型、承認と実績記録の置き場を、無料のMOAIで整理する。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://solederlego8-a11y.github.io/moai/blog/blog-sns-doujiku-ai-unyo-tejun.html">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "AIでブログとSNSを同時に回す運用手順｜1本の記事から投稿文を作る週次フロー", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "author": {"@type": "Organization", "name": "MOAI"}, "publisher": {"@type": "Organization", "name": "MOAI"}, "mainEntityOfPage": "https://solederlego8-a11y.github.io/moai/blog/blog-sns-doujiku-ai-unyo-tejun.html"}
+</script>
+<style>
+:root{--bg:#f6f7f9;--paper:#fff;--ink:#1a1d23;--muted:#5b6472;--line:#e3e6eb;--accent:#2f6bff;--accent-soft:#eaf0ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--paper:#161a21;--ink:#e8ebf0;--muted:#9aa3b2;--line:#2a3140;--accent:#5b8cff;--accent-soft:#1b2740}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.9}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+header.top{display:flex;align-items:center;gap:12px;margin-bottom:28px;font-size:14px}
+header.top a{color:var(--muted);text-decoration:none}header.top a:hover{color:var(--accent)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px 28px}
+h1{font-size:26px;line-height:1.45;margin:0 0 8px}.meta{color:var(--muted);font-size:13px;margin:0 0 24px}
+h2{font-size:20px;margin:36px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}h3{font-size:16.5px;margin:24px 0 8px}
+p{margin:0 0 16px}ul,ol{margin:0 0 16px;padding-left:22px}li{margin:0 0 6px}
+.tldr{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 24px}.tldr ul{margin:6px 0 0}
+.tw{overflow-x:auto;margin:0 0 20px}table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--accent-soft)}
+.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font-weight:700;margin:8px 0 20px}
+a{color:var(--accent)}footer{margin-top:28px;color:var(--muted);font-size:13px}
+</style>
+<!-- ga4-cv -->
+<script>
+if(typeof gtag==='function'){document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||a.hasAttribute('data-cv-tracked'))return;var h=a.href||'';var has=function(s){return h.indexOf(s)>-1;};var asp=has('a8.net')?'a8':(has('rakuten.co.jp')||has('r10.to'))?'rakuten':(has('amazon.co.jp')||has('amzn.'))?'amazon':'';if(asp){gtag('event','affiliate_click',{asp:asp,link_url:h,link_text:(a.innerText||'').trim().slice(0,80),page_path:location.pathname});}else if(has('buy.stripe.com')){gtag('event','begin_checkout',{link_url:h,page_path:location.pathname});}},true);document.addEventListener('submit',function(e){var f=e.target;gtag('event','generate_lead',{form_id:f.id||f.getAttribute('data-subject')||f.action||'',page_path:location.pathname});},true);}
+</script>
+<!-- faq-schema -->
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "ブログとSNSで文章を変えたほうがよいですか", "acceptedAnswer": {"@type": "Answer", "text": "変えたほうが読まれやすくなります。ただし、事実と主張は同じにします。文体と長さは媒体に合わせて変え、数字や結論は記事と食い違わないようにするのが基本です。"}}, {"@type": "Question", "name": "先にSNSで反応を見てから記事にするのはだめですか", "acceptedAnswer": {"@type": "Answer", "text": "その進め方もあります。ただし、投稿した内容と記事の根拠がずれないよう、記事を書く段階で出典を確認し、先に出した投稿文が事実と合っているかを見直してください。"}}, {"@type": "Question", "name": "複数のSNSを同時に運用してもよいですか", "acceptedAnswer": {"@type": "Answer", "text": "可能ですが、最初は1つに絞ることをおすすめします。媒体ごとに依頼、承認、記録が増えるため、週の作業時間が収まるかを確認してから増やします。"}}, {"@type": "Question", "name": "MOAIで投稿まで自動化できますか", "acceptedAnswer": {"@type": "Answer", "text": "できません。MOAIは依頼・承認・記録の置き場で、投稿機能も予約投稿も持っていません。承認済みの本文を人が各媒体に投稿します。"}}, {"@type": "Question", "name": "ChatGPTとClaudeのどちらで使えばよいですか", "acceptedAnswer": {"@type": "Answer", "text": "ブラウザ版は、どちらにも依頼を貼り付けて使えます。ローカル版の自動実行はClaude Codeを前提としています。利用条件や料金は各サービスの案内に従ってください。"}}]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a href="../">🗿 MOAI</a><span>›</span><a href="./">ブログ</a></header>
+<article class="card">
+<h1>AIでブログとSNSを同時に回す運用手順｜1本の記事から投稿文を作る週次フロー</h1>
+<p class="meta">公開: 2026-10-09 ・ 更新: 2026-10-09 ・ MOAI 編集部</p>
+
+<div class="tldr"><strong>要点</strong>
+<ul>
+<li>ブログとSNSを別々に考えると時間が足りなくなる。「1本のブログ記事を軸にして、SNS投稿文を派生させる」流れにすると、AIに頼む作業が減り、承認も1回にまとめられる</li>
+<li>週次フローは「テーマ決め → 記事の依頼 → 記事の承認と公開 → 承認済み記事からSNS投稿文を依頼 → 投稿文の承認と投稿 → 数字の記録」の6段階</li>
+<li>SNS投稿文は、承認済みの記事を元にして頼む。記事の内容と食い違う投稿文や、記事にない数字が混ざるのを防げる</li>
+<li>無料のMOAIは、記事とSNS投稿文を同じ承認キューで状態管理でき、チャネルごとの実績も1か所に記録できる。投稿そのものは各媒体で人が行う</li>
+</ul></div>
+
+<p>ブログを書きながら、X・Instagram・Threadsなどにも投稿したい。生成AIを使えば文章は作れますが、ブログ用に頼み、SNS用に頼み、それぞれ確認して、それぞれ公開して、と進めると、作業は媒体の数だけ増えます。しかも記事とSNSで言っていることがずれる、という新しい問題も起きます。</p>
+<p>この記事では、ブログとSNSを同時に運用するときに、AIへの依頼を「記事が先、SNSは記事から派生」という順番に整える週次フローを説明します。無料のオープンソースのAIマーケティング司令室「MOAI」を置き場として使う前提ですが、考え方自体は手元のスプレッドシートでも応用できます。</p>
+
+<h2>なぜ「ブログとSNSを同時に」だと詰まるのか</h2>
+<p>ブログとSNSを同時に運用しようとして止まる原因は、多くの場合、文章を書く力ではなく、管理の分散にあります。</p>
+<div class="tw"><table>
+<thead><tr><th>詰まりやすい点</th><th>起きること</th><th>対策</th></tr></thead>
+<tbody>
+<tr><td>媒体ごとに別々に依頼している</td><td>依頼の回数が増え、毎回ブランドの前提を説明し直す</td><td>前提は設定に1回だけ書く。SNSは記事から派生させる</td></tr>
+<tr><td>記事とSNSで内容がずれる</td><td>SNSに書いた数字や主張が、記事にない・記事と違う</td><td>承認済みの記事を材料にして投稿文を頼む</td></tr>
+<tr><td>確認が媒体ごとにばらばら</td><td>どれを確認したか分からなくなる</td><td>同じ承認キューで、記事とSNS投稿文を状態で管理する</td></tr>
+<tr><td>数字を媒体ごとに見ている</td><td>どの記事がどの媒体で効いたか分からない</td><td>チャネルごとに記録し、記事のテーマと並べて振り返る</td></tr>
+</tbody></table></div>
+<p>つまり、解決すべきなのは「AIの出力の質」より、「依頼・確認・記録の流れを1本にすること」です。流れが1本なら、媒体が増えても、増えるのは派生の依頼だけになります。</p>
+
+<h2>基本の考え方：記事が親、SNS投稿文は子</h2>
+<p>ブログ記事は、調べた根拠、出典、構成が揃った「親」のコンテンツです。SNS投稿文は、その中から1つの論点を切り出して短く伝える「子」です。この関係を守ると、次の利点があります。</p>
+<ul>
+<li><strong>事実確認が1回で済む</strong>：数字や出典は記事の承認時に確認し、投稿文は「記事にある内容だけを使う」と指定する</li>
+<li><strong>依頼が小さくなる</strong>：SNS投稿文の依頼は「この記事の論点を3つ、140字で」のように短くできる</li>
+<li><strong>導線が揃う</strong>：SNSからブログへ、ブログから問い合わせや資料請求へ、という流れを最初から設計できる</li>
+</ul>
+<p>反対に、先にSNSの投稿文を作ってから記事を書くと、記事側で根拠を探し直すことになり、投稿済みの内容と食い違ったときに直しにくくなります。</p>
+
+<h2>週次フローの全体像</h2>
+<p>1チャネルのブログ（週2本）と、SNS1つ（週4〜6投稿）を同時に回す例です。MOAIの画面との対応も併記します。</p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>やること</th><th>MOAIの画面</th></tr></thead>
+<tbody>
+<tr><td>1. テーマ決め</td><td>先週の数字を見て、今週の記事2本のテーマと公開日を決める</td><td>ダッシュボード・カレンダー</td></tr>
+<tr><td>2. 記事の依頼</td><td>調査（SEOリサーチャー）→本文（ライター）の順に依頼を積む</td><td>指示する</td></tr>
+<tr><td>3. 記事の承認と公開</td><td>事実・出典・広告表記を確認し、承認。ブログに公開してタスクを「公開済み」に</td><td>承認キュー・タスク</td></tr>
+<tr><td>4. 投稿文の依頼</td><td>承認済みの記事を材料に、SNSコピーライターへ投稿文の案を依頼</td><td>指示する</td></tr>
+<tr><td>5. 投稿文の承認と投稿</td><td>記事と内容が一致しているか確認し、各SNSに投稿</td><td>承認キュー・タスク</td></tr>
+<tr><td>6. 数字の記録</td><td>ブログのPV、SNSの反応、問い合わせ数をチャネルに記録</td><td>チャネル・ダッシュボード</td></tr>
+</tbody></table></div>
+
+<h2>段階ごとの具体的なやり方</h2>
+<h3>段階1：テーマ決め（月曜・30分）</h3>
+<p>前の週の数字を見て、伸びた記事の関連テーマを1本、新しい切り口を1本、という配分にすると、振り返りが次の計画につながります。数字がまだない最初の週は、検索する人が購入や問い合わせの直前に調べそうな、3語以上の言葉を選びます。ビッグワードより、状況が具体的な言葉のほうが、上位に大手サイトが並びにくい傾向があります。</p>
+<h3>段階2：記事の依頼（月〜火）</h3>
+<p>調査と執筆は分けます。まず、SEOリサーチャーに「このキーワードの検索結果の上位10件の見出し構成を表にして、上位にない切り口を3つ挙げて」と頼みます。その結果を見て、ライターに「切り口2で4000字以上、体験談は書かない、数字には出典URLを付ける」と頼みます。調査の結果を読んでから執筆を頼む二段構えにすると、1回の依頼が小さくなり、差し戻しも減ります。</p>
+<h3>段階3：記事の承認と公開（水曜）</h3>
+<p>記事の承認では、次を確認します。</p>
+<ul>
+<li>料金・日付・制度の数字が、出典のページと一致しているか</li>
+<li>体験談、顧客の声、肩書きなど、事実でないものが含まれていないか</li>
+<li>広告リンクがある場合、読者に分かる形で広告と示しているか</li>
+<li>末尾に、次の行動（問い合わせ・資料請求・ツールの入手など）への案内があるか</li>
+</ul>
+<p>承認したら、ブログに公開し、MOAIのタスクを「公開済み」に移します。公開済みになった記事が、SNS投稿文の材料になります。</p>
+<h3>段階4：投稿文の依頼（水〜木）</h3>
+<p>承認済みの記事の本文をAIに渡し、次のように頼みます。</p>
+<p>「次の承認済み記事から、X用の投稿文を3案作って。条件：140字以内。記事にある内容だけを使い、記事にない数字や主張は足さない。本文にURLは入れない。体験談は書かない」</p>
+<p>「記事にある内容だけを使う」と明記するのが、記事とSNSのずれを防ぐポイントです。InstagramやThreadsなど文字数や文化が違う媒体には、媒体ごとに別の指示として積みます。1つの指示は「1人の担当に、1つの成果物」に絞ります。</p>
+<h3>段階5：投稿文の承認と投稿（木〜金）</h3>
+<p>投稿文は短い分、確認を軽く済ませてしまいがちです。次の3点は必ず見ます。</p>
+<ul>
+<li>記事の内容と食い違っていないか、記事にない数字が入っていないか</li>
+<li>「絶対」「必ず」のような断定が入っていないか</li>
+<li>広告や提携がある記事の場合、投稿文でも広告であることが分かるか</li>
+</ul>
+<p>承認したら、各SNSに人が投稿します。MOAIにはSNSへの投稿機能はなく、予約投稿も持っていません。予約が必要なら、各SNSの公式の予約機能などを併用してください。</p>
+<h3>段階6：数字の記録（週末・15分）</h3>
+<p>記録するのは、媒体ごとに2〜3指標に絞ります。</p>
+<div class="tw"><table>
+<thead><tr><th>媒体</th><th>記録する指標の例</th><th>次の計画での使い方</th></tr></thead>
+<tbody>
+<tr><td>ブログ</td><td>PV、問い合わせページへの到達数</td><td>到達の多い記事の関連テーマを次の候補に</td></tr>
+<tr><td>X</td><td>インプレッション、プロフィールクリック</td><td>反応の多い論点の切り出し方を繰り返す</td></tr>
+<tr><td>Instagram・Threads</td><td>フォロワー、保存数</td><td>保存の多い型を固定する</td></tr>
+</tbody></table></div>
+<p>MOAIは各サービスから数字を自動で取り込めないため、手入力です。ただ、週1回の記録を4週間続けると、ダッシュボードのグラフから「記事の公開週に、どの媒体が動いたか」が見え始めます。</p>
+
+<h2>1本の記事から派生させる投稿の型</h2>
+<p>承認済みの記事から作れる投稿の型は、主に次の4つです。1本の記事から全部を作る必要はなく、週のSNS投稿数に合わせて選びます。</p>
+<div class="tw"><table>
+<thead><tr><th>型</th><th>内容</th><th>注意点</th></tr></thead>
+<tbody>
+<tr><td>要点型</td><td>記事の要点を3〜4行の箇条書きにする</td><td>記事の要点ボックスと内容を一致させる</td></tr>
+<tr><td>問い型</td><td>記事が答える疑問を1つ投げかけ、続きを記事に誘導する</td><td>煽りすぎず、記事に答えがあることを確認する</td></tr>
+<tr><td>表・手順型</td><td>記事の手順やチェックリストの一部を切り出す</td><td>省略した部分があることが分かるようにする</td></tr>
+<tr><td>よくある質問型</td><td>記事のFAQの1問を取り上げる</td><td>回答が記事と同じ内容であること</td></tr>
+</tbody></table></div>
+<p>いずれの型でも、実際には経験していないことを経験したかのように書かない、という条件は共通です。AIは頼まなくても「やってみたところ」のような表現を作りがちなので、設定の禁止事項に書いておき、承認時にも確認します。</p>
+
+<h2>設定画面に先に書いておくこと</h2>
+<p>ブログとSNSを同時に回すなら、MOAIの設定画面に次の内容を書いておくと、全部の依頼に引き継がれます。</p>
+<ol>
+<li><strong>ミッション</strong>：誰に何を届けるメディアか。ブログとSNSで共通にする</li>
+<li><strong>トーン</strong>：ブログは丁寧語、SNSは短く、など媒体別の違いも書く</li>
+<li><strong>禁止ワード</strong>：「絶対」「必ず」「No.1」など、使わない言い切り表現</li>
+<li><strong>運用ルール</strong>：SNS投稿文は承認済みの記事から作る、記事にない数字は書かない、広告は明示する</li>
+</ol>
+<p>運用ルールに「SNSは記事から派生」と書いておくと、依頼文を毎回書かなくても、AIへの指示に前提として付きます。承認の基準の作り方は、<a href="sns-toukou-shonin-flow-muryo.html">SNS投稿の承認フローを無料で作る方法</a>で詳しく説明しています。</p>
+
+<h2>週のはじめに決める「記事とSNSの対応表」</h2>
+<p>週の最初に、記事とSNS投稿の対応を簡単な表にしておくと、投稿文の依頼を積み忘れません。紙でもスプレッドシートでも、MOAIのカレンダーでも構いません。</p>
+<div class="tw"><table>
+<thead><tr><th>記事</th><th>公開日</th><th>派生する投稿</th><th>投稿日</th></tr></thead>
+<tbody>
+<tr><td>記事A</td><td>水曜</td><td>要点型1本、問い型1本</td><td>水曜・金曜</td></tr>
+<tr><td>記事B</td><td>金曜</td><td>表・手順型1本、よくある質問型1本</td><td>土曜・月曜</td></tr>
+</tbody></table></div>
+<p>こうしておくと、「公開した記事が、SNSで一度も紹介されないまま古くなる」ことを防げます。また、すでに公開した過去記事の中から、今週のテーマに近いものを選んで再び紹介する投稿を入れる使い方もできます。この場合も、記事の内容が古くなっていないか（料金や制度の数字が変わっていないか）を、投稿前に出典で確認してください。</p>
+<p>対応表を作る作業は10分ほどですが、これがあると週の途中で「今日は何を投稿するのか」を考える時間がなくなります。投稿文の依頼は、記事の公開日にまとめて積み、承認も1回で済ませると、確認の手間が減ります。</p>
+
+<h2>続かないときの立て直し</h2>
+<ul>
+<li><strong>SNSだけ止まる</strong>：記事の公開日にSNS投稿文の依頼を積むところまでを、カレンダーに入れる。投稿の曜日を固定する</li>
+<li><strong>承認がたまる</strong>：依頼の本数が確認の時間を超えている。記事を週1本に減らし、投稿文は2案に絞る</li>
+<li><strong>記事とSNSがずれる</strong>：投稿文の依頼に、記事の本文を必ず添える。記事にない内容を足さない条件を書く</li>
+<li><strong>数字を見なくなる</strong>：記録する指標を1媒体2つまでに絞り、土曜に固定する</li>
+</ul>
+<p>運用全体を5段階のループとして整理した考え方は、<a href="ai-marketing-unyo-loop-muryo.html">AIマーケティングの運用ループを無料で回す手順</a>にまとめています。</p>
+
+<h2>ブラウザ版で試す手順</h2>
+<ol>
+<li><a href="../">MOAIのブラウザ版</a>を開く（登録・インストール不要）</li>
+<li>「チャネル」にブログとSNSを登録する</li>
+<li>「設定」にミッション・トーン・運用ルールを書く</li>
+<li>「指示する」で、記事の調査の依頼を積む</li>
+<li>「キューをまとめてコピー」を押してAIに貼り、結果を承認キューに貼る</li>
+<li>記事の公開後、承認済みの記事を材料にSNS投稿文を依頼する</li>
+</ol>
+<p>ブラウザ版のデータはそのブラウザの中にだけ保存されます。履歴やサイトデータを消すと一緒に消えるため、週1回は書き出してください。依頼のコピーと貼り戻しが負担になったら、ローカル版に移ると、画面のボタンからClaude Codeに自動実行させられます。手順は<a href="claude-code-marketing-jidoka-yarikata.html">Claude Codeでマーケティングを自動化するやり方</a>を参照してください。</p>
+
+<h2>よくある質問</h2>
+<h3>Q. ブログとSNSで文章を変えたほうがよいですか</h3>
+<p>変えたほうが読まれやすくなります。ただし、事実と主張は同じにします。文体と長さは媒体に合わせて変え、数字や結論は記事と食い違わないようにするのが基本です。</p>
+<h3>Q. 先にSNSで反応を見てから記事にするのはだめですか</h3>
+<p>その進め方もあります。ただし、投稿した内容と記事の根拠がずれないよう、記事を書く段階で出典を確認し、先に出した投稿文が事実と合っているかを見直してください。</p>
+<h3>Q. 複数のSNSを同時に運用してもよいですか</h3>
+<p>可能ですが、最初は1つに絞ることをおすすめします。媒体ごとに依頼、承認、記録が増えるため、週の作業時間が収まるかを確認してから増やします。</p>
+<h3>Q. MOAIで投稿まで自動化できますか</h3>
+<p>できません。MOAIは依頼・承認・記録の置き場で、投稿機能も予約投稿も持っていません。承認済みの本文を人が各媒体に投稿します。</p>
+<h3>Q. ChatGPTとClaudeのどちらで使えばよいですか</h3>
+<p>ブラウザ版は、どちらにも依頼を貼り付けて使えます。ローカル版の自動実行はClaude Codeを前提としています。利用条件や料金は各サービスの案内に従ってください。</p>
+
+<h2>無料で週次フローを始める</h2>
+<p>チャネルを登録し、設定を書き、記事の調査を1つ積むところから始められます。</p>
+<p><a class="cta" href="../">MOAIをブラウザで開く（無料・登録不要）</a></p>
+<p>ローカル版や仕組みの詳細は <a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHubリポジトリ</a> にあります。役に立ったら、スターを付けてもらえると開発の励みになります。</p>
+
+<h2>関連記事</h2>
+<ul>
+<li><a href="chatgpt-sns-unyo-kanri-muryo.html">ChatGPTでのSNS運用を無料で一元管理する方法</a></li>
+<li><a href="hitori-shacho-marketing-jidoka-muryo.html">一人社長のマーケティング自動化を無料で始める</a></li>
+<li><a href="ai-agent-marketing-makasete-ikenai-gyomu.html">AIエージェントに任せてはいけないマーケティング業務</a></li>
+</ul>
+</article>
+<footer>© 2026 MOAI ・ <a href="./">ブログ一覧</a> ・ <a href="../">アプリを開く</a> ・ <a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHub</a> ・ <a href="https://solederlego8-a11y.github.io/">運営メディア一覧</a></footer>
+</div>
+</body>
+</html>
