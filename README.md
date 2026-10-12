@@ -169,3 +169,29 @@ moai/
 ## ライセンス
 
 MIT License. 自由に使い、改造し、再配布できます。
+
+<!-- article-index:start -->
+## MOAI 公開中のページ一覧
+
+無料・オープンソースのAIマーケティング司令室。ブログで導入・運用の手順を解説しています。
+
+サイト: https://solederlego8-a11y.github.io/moai/
+
+### top
+- [MOAI｜AIマーケティング司令室](https://solederlego8-a11y.github.io/moai/)
+
+### blog
+- [MOAI ブログ｜無料でAIマーケティングの運用を回す方法](https://solederlego8-a11y.github.io/moai/blog/)
+- [AIマーケティングの運用ループを無料で回す手順｜計画→依頼→承認→投稿→計測](https://solederlego8-a11y.github.io/moai/blog/ai-marketing-unyo-loop-muryo.html)
+- [ChatGPTでのSNS運用を無料で一元管理する方法｜前提・依頼・承認・実績を1か所に](https://solederlego8-a11y.github.io/moai/blog/chatgpt-sns-unyo-kanri-muryo.html)
+- [SNS投稿の承認フローを無料で作る方法｜必要な3要素とチェックリスト](https://solederlego8-a11y.github.io/moai/blog/sns-toukou-shonin-flow-muryo.html)
+- [Claude Codeでマーケティングを自動化するやり方｜導入5ステップと承認つき運用](https://solederlego8-a11y.github.io/moai/blog/claude-code-marketing-jidoka-yarikata.html)
+- [AIマーケティングツールを無料・オープンソースで選ぶ基準｜5つの確認項目と導入手順](https://solederlego8-a11y.github.io/moai/blog/ai-marketing-tool-muryo-opensource.html)
+- [NoimosAIの代替を無料で｜オープンソースで置き換えられる機能・できない機能](https://solederlego8-a11y.github.io/moai/blog/noimosai-daitai-muryo.html)
+- [一人社長のマーケティング自動化を無料で始める｜週3時間で回す最小構成](https://solederlego8-a11y.github.io/moai/blog/hitori-shacho-marketing-jidoka-muryo.html)
+- [AIでブログとSNSを同時に回す運用手順｜1本の記事から投稿文を作る週次フロー](https://solederlego8-a11y.github.io/moai/blog/blog-sns-doujiku-ai-unyo-tejun.html)
+- [AIエージェントに任せてはいけないマーケティング業務｜人が残す5つの判断と線引き](https://solederlego8-a11y.github.io/moai/blog/ai-agent-marketing-makasete-ikenai-gyomu.html)
+- [AIマーケティングツールを解約する前に書き出すデータ｜乗り換え前チェックリスト10項目](https://solederlego8-a11y.github.io/moai/blog/ai-marketing-tool-kaiyaku-mae-data-ikou.html)
+- [AIマーケティングツールのデータ保存先を導入前に確認する方法｜ブラウザ版とローカル版の違い](https://solederlego8-a11y.github.io/moai/blog/ai-marketing-tool-data-hozonsaki-kakunin.html)
+
+<!-- article-index:end -->
