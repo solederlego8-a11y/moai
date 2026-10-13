@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<!-- ga4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSXEBHJSG1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BSXEBHJSG1', { anonymize_ip: true });
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOAIをWindowsに入れる手順｜ブラウザ版とローカル版の始め方 | MOAI ブログ</title>
+<meta name="description" content="無料のAIマーケティング司令室MOAIをWindowsで始める手順。ブラウザ版とローカル版の選び方、Node.jsの準備、起動、ログイン、つまずきやすい点をまとめる。">
+<link rel="canonical" href="https://solederlego8-a11y.github.io/moai/blog/moai-windows-donyu-tejun.html">
+<meta property="og:title" content="MOAIをWindowsに入れる手順｜ブラウザ版とローカル版の始め方">
+<meta property="og:description" content="無料のAIマーケティング司令室MOAIをWindowsで始める手順。ブラウザ版とローカル版の選び方、Node.jsの準備、起動、ログイン、つまずきやすい点をまとめる。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://solederlego8-a11y.github.io/moai/blog/moai-windows-donyu-tejun.html">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "MOAIをWindowsに入れる手順｜ブラウザ版とローカル版の始め方", "datePublished": "2026-10-13", "dateModified": "2026-10-13", "author": {"@type": "Organization", "name": "MOAI"}, "publisher": {"@type": "Organization", "name": "MOAI"}, "mainEntityOfPage": "https://solederlego8-a11y.github.io/moai/blog/moai-windows-donyu-tejun.html"}
+</script>
+<style>
+:root{--bg:#f6f7f9;--paper:#fff;--ink:#1a1d23;--muted:#5b6472;--line:#e3e6eb;--accent:#2f6bff;--accent-soft:#eaf0ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--paper:#161a21;--ink:#e8ebf0;--muted:#9aa3b2;--line:#2a3140;--accent:#5b8cff;--accent-soft:#1b2740}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.9}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+header.top{display:flex;align-items:center;gap:12px;margin-bottom:28px;font-size:14px}
+header.top a{color:var(--muted);text-decoration:none}header.top a:hover{color:var(--accent)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px 28px}
+h1{font-size:26px;line-height:1.45;margin:0 0 8px}.meta{color:var(--muted);font-size:13px;margin:0 0 24px}
+h2{font-size:20px;margin:36px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}h3{font-size:16.5px;margin:24px 0 8px}
+p{margin:0 0 16px}ul,ol{margin:0 0 16px;padding-left:22px}li{margin:0 0 6px}
+.tldr{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 24px}.tldr ul{margin:6px 0 0}
+.tw{overflow-x:auto;margin:0 0 20px}table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--accent-soft)}
+.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font-weight:700;margin:8px 0 20px}
+a{color:var(--accent)}footer{margin-top:28px;color:var(--muted);font-size:13px}
+pre{background:var(--accent-soft);padding:12px 14px;border-radius:8px;overflow-x:auto;font-size:13px;line-height:1.6}code{font-size:.92em}</style>
+<!-- ga4-cv -->
+<script>
+if(typeof gtag==='function'){document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||a.hasAttribute('data-cv-tracked'))return;var h=a.href||'';var has=function(s){return h.indexOf(s)>-1;};var asp=has('a8.net')?'a8':(has('rakuten.co.jp')||has('r10.to'))?'rakuten':(has('amazon.co.jp')||has('amzn.'))?'amazon':'';if(asp){gtag('event','affiliate_click',{asp:asp,link_url:h,link_text:(a.innerText||'').trim().slice(0,80),page_path:location.pathname});}else if(has('buy.stripe.com')){gtag('event','begin_checkout',{link_url:h,page_path:location.pathname});}},true);document.addEventListener('submit',function(e){var f=e.target;gtag('event','generate_lead',{form_id:f.id||f.getAttribute('data-subject')||f.action||'',page_path:location.pathname});},true);}
+</script>
+<!-- faq-schema -->
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Windows以外でも動きますか", "acceptedAnswer": {"@type": "Answer", "text": "Node.jsが動く環境なら動作します。macOSやLinuxでは、ログインは node login.js、スキルとエージェントのコピーは cp コマンドで行います。"}}, {"@type": "Question", "name": "Node.jsを入れたくない場合はどうすればいいですか", "acceptedAnswer": {"@type": "Answer", "text": "ブラウザ版を使ってください。URLを開くだけで動き、Node.jsは不要です。ただし、AIの自動実行はできないため、指示をコピーしてAIに貼る形になります。"}}, {"@type": "Question", "name": "起動したウィンドウを閉じるとどうなりますか", "acceptedAnswer": {"@type": "Answer", "text": "サーバーが止まり、画面が開けなくなります。データは data/ に残っているので、もう一度 node server.js（または start-moai.bat）を実行すれば続きから使えます。"}}, {"@type": "Question", "name": "毎日決まった時刻に自動で実行できますか", "acceptedAnswer": {"@type": "Answer", "text": "MOAI自体にスケジュール実行の機能はありません。指示を積んでおき、決まった時刻にボタンを押すか、Claude Code側で /moai を実行する運用になります。"}}, {"@type": "Question", "name": "ブラウザ版のデータをローカル版に移せますか", "acceptedAnswer": {"@type": "Answer", "text": "設定画面の「データを書き出す（JSON）」で保存し、ローカル版の「読み込む」で取り込めます。書き出したファイルは、ブラウザ版とローカル版のどちらにも読み込めます。"}}]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a href="../">🗿 MOAI</a><span>›</span><a href="./">ブログ</a></header>
+<article class="card">
+<h1>MOAIをWindowsに入れる手順｜ブラウザ版とローカル版の始め方</h1>
+<p class="meta">公開: 2026-10-13 ・ 更新: 2026-10-13 ・ 運営: MOAI 編集部（オープンソースのMOAI開発チーム）</p>
+
+<div class="tldr"><strong>30秒で判断</strong>
+<ul>
+<li>Windowsで始める方法は2つ。インストール不要の「ブラウザ版」（URLを開くだけ）と、自分のPCで動かす「ローカル版」（Node.jsが必要。AIを画面のボタンで自動実行できる）</li>
+<li>ローカル版の最短手順は、リポジトリを取得して <code>node server.js</code> を実行し、ブラウザで <code>http://localhost:4173</code> を開くこと。依存パッケージはなく <code>npm install</code> は不要</li>
+<li>AIを自動で動かすなら、最初に1回だけ <code>login-claude.bat</code> でログインする。ブラウザ版ならこの手順は要らない</li>
+</ul>
+<table><thead><tr><th>あなたの状況</th><th>おすすめ</th><th>次の一手</th></tr></thead><tbody>
+<tr><td>まず使い心地を見たい／PCに何も入れたくない</td><td>ブラウザ版</td><td><a href="../">MOAIをブラウザで開く</a></td></tr>
+<tr><td>AIにキューの指示を自動で処理させたい</td><td>ローカル版</td><td>この記事の手順1〜5へ（<a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHubで入手</a>）</td></tr>
+<tr><td>無料か有料かで迷っている</td><td>先に判断</td><td><a href="ai-marketing-tool-muryo-yuryo-hantei-hub.html">無料で足りるか判断する4基準</a></td></tr>
+</tbody></table></div>
+
+<p>無料のAIマーケティング司令室「MOAI」をWindowsで使い始めるための手順を、つまずきやすい点まで含めて整理しました。MOAIの仕組みを一通り説明する記事はすでにありますが、この記事は「Windowsのパソコンで、今日、動かすまで」に絞っています。コマンドや画面の動作は、MOAIのリポジトリ（README・ソースコード）に書かれている内容に沿っています。</p>
+<p>この記事はMOAIの編集部が書いています。MOAIはMITライセンスのオープンソースで、利用に費用はかかりません。ただし、AIを動かすために使うClaude Codeなどのサービスの利用条件・料金は、それぞれの提供元の案内に従います。</p>
+
+<h2>最初に選ぶ：ブラウザ版かローカル版か</h2>
+<p>MOAIには同じ画面で動く2つのモードがあります。どちらから始めても、書き出したデータでもう一方に移れるため、迷ったらブラウザ版が安全です。</p>
+<div class="tw"><table><thead><tr><th>項目</th><th>ブラウザ版</th><th>ローカル版</th></tr></thead><tbody>
+<tr><td>準備</td><td>URLを開くだけ</td><td>Node.jsのインストールと、ファイルの取得が必要</td></tr>
+<tr><td>データの保存先</td><td>そのブラウザの中</td><td>自分のPCの <code>data/*.json</code></td></tr>
+<tr><td>AIの実行</td><td>自動では動かない。指示をコピーしてAIに貼る</td><td>画面の「▶ AIに実行させる」ボタンで実行</td></tr>
+<tr><td>消える条件</td><td>ブラウザの履歴・サイトデータの削除</td><td>フォルダを削除したとき</td></tr>
+<tr><td>向いている人</td><td>まず試したい人</td><td>毎週の運用を自動化したい人</td></tr>
+</tbody></table></div>
+<p>ブラウザ版の使い方は<a href="chatgpt-sns-unyo-kanri-muryo.html">ChatGPTでのSNS運用を無料で一元管理する方法</a>、データの保存先の違いは<a href="ai-marketing-tool-data-hozonsaki-kakunin.html">データ保存先を導入前に確認する方法</a>に詳しく書いています。ローカル版の導入に進む場合は、次の準備から始めます。</p>
+
+<h2>ローカル版に必要なもの</h2>
+<ul>
+<li><strong>Node.js</strong>（無料）：MOAIのサーバーを動かすために使う。MOAIは外部パッケージに依存せず、Node.jsの標準機能だけで動く</li>
+<li><strong>Claude Code</strong>：AIをボタンで自動実行したい場合のみ。利用条件・料金は提供元（Anthropic）の案内で確認する</li>
+<li><strong>git</strong>：あると便利だが必須ではない。GitHubのページから「Download ZIP」でも取得できる</li>
+</ul>
+<p>Node.jsが入っているかどうかは、コマンドプロンプトまたはPowerShellで次のコマンドを実行すると確認できます。バージョン番号が表示されれば入っています。</p>
+<pre><code>node -v</code></pre>
+<p>「認識されていません」といった表示が出る場合は、Node.jsの公式サイト（nodejs.org）から入手してインストールします。インストール後は、開いているコマンドプロンプトやPowerShellを一度閉じて開き直してから、もう一度 <code>node -v</code> を確認してください。開いたままだと、新しく入ったコマンドが認識されないことがあります。</p>
+
+<h2>手順1：MOAIを取得する</h2>
+<p>gitが使える場合は、次のコマンドで取得します。</p>
+<pre><code>git clone https://github.com/solederlego8-a11y/moai.git
+cd moai</code></pre>
+<p>gitを使わない場合は、<a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHubのリポジトリページ</a>で「Code」から「Download ZIP」を選び、展開してできたフォルダを使います。</p>
+<h3>置き場所の注意</h3>
+<p>ローカル版は、起動すると同じフォルダの <code>data/</code> にJSONファイルを書き込みます。Windowsの「制御されたフォルダーアクセス」（Microsoftの公式機能）が有効だと、ドキュメントなど保護されたフォルダへの書き込みが制限されることがあります。書き込みでエラーが出る場合は、保護の対象外のフォルダ（たとえばユーザーフォルダ直下に新しく作ったフォルダ）に置き直すのが簡単です。設定の変更方法はWindowsのセキュリティ設定の公式ヘルプで確認してください。</p>
+
+<h2>手順2：起動する</h2>
+<p>取得したフォルダの中で、次のコマンドを実行します。</p>
+<pre><code>node server.js</code></pre>
+<p>起動したら、ブラウザで <code>http://localhost:4173</code> を開きます。MOAIの画面が出れば成功です。止めるときは、コマンドを実行しているウィンドウで <code>Ctrl + C</code> を押します。</p>
+<p>コマンドを打ちたくない場合は、フォルダにある <code>start-moai.bat</code> をダブルクリックしても起動します。</p>
+<h3>画面が開かないとき</h3>
+<ul>
+<li><strong>ポート4173が使われている</strong>：環境変数 <code>MOAI_PORT</code> で別の番号を指定して起動し直します</li>
+<li><strong>画面にエラーが出る</strong>：<code>data/</code> のJSONを手で編集していないか確認します。壊れたJSONは画面がすぐエラーになるため、データの更新は画面かCLI（<code>node cli.js</code>）経由で行います</li>
+<li><strong>Node.jsのバージョンが古い可能性</strong>：<code>node -v</code> の結果を確認し、公式サイトの現行版に更新して再度試します</li>
+</ul>
+
+<h2>手順3：前提を書いて、最初の指示を積む</h2>
+<p>画面が開いたら、AIに実行させる前にやっておくことが2つあります。</p>
+<ol>
+<li>「チャネル」で、運用しているメディア（ブログ、Instagram、Xなど）を登録する</li>
+<li>「設定」で、ミッション・トーン・禁止ワード・運用ルールを書く</li>
+</ol>
+<p>設定に書いた内容は、AIへの指示に毎回引き継がれます。書き方の例は<a href="moai-settings-mission-tone-kakikata.html">MOAIの設定の書き方</a>で、例文つきで説明しています。そのうえで「指示する」から、最初の依頼を日本語で書いて積みます。最初の1本は、公開しない調査系の依頼（たとえば、記事の切り口の候補を3つ挙げてもらう）にしておくと、失敗しても外に影響がありません。</p>
+
+<h2>手順4：AIを入れてログインする（自動実行する場合のみ）</h2>
+<p>画面のボタンでAIを動かすには、MOAI同梱のスキルとエージェント定義をClaude Codeに読ませます。Windowsでは、リポジトリのフォルダで次を実行します。</p>
+<pre><code>xcopy /E /I claude-code\skills\moai "%USERPROFILE%\.claude\skills\moai"
+xcopy /E /I claude-code\agents "%USERPROFILE%\.claude\agents"</code></pre>
+<p>続いて、一度だけログインします。フォルダにある <code>login-claude.bat</code> をダブルクリックすると、ブラウザが開くので「許可（Authorize）」を押します。状態は次のコマンドでいつでも確認できます。</p>
+<pre><code>node login.js --status</code></pre>
+<p>デスクトップアプリでClaude Codeにログイン済みでも、この手順は別に必要です。外から起動したAIには、アプリの認証が引き継がれないためです。</p>
+<h3>Claude Codeが見つからないと言われたら</h3>
+<p>インストール済みなのに「Claude Code が見つかりませんでした」と出る場合は、環境変数 <code>MOAI_CLAUDE_BIN</code> にClaude Codeの実行ファイルのパスを設定してから、<code>node server.js</code> を起動し直します。</p>
+
+<h2>手順5：実行して、承認する</h2>
+<p>「指示する」画面の「▶ AIに実行させる」を押すと、キューの指示が古い順に処理されます。AIがどのツールを使い、何を調べているかが画面にそのまま表示されます。生成物は「承認キュー」に戻ってくるので、読んでから承認・差し戻し・却下を選びます。承認していないものが勝手に公開されることはありません。</p>
+<p>権限のプリセットは、既定の「おまかせ（推奨）」のままで始めてください。このプリセットはnodeコマンドと調べもの・執筆に限って許可します。外部への投稿は、人が行う運用をおすすめします。「すべて許可」は確認なしでどんな操作も実行できる状態になるため、何をさせるかを把握したうえで、必要なときだけ選びます。</p>
+<p>導入後の運用の全体像と、指示の書き方の例は、<a href="claude-code-marketing-jidoka-yarikata.html">Claude Codeでマーケティングを自動化するやり方</a>にまとめています。</p>
+
+<h2>つまずきやすい点の早見表</h2>
+<div class="tw"><table><thead><tr><th>症状</th><th>確認すること</th></tr></thead><tbody>
+<tr><td><code>node</code> が認識されない</td><td>Node.jsのインストール後にウィンドウを開き直したか</td></tr>
+<tr><td>画面が開かない</td><td>起動したウィンドウを閉じていないか。ポート4173が使用中でないか</td></tr>
+<tr><td>データが保存されない</td><td>保存先フォルダが書き込み保護の対象になっていないか</td></tr>
+<tr><td>画面がエラーになる</td><td><code>data/</code> のJSONを手で編集していないか</td></tr>
+<tr><td>AIが動かない</td><td><code>node login.js --status</code> でログイン状態を確認。エージェント定義をコピーしたか</td></tr>
+<tr><td>担当が呼ばれない</td><td><code>%USERPROFILE%\.claude\agents</code> にエージェント定義が入っているか</td></tr>
+</tbody></table></div>
+
+<h2>導入したあとにやること</h2>
+<p>導入できたら、次の順で進めると運用が定着しやすくなります。</p>
+<ol>
+<li>設定画面の内容を、自分の運用に合わせて書き換える</li>
+<li>調査系の依頼を1本だけ実行し、承認キューの流れを一度通す</li>
+<li>週に1回、設定画面から（ブラウザ版の場合は特に）データを書き出して保管する</li>
+<li>慣れてきたら、AI担当者を自分用に追加する（<a href="moai-ai-tantosha-tsuika-customize.html">MOAIのAI担当者を増やす方法</a>）</li>
+</ol>
+<p>ローカル版を使い続ける場合も、<code>data/</code> フォルダのバックアップは定期的に取っておくと安心です。MOAIにはクラウド同期の機能がないため、PCの故障や誤削除に備えるのは使う人の側になります。</p>
+
+<h2>ブラウザ版から引っ越す・更新する</h2>
+<h3>ブラウザ版のデータをローカル版に移す</h3>
+<p>すでにブラウザ版を使っていた場合は、設定画面の「データを書き出す（JSON）」でファイルを保存し、ローカル版の設定画面で「読み込む」を選びます。MOAIの書き出しファイルではないファイルを選ぶと、読み込めない旨のメッセージが出ます。移したあとも、元のブラウザ版のデータは消えないため、ローカル版で問題なく動くことを確認してから、ブラウザ版の利用をやめれば安心です。</p>
+<h3>新しい版に更新する</h3>
+<p>gitで取得した場合は、リポジトリのフォルダで <code>git pull</code> を実行すると最新の状態になります。ZIPで取得した場合は、新しいZIPを別のフォルダに展開し、元のフォルダの <code>data/</code> をコピーして持っていく形になります。<code>data/</code> はGitの管理対象外なので、更新で上書きされることはありませんが、更新前にフォルダごとバックアップを取っておくと確実です。</p>
+<h3>削除したいとき</h3>
+<p>ローカル版は、フォルダを削除すれば取り除けます。Node.jsや、Claude Codeにコピーしたスキル・エージェント定義（<code>%USERPROFILE%\.claude</code> 以下）は別の場所にあるため、不要なら個別に削除します。削除前に、必要なデータを書き出しておいてください。</p>
+<h2>導入前に決めておくと迷わないこと</h2>
+<p>手順そのものよりも、「何のために動かすのか」が決まっていないと、導入後に手が止まります。導入の前に、次の3点だけメモしておくことをおすすめします。</p>
+<ul>
+<li>運用するチャネルはどれか（ブログ、Instagram、Xなど。最初は1〜2つに絞る）</li>
+<li>最初に任せたい仕事は何か（調査、下書き、投稿文の派生など。公開に直結しないものから）</li>
+<li>公開の判断は誰が、いつ行うか（承認する人と曜日を決める）</li>
+</ul>
+<p>この3点が決まっていれば、画面を開いてからの設定と最初の指示が、短時間で書けるはずです。運用全体の流れは<a href="ai-marketing-unyo-loop-muryo.html">AIマーケティングの運用ループを無料で回す手順</a>で、計画から計測まで通して説明しています。
+</p>
+<h2>よくある質問</h2>
+<h3>Q. Windows以外でも動きますか</h3>
+<p>Node.jsが動く環境なら動作します。macOSやLinuxでは、ログインは <code>node login.js</code>、スキルとエージェントのコピーは <code>cp</code> コマンドで行います。</p>
+<h3>Q. Node.jsを入れたくない場合はどうすればいいですか</h3>
+<p>ブラウザ版を使ってください。URLを開くだけで動き、Node.jsは不要です。ただし、AIの自動実行はできないため、指示をコピーしてAIに貼る形になります。</p>
+<h3>Q. 起動したウィンドウを閉じるとどうなりますか</h3>
+<p>サーバーが止まり、画面が開けなくなります。データは <code>data/</code> に残っているので、もう一度 <code>node server.js</code>（または <code>start-moai.bat</code>）を実行すれば続きから使えます。</p>
+<h3>Q. 毎日決まった時刻に自動で実行できますか</h3>
+<p>MOAI自体にスケジュール実行の機能はありません。指示を積んでおき、決まった時刻にボタンを押すか、Claude Code側で <code>/moai</code> を実行する運用になります。</p>
+<h3>Q. ブラウザ版のデータをローカル版に移せますか</h3>
+<p>設定画面の「データを書き出す（JSON）」で保存し、ローカル版の「読み込む」で取り込めます。書き出したファイルは、ブラウザ版とローカル版のどちらにも読み込めます。</p>
+
+<h2>まず動かしてみる</h2>
+<p>手順は、コマンドを2〜3回打つだけです。先に画面の雰囲気を見たいなら、ブラウザ版をそのまま開けます。</p>
+<p><a class="cta" href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHubでMOAIを入手する（無料・MIT）</a></p>
+<p>インストールせずに試す場合は、<a href="../">ブラウザ版のMOAI</a>を開いてください。役に立ったら、GitHubでスターを付けてもらえると開発の励みになります。無料で足りるか迷う場合は、<a href="ai-marketing-tool-muryo-yuryo-hantei-hub.html">判断基準をまとめたこちらの記事</a>が参考になります。</p>
+</article>
+<footer>© 2026 MOAI ・ <a href="./">ブログ一覧</a> ・ <a href="../">アプリを開く</a> ・ <a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHub</a> ・ <a href="https://solederlego8-a11y.github.io/">運営メディア一覧</a></footer>
+</div>
+</body>
+</html>

@@ -193,5 +193,10 @@ MIT License. 自由に使い、改造し、再配布できます。
 - [AIエージェントに任せてはいけないマーケティング業務｜人が残す5つの判断と線引き](https://solederlego8-a11y.github.io/moai/blog/ai-agent-marketing-makasete-ikenai-gyomu.html)
 - [AIマーケティングツールを解約する前に書き出すデータ｜乗り換え前チェックリスト10項目](https://solederlego8-a11y.github.io/moai/blog/ai-marketing-tool-kaiyaku-mae-data-ikou.html)
 - [AIマーケティングツールのデータ保存先を導入前に確認する方法｜ブラウザ版とローカル版の違い](https://solederlego8-a11y.github.io/moai/blog/ai-marketing-tool-data-hozonsaki-kakunin.html)
+- [AIマーケティングツールは無料で足りる？有料に替える判断基準4つ](https://solederlego8-a11y.github.io/moai/blog/ai-marketing-tool-muryo-yuryo-hantei-hub.html)
+- [MOAIをWindowsに入れる手順｜ブラウザ版とローカル版の始め方](https://solederlego8-a11y.github.io/moai/blog/moai-windows-donyu-tejun.html)
+- [AIマーケティングを無料で始める本当の費用｜隠れコスト5項目](https://solederlego8-a11y.github.io/moai/blog/ai-marketing-muryo-kakureta-cost.html)
+- [MOAIの設定の書き方｜ミッション・トーン・禁止ワードの例文つき](https://solederlego8-a11y.github.io/moai/blog/moai-settings-mission-tone-kakikata.html)
+- [MOAIのAI担当者を増やす方法｜エージェント定義の追加と割り当て](https://solederlego8-a11y.github.io/moai/blog/moai-ai-tantosha-tsuika-customize.html)
 
 <!-- article-index:end -->

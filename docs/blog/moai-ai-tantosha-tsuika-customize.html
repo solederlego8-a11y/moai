@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<!-- ga4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSXEBHJSG1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BSXEBHJSG1', { anonymize_ip: true });
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOAIのAI担当者を増やす方法｜エージェント定義の追加と割り当て | MOAI ブログ</title>
+<meta name="description" content="MOAIのAI担当者（サブエージェント）を自分用に増やす手順。エージェント定義ファイルの書き方、seed.jsとの対応、おまかせ指定との関係を解説する。">
+<link rel="canonical" href="https://solederlego8-a11y.github.io/moai/blog/moai-ai-tantosha-tsuika-customize.html">
+<meta property="og:title" content="MOAIのAI担当者を増やす方法｜エージェント定義の追加と割り当て">
+<meta property="og:description" content="MOAIのAI担当者（サブエージェント）を自分用に増やす手順。エージェント定義ファイルの書き方、seed.jsとの対応、おまかせ指定との関係を解説する。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://solederlego8-a11y.github.io/moai/blog/moai-ai-tantosha-tsuika-customize.html">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "MOAIのAI担当者を増やす方法｜エージェント定義の追加と割り当て", "datePublished": "2026-10-13", "dateModified": "2026-10-13", "author": {"@type": "Organization", "name": "MOAI"}, "publisher": {"@type": "Organization", "name": "MOAI"}, "mainEntityOfPage": "https://solederlego8-a11y.github.io/moai/blog/moai-ai-tantosha-tsuika-customize.html"}
+</script>
+<style>
+:root{--bg:#f6f7f9;--paper:#fff;--ink:#1a1d23;--muted:#5b6472;--line:#e3e6eb;--accent:#2f6bff;--accent-soft:#eaf0ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--paper:#161a21;--ink:#e8ebf0;--muted:#9aa3b2;--line:#2a3140;--accent:#5b8cff;--accent-soft:#1b2740}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.9}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+header.top{display:flex;align-items:center;gap:12px;margin-bottom:28px;font-size:14px}
+header.top a{color:var(--muted);text-decoration:none}header.top a:hover{color:var(--accent)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px 28px}
+h1{font-size:26px;line-height:1.45;margin:0 0 8px}.meta{color:var(--muted);font-size:13px;margin:0 0 24px}
+h2{font-size:20px;margin:36px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}h3{font-size:16.5px;margin:24px 0 8px}
+p{margin:0 0 16px}ul,ol{margin:0 0 16px;padding-left:22px}li{margin:0 0 6px}
+.tldr{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 24px}.tldr ul{margin:6px 0 0}
+.tw{overflow-x:auto;margin:0 0 20px}table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--accent-soft)}
+.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font-weight:700;margin:8px 0 20px}
+a{color:var(--accent)}footer{margin-top:28px;color:var(--muted);font-size:13px}
+pre{background:var(--accent-soft);padding:12px 14px;border-radius:8px;overflow-x:auto;font-size:13px;line-height:1.6}code{font-size:.92em}</style>
+<!-- ga4-cv -->
+<script>
+if(typeof gtag==='function'){document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||a.hasAttribute('data-cv-tracked'))return;var h=a.href||'';var has=function(s){return h.indexOf(s)>-1;};var asp=has('a8.net')?'a8':(has('rakuten.co.jp')||has('r10.to'))?'rakuten':(has('amazon.co.jp')||has('amzn.'))?'amazon':'';if(asp){gtag('event','affiliate_click',{asp:asp,link_url:h,link_text:(a.innerText||'').trim().slice(0,80),page_path:location.pathname});}else if(has('buy.stripe.com')){gtag('event','begin_checkout',{link_url:h,page_path:location.pathname});}},true);document.addEventListener('submit',function(e){var f=e.target;gtag('event','generate_lead',{form_id:f.id||f.getAttribute('data-subject')||f.action||'',page_path:location.pathname});},true);}
+</script>
+<!-- faq-schema -->
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "画面から担当を追加できますか", "acceptedAnswer": {"@type": "Answer", "text": "現状の画面には、担当を追加する機能はありません。claude-code/agents/ にエージェント定義を足し、必要なら docs/seed.js に表示用の定義を足す形になります。"}}, {"@type": "Question", "name": "担当を足しても呼ばれないときは、どこを見ますか", "acceptedAnswer": {"@type": "Answer", "text": "まず、定義ファイルが ~/.claude/agents/（Windowsでは %USERPROFILE%\\.claude\\agents）に入っているかを確認します。次に、先頭ブロックの書式、特に description にコロンがある場合のダブルクォートを確認します。"}}, {"@type": "Question", "name": "同梱の8人を削除したり、名前を変えたりしていいですか", "acceptedAnswer": {"@type": "Answer", "text": "MITライセンスの範囲で自由に変更できます。ただし、割り当て先の名前（target）と定義ファイルの name が一致していないと、担当が呼ばれません。名前を変えるときは両方を揃えてください。"}}, {"@type": "Question", "name": "他のAI（ChatGPTなど）でも担当を増やせますか", "acceptedAnswer": {"@type": "Answer", "text": "エージェント定義はClaude Codeのサブエージェントの仕組みを使うため、自動実行はClaude Code前提です。ブラウザ版では、指示をコピーして貼る運用になるため、担当ごとの定義ファイルは働きません。担当名を依頼文に書き添える形になります。"}}, {"@type": "Question", "name": "担当が多いと、費用が増えますか", "acceptedAnswer": {"@type": "Answer", "text": "担当の数自体に費用はかかりません。ただし、実行のたびにAIの利用量は増えるため、使うAIサービスの料金体系に従って費用が増えることがあります。費用の考え方はAIマーケティングを無料で始める本当の費用で整理しています。"}}]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a href="../">🗿 MOAI</a><span>›</span><a href="./">ブログ</a></header>
+<article class="card">
+<h1>MOAIのAI担当者を増やす方法｜エージェント定義の追加と割り当て</h1>
+<p class="meta">公開: 2026-10-13 ・ 更新: 2026-10-13 ・ 運営: MOAI 編集部（オープンソースのMOAI開発チーム）</p>
+
+<div class="tldr"><strong>30秒で判断</strong>
+<ul>
+<li>MOAIのAI担当者（SEOリサーチャー、ライター、SNSコピーライターなど8人）は、Claude Codeのサブエージェント定義ファイル（Markdown）が実体。<code>claude-code/agents/</code> にファイルを足せば、担当を増やせる</li>
+<li>2つの使い方がある：(1) 画面の担当表示も増やす（<code>docs/seed.js</code> を編集）、(2) 担当を「おまかせ」にして指示を積み、Claude Codeに指示の内容から選ばせる</li>
+<li>画面から担当を追加する機能はない。改造が前提なので、まず別フォルダに取得した試用環境で試すのが安全</li>
+</ul>
+<table><thead><tr><th>あなたの状況</th><th>次の一手</th></tr></thead><tbody>
+<tr><td>まだ動かしていない</td><td><a href="moai-windows-donyu-tejun.html">導入手順</a>で、まず8人のままローカル版を動かす</td></tr>
+<tr><td>8人で足りるか知りたい</td><td><a href="claude-code-marketing-jidoka-yarikata.html">8人それぞれの指示の書き方</a>を見る</td></tr>
+<tr><td>改造して使う・公開リポジトリを見たい</td><td><a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHubで入手</a>（MIT）</td></tr>
+</tbody></table></div>
+
+<p>MOAIの「AIチーム」画面には、戦略ディレクターのほかに、SEOリサーチャー、コンテンツライター、SNSコピーライター、競合アナリスト、グロース分析官、収益ファネル設計、動画・Reels企画の担当が並びます。自分の事業には別の役割がほしい、たとえば「メルマガ担当」「商品説明の校正担当」を足したい、という場面は必ず出てきます。</p>
+<p>MITライセンスのオープンソースであるMOAIは、自由に改造してよいと明記されています。この記事は、担当を増やすための手順を、リポジトリの構成に沿って整理したものです。コマンドや構成は、MOAIのリポジトリ（README、<code>docs/seed.js</code>、<code>claude-code/agents/</code>）で確認できる内容に基づいています。実際に改造する前に、最新のリポジトリの状態を確認してください。</p>
+
+<h2>担当の「実体」はどこにあるか</h2>
+<p>MOAIのAI担当者は、画面上の表示と、実際に仕事をするエージェント定義の2層でできています。</p>
+<div class="tw"><table><thead><tr><th>層</th><th>場所</th><th>役割</th></tr></thead><tbody>
+<tr><td>画面上の表示</td><td>初期データ <code>docs/seed.js</code> の <code>agents.items</code></td><td>担当の名前・説明・アイコン・出力物・割り当て先（backend）</td></tr>
+<tr><td>実際の仕事をする定義</td><td><code>claude-code/agents/*.md</code></td><td>Claude Codeのサブエージェントの指示書（役割・やること・出力形式）</td></tr>
+</tbody></table></div>
+<p>たとえば、SEOリサーチャーの画面表示は、割り当て先（backend）が <code>{ type: 'agent', target: 'moai-seo-researcher' }</code> になっています。画面上は「subagent: moai-seo-researcher」と表示され、実体は <code>claude-code/agents/moai-seo-researcher.md</code> です。戦略ディレクターだけは、割り当て先が「メインスレッド」で、Claude Code本体の処理が担当します。</p>
+<p>この2層のうち、仕事の質を決めるのはエージェント定義のほうです。画面の表示は、キューに担当名を出して見やすくするためのものといえます。</p>
+
+<h2>エージェント定義ファイルの形</h2>
+<p>同梱のSEOリサーチャーは、次のような構成です（抜粋）。ファイルの先頭に設定のブロックがあり、その下に指示書が続きます。</p>
+<pre><code>---
+name: moai-seo-researcher
+description: 検索需要のあるキーワード・競合の強さ・勝てる切り口を調べるリサーチ専門エージェント。…
+tools: WebSearch, WebFetch, Read, Write, Glob, Grep
+model: sonnet
+---
+
+あなたはSEOリサーチャーです。…（以下、やること・見方・出力の指示）</code></pre>
+<p>先頭ブロックの項目の意味は、次のとおりです。</p>
+<ul>
+<li><code>name</code>：エージェントの名前。ファイル名と揃えるのが分かりやすい。画面の割り当て先（target）はこの名前を指す</li>
+<li><code>description</code>：いつ呼ぶべきかの説明。Claude Codeが担当を選ぶときの手がかりになる。「どういう依頼のときに使うか」を具体的に書く</li>
+<li><code>tools</code>：使わせるツールの一覧。調べもの専用なら検索系だけ、書くだけなら読み書き系だけ、と絞る</li>
+<li><code>model</code>：使うモデルの指定</li>
+</ul>
+<p>サブエージェントの仕様（項目や挙動）は、Claude Code側で更新されることがあります。記述の細部は、Claude Codeの公式ドキュメントで確認してください。</p>
+<p>注意点として、<code>description</code> にコロン（<code>: </code>）を含める場合は、全体をダブルクォートで囲む必要があります。囲まないと先頭ブロックの解釈が壊れ、エージェントが読み込まれないことがあります。</p>
+
+<h2>手順：担当を1人増やす</h2>
+<p>例として、「メルマガ担当」を追加する流れを説明します。</p>
+<h3>手順0：試用環境を作る</h3>
+<p>改造は、普段使うデータとは別のフォルダで試します。リポジトリをもう一つ別の場所に取得し、そこで改造してください。ローカル版のデータは <code>data/</code> に保存されるため、フォルダを分ければデータも分かれます。取得方法は<a href="moai-windows-donyu-tejun.html">MOAIをWindowsに入れる手順</a>にあります。</p>
+<h3>手順1：エージェント定義を書く</h3>
+<p><code>claude-code/agents/</code> に、たとえば <code>moai-newsletter-writer.md</code> を作ります。最低限、次の内容を入れます。</p>
+<ol>
+<li>先頭ブロック（<code>name</code>、<code>description</code>、<code>tools</code>、<code>model</code>）</li>
+<li>役割の一文（「あなたはメルマガ担当です」）</li>
+<li>やること（箇条書きで、順番がわかるように）</li>
+<li>守ること（体験談を書かない、数字には出典、など）</li>
+<li>出力の形（件名の案を3つ、本文、末尾の確認事項など）</li>
+</ol>
+<p>守ることの欄には、<a href="moai-settings-mission-tone-kakikata.html">設定の書き方</a>で説明した運用ルールと同じ方針を入れておくと、担当ごとのぶれを防げます。特に、実体験の捏造や架空の人物の作成を禁じる一文は、文章を書く担当には必ず入れたいところです。</p>
+<h3>手順2：Claude Codeに読ませる</h3>
+<p>作った定義ファイルを、Claude Codeのエージェントフォルダにコピーします。Windowsでは、同梱のエージェントと同じ方法です。</p>
+<pre><code>xcopy /E /I claude-code\agents "%USERPROFILE%\.claude\agents"</code></pre>
+<p>macOSやLinuxでは <code>cp -r claude-code/agents/* ~/.claude/agents/</code> です。コピーしたあと、担当が呼ばれない場合は、フォルダにファイルが入っているかを最初に確認します。</p>
+<h3>手順3：画面にも担当を足す（任意）</h3>
+<p><code>docs/seed.js</code> の <code>agents.items</code> に、同じ形で1件足します。既存の担当を参考に、<code>id</code>、<code>name</code>、<code>role</code>、<code>avatar</code>、<code>desc</code>、<code>backend</code>、<code>outputs</code>、<code>enabled</code> を揃えます。</p>
+<pre><code>{
+  id: 'ag_newsletter', name: 'メルマガ担当', role: 'writing', avatar: '✉️',
+  desc: '承認済みの記事から、メルマガの件名案と本文を作る',
+  backend: { type: 'agent', target: 'moai-newsletter-writer' },
+  outputs: ['件名案', 'メルマガ本文'], enabled: true,
+}</code></pre>
+<p>ここで、<code>seed.js</code> は「初期データ」であることに注意してください。READMEには「<code>docs/seed.js</code> を書き換えると初期データを変えられます」とあります。すでに運用中のデータに対して、<code>seed.js</code> の変更がどう反映されるかは、READMEには書かれていません。そのため、運用中のデータに入れるのではなく、まず新しい試用環境で、担当が表示されることを確認してください。<code>data/*.json</code> を手で書き換えると壊れやすいので、おすすめしません。</p>
+
+<h2>画面を触らず、「おまかせ」で使う方法</h2>
+<p>画面の担当を増やさなくても、新しい担当を使う方法があります。「指示する」で担当を「おまかせ」にして積むと、Claude Codeが指示の内容から担当を選びます。<code>description</code> に「メルマガ」「件名」といった言葉を入れておけば、そうした依頼のときに、新しい担当が選ばれる見込みが高まります。</p>
+<p>この方法の利点は、画面側のコードを触らずに済むことです。欠点は、どの担当が呼ばれたかが画面の担当欄に出ないことと、選ばれ方がClaude Codeの判断に左右されることです。確実に呼びたい場合は、指示文に担当の名前を明記します。</p>
+
+<h2>どんな担当を足すと役に立つか</h2>
+<p>担当を増やす前に、まず既存の8人で足りないかを考えてください。担当が多いほど、使い分けの手間と、確認する量が増えます。足す価値があるのは、同じ種類の依頼を何度も繰り返す場面です。</p>
+<div class="tw"><table><thead><tr><th>追加の候補</th><th>向いている場面</th><th>tools の絞り方の例</th></tr></thead><tbody>
+<tr><td>校正・ファクトチェック担当</td><td>公開前に、数字・固有名詞・断定表現を洗い出したい</td><td>読み取りと検索のみ（本文を書き換えさせない）</td></tr>
+<tr><td>メルマガ担当</td><td>記事からメルマガの件名・本文を派生させたい</td><td>読み書きのみ</td></tr>
+<tr><td>FAQ作成担当</td><td>問い合わせの傾向からFAQの下書きを作りたい</td><td>読み書きのみ</td></tr>
+<tr><td>週次レビュー担当</td><td>実績の数字と、承認履歴をまとめたい</td><td>読み取りとnodeコマンド</td></tr>
+</tbody></table></div>
+<p>校正の担当のように「確認だけをして、書き換えない」役割は、<code>tools</code> から書き込み系を外しておくと、権限の面でも安全です。AIに任せる範囲の考え方は、<a href="ai-agent-marketing-makasete-ikenai-gyomu.html">AIエージェントに任せてはいけないマーケティング業務</a>が参考になります。</p>
+
+<h2>やってはいけない改造</h2>
+<ul>
+<li><strong>承認の仕組みを外す</strong>：承認されていないタスクを勝手に公開しない、というルールは、MOAIの根幹です。担当を足しても、公開の判断は人に残してください</li>
+<li><strong>tools を広く許可しすぎる</strong>：調べるだけの担当に、外部へ投稿できるツールまで許可しない</li>
+<li><strong>公開リポジトリに個人のデータを入れる</strong>：自分用に改造したものをフォーク（コピー）して公開する場合、<code>data/</code>（自分のデータ）や、機密に当たる内容を含めない。<code>data/</code> はリポジトリの管理対象外に設定されている</li>
+</ul>
+
+<h2>改造を共有する</h2>
+<p>MOAIはMITライセンスなので、改造したものを自分のリポジトリで公開することも、再配布することもできます。ライセンスの全文はリポジトリの <code>LICENSE</code> にあります。改良点を共有したい場合は、GitHubの機能（フォークや、改善の提案）を使うのが一般的です。</p>
+
+<h2>よくある質問</h2>
+<h3>Q. 画面から担当を追加できますか</h3>
+<p>現状の画面には、担当を追加する機能はありません。<code>claude-code/agents/</code> にエージェント定義を足し、必要なら <code>docs/seed.js</code> に表示用の定義を足す形になります。</p>
+<h3>Q. 担当を足しても呼ばれないときは、どこを見ますか</h3>
+<p>まず、定義ファイルが <code>~/.claude/agents/</code>（Windowsでは <code>%USERPROFILE%\.claude\agents</code>）に入っているかを確認します。次に、先頭ブロックの書式、特に <code>description</code> にコロンがある場合のダブルクォートを確認します。</p>
+<h3>Q. 同梱の8人を削除したり、名前を変えたりしていいですか</h3>
+<p>MITライセンスの範囲で自由に変更できます。ただし、割り当て先の名前（<code>target</code>）と定義ファイルの <code>name</code> が一致していないと、担当が呼ばれません。名前を変えるときは両方を揃えてください。</p>
+<h3>Q. 他のAI（ChatGPTなど）でも担当を増やせますか</h3>
+<p>エージェント定義はClaude Codeのサブエージェントの仕組みを使うため、自動実行はClaude Code前提です。ブラウザ版では、指示をコピーして貼る運用になるため、担当ごとの定義ファイルは働きません。担当名を依頼文に書き添える形になります。</p>
+<h3>Q. 担当が多いと、費用が増えますか</h3>
+<p>担当の数自体に費用はかかりません。ただし、実行のたびにAIの利用量は増えるため、使うAIサービスの料金体系に従って費用が増えることがあります。費用の考え方は<a href="ai-marketing-muryo-kakureta-cost.html">AIマーケティングを無料で始める本当の費用</a>で整理しています。</p>
+
+<h2>まずは8人のまま動かして、足りないところを見つける</h2>
+<p>最初から担当を増やすより、同梱の8人で一度運用を回し、足りない役割を見つけてから足すほうが、無駄がありません。ブラウザ版で流れを確認できます。</p>
+<p><a class="cta" href="../">MOAIをブラウザで開く（無料・登録不要）</a></p>
+<p>改造したい人は、<a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHubリポジトリ</a>から取得できます。依存パッケージはありません。役に立ったらスターを付けてもらえると、開発の励みになります。無料で足りるかの判断に迷う人は、<a href="ai-marketing-tool-muryo-yuryo-hantei-hub.html">判断基準4つの記事</a>から読んでください。</p>
+</article>
+<footer>© 2026 MOAI ・ <a href="./">ブログ一覧</a> ・ <a href="../">アプリを開く</a> ・ <a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHub</a> ・ <a href="https://solederlego8-a11y.github.io/">運営メディア一覧</a></footer>
+</div>
+</body>
+</html>

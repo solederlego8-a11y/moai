@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<!-- ga4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSXEBHJSG1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BSXEBHJSG1', { anonymize_ip: true });
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOAIの設定の書き方｜ミッション・トーン・禁止ワードの例文つき | MOAI ブログ</title>
+<meta name="description" content="MOAIの設定画面に書くミッション・トーン・禁止ワード・運用ルールの書き方を、例文つきで解説。AIへの依頼にどう引き継がれるかも実装に沿って説明する。">
+<link rel="canonical" href="https://solederlego8-a11y.github.io/moai/blog/moai-settings-mission-tone-kakikata.html">
+<meta property="og:title" content="MOAIの設定の書き方｜ミッション・トーン・禁止ワードの例文つき">
+<meta property="og:description" content="MOAIの設定画面に書くミッション・トーン・禁止ワード・運用ルールの書き方を、例文つきで解説。AIへの依頼にどう引き継がれるかも実装に沿って説明する。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://solederlego8-a11y.github.io/moai/blog/moai-settings-mission-tone-kakikata.html">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "MOAIの設定の書き方｜ミッション・トーン・禁止ワードの例文つき", "datePublished": "2026-10-13", "dateModified": "2026-10-13", "author": {"@type": "Organization", "name": "MOAI"}, "publisher": {"@type": "Organization", "name": "MOAI"}, "mainEntityOfPage": "https://solederlego8-a11y.github.io/moai/blog/moai-settings-mission-tone-kakikata.html"}
+</script>
+<style>
+:root{--bg:#f6f7f9;--paper:#fff;--ink:#1a1d23;--muted:#5b6472;--line:#e3e6eb;--accent:#2f6bff;--accent-soft:#eaf0ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--paper:#161a21;--ink:#e8ebf0;--muted:#9aa3b2;--line:#2a3140;--accent:#5b8cff;--accent-soft:#1b2740}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.9}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+header.top{display:flex;align-items:center;gap:12px;margin-bottom:28px;font-size:14px}
+header.top a{color:var(--muted);text-decoration:none}header.top a:hover{color:var(--accent)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px 28px}
+h1{font-size:26px;line-height:1.45;margin:0 0 8px}.meta{color:var(--muted);font-size:13px;margin:0 0 24px}
+h2{font-size:20px;margin:36px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}h3{font-size:16.5px;margin:24px 0 8px}
+p{margin:0 0 16px}ul,ol{margin:0 0 16px;padding-left:22px}li{margin:0 0 6px}
+.tldr{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 24px}.tldr ul{margin:6px 0 0}
+.tw{overflow-x:auto;margin:0 0 20px}table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--accent-soft)}
+.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font-weight:700;margin:8px 0 20px}
+a{color:var(--accent)}footer{margin-top:28px;color:var(--muted);font-size:13px}
+pre{background:var(--accent-soft);padding:12px 14px;border-radius:8px;overflow-x:auto;font-size:13px;line-height:1.6}code{font-size:.92em}</style>
+<!-- ga4-cv -->
+<script>
+if(typeof gtag==='function'){document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||a.hasAttribute('data-cv-tracked'))return;var h=a.href||'';var has=function(s){return h.indexOf(s)>-1;};var asp=has('a8.net')?'a8':(has('rakuten.co.jp')||has('r10.to'))?'rakuten':(has('amazon.co.jp')||has('amzn.'))?'amazon':'';if(asp){gtag('event','affiliate_click',{asp:asp,link_url:h,link_text:(a.innerText||'').trim().slice(0,80),page_path:location.pathname});}else if(has('buy.stripe.com')){gtag('event','begin_checkout',{link_url:h,page_path:location.pathname});}},true);document.addEventListener('submit',function(e){var f=e.target;gtag('event','generate_lead',{form_id:f.id||f.getAttribute('data-subject')||f.action||'',page_path:location.pathname});},true);}
+</script>
+<!-- faq-schema -->
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "設定を書かないとどうなりますか", "acceptedAnswer": {"@type": "Answer", "text": "初期値（トーン・禁止ワード・運用ルール）がそのまま使われます。ミッションは案内文のままなので、AIは方向を判断できず、出力が一般的な内容になりやすくなります。"}}, {"@type": "Question", "name": "設定を変えたら、過去の生成物にも反映されますか", "acceptedAnswer": {"@type": "Answer", "text": "反映されません。設定は、これから積む依頼に付くものです。過去の生成物は、必要なら差し戻しや再依頼で作り直します。"}}, {"@type": "Question", "name": "設定の内容は外部に送られますか", "acceptedAnswer": {"@type": "Answer", "text": "MOAI自体はデータを外部に送りません。ただし、ブラウザ版でコピーした依頼文をAIに貼り付けたり、ローカル版でClaude Codeを実行したりすると、設定の内容は使用するAIサービスに渡ります。機密情報は設定に書かない運用にしてください。"}}, {"@type": "Question", "name": "複数のメディアで設定を使い分けられますか", "acceptedAnswer": {"@type": "Answer", "text": "設定はMOAI全体で1セットです。メディアごとの違いは、チャネルのメモや、個別の指示に書いて補います。ローカル版なら、フォルダを分けて別々にMOAIを動かす方法もあります。"}}, {"@type": "Question", "name": "書いた設定をバックアップできますか", "acceptedAnswer": {"@type": "Answer", "text": "設定画面の「データを書き出す（JSON）」で、設定を含む全データを保存できます。ブラウザ版は特に、定期的な書き出しをおすすめします。"}}]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a href="../">🗿 MOAI</a><span>›</span><a href="./">ブログ</a></header>
+<article class="card">
+<h1>MOAIの設定の書き方｜ミッション・トーン・禁止ワードの例文つき</h1>
+<p class="meta">公開: 2026-10-13 ・ 更新: 2026-10-13 ・ 運営: MOAI 編集部（オープンソースのMOAI開発チーム）</p>
+
+<div class="tldr"><strong>30秒で判断</strong>
+<ul>
+<li>MOAIの「設定」には、ミッション・トーン＆マナー・禁止ワード・運用ルールの4項目がある。ここに書いた内容が、AIへの指示に毎回引き継がれる（毎回の依頼文に前提を書き直さなくてよくなる）</li>
+<li>書き方の原則は「判断に使える具体さ」。「良い記事を書く」ではなく「誰に・何を・どこまで言ってよいか」を書く</li>
+<li>引き継ぎの範囲は版で異なる。ローカル版のAI実行はミッションも読み込む。ブラウザ版の「キューをまとめてコピー」は、トーン・禁止ワード・運用ルールが付く（本記事執筆時点のコードに基づく）</li>
+</ul>
+<table><thead><tr><th>あなたの状況</th><th>次の一手</th></tr></thead><tbody>
+<tr><td>これから設定を書く</td><td>この記事の「例文」をコピーして、自分用に書き換える</td></tr>
+<tr><td>まだMOAIを開いていない</td><td><a href="../">ブラウザ版を開く</a>（登録不要）／<a href="moai-windows-donyu-tejun.html">ローカル版の導入手順</a></td></tr>
+<tr><td>AIに任せてよい範囲を決めたい</td><td><a href="ai-agent-marketing-makasete-ikenai-gyomu.html">任せてはいけない業務の線引き</a></td></tr>
+</tbody></table></div>
+
+<p>MOAIを開いて最初に迷うのが、設定画面の4つの入力欄です。「ミッションには何を書くのか」「禁止ワードは何を入れるのか」。初期値のままだと、AIの出力は毎回ばらつきます。この記事では、4項目の書き方を、例文つきで説明します。</p>
+<p>画面の項目名と、設定がAIにどう渡るかは、MOAIのソースコード（<code>docs/app.js</code>・<code>cli.js</code>・<code>docs/seed.js</code>）で確認した内容に沿っています。例文は、特定の実在の事業や人物を想定したものではなく、書き方を示すための架空のサンプルです。実在の運営者の実績や体験談として読まないでください。</p>
+
+<h2>設定が果たす役割：毎回の「前提」を1か所に</h2>
+<p>AIに依頼するとき、毎回ブランドの方針やトーン、避けたい表現を書き添えるのは手間がかかり、書き忘れた回に出力がぶれます。MOAIの設定画面は、この前提を1か所に書いておき、依頼のたびに自動で付ける仕組みです。</p>
+<p>初期状態で入っている値は、次のようなものです。</p>
+<ul>
+<li>ミッション：（何のためにメディアを運用するのかを書いてください、という案内文）</li>
+<li>トーン：ですます調・具体的な数字と事例を必ず含める・煽らない</li>
+<li>禁止ワード：絶対に稼げる／誰でも簡単に／確実に</li>
+<li>運用ルール：使っていない商品を「実際に使った」と書かない、架空の著者プロフィールや資格を作らない、引用元・参照URLを必ず記録する、他社記事の翻訳・要約ではなく独自の観点で再構成する</li>
+</ul>
+<p>初期値の運用ルールには、広告表記や体験談に関する注意が入っています。これは削除せず、自分の運用に合わせて追加する形をおすすめします。</p>
+
+<h2>どう渡るか：ブラウザ版とローカル版の違い</h2>
+<div class="tw"><table><thead><tr><th>場面</th><th>AIに渡る内容</th></tr></thead><tbody>
+<tr><td>ブラウザ版：「キューをまとめてコピー」</td><td>トーン、禁止ワード、運用ルール、各指示（担当・対象チャネル付き）</td></tr>
+<tr><td>ローカル版：Claude Codeによる実行（<code>node cli.js context</code> で前提を読み込む）</td><td>ミッション、トーン、禁止ワード、運用ルール、チャネル、KPI</td></tr>
+</tbody></table></div>
+<p>つまり、ブラウザ版でAIに貼り付ける場合、ミッションの欄は自動では付きません。ミッションの内容を依頼に反映させたいときは、トーンや運用ルールに要点を1行入れておくか、貼り付けるときに自分で書き足します。コードは更新される可能性があるため、気になる場合は<a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHubのリポジトリ</a>で最新の実装を確認してください。</p>
+
+<h2>書き方1：ミッション（何のために運用するか）</h2>
+<p>ミッションには、「誰の、どんな困りごとを、どう解決するメディアか」を書きます。会社理念のような抽象的な文章ではなく、記事や投稿の方向を決める判断材料になる書き方が効果的です。</p>
+<h3>弱い例と強い例</h3>
+<div class="tw"><table><thead><tr><th></th><th>例</th><th>問題点・良い点</th></tr></thead><tbody>
+<tr><td>弱い</td><td>役に立つ情報を発信して、多くの人に喜ばれるメディアにする</td><td>誰に何を、が無い。AIが方向を決められない</td></tr>
+<tr><td>強い</td><td>一人で小さな事業を運営している人が、週3時間の作業でSNSとブログを続けられるよう、手順と判断基準を具体的に伝える</td><td>対象・困りごと・提供するものが分かる</td></tr>
+</tbody></table></div>
+<p>ミッションは長くする必要はありません。2〜3文で、次の3点が入っていれば十分です。</p>
+<ol>
+<li>読者は誰か（職業・状況・知識レベル）</li>
+<li>読者の困りごとは何か</li>
+<li>このメディアは何を提供するか（手順、比較、判断基準など）</li>
+</ol>
+
+<h2>書き方2：トーン＆マナー</h2>
+<p>トーンには、文体と表現の癖を書きます。初期値の「ですます調・具体的な数字と事例を必ず含める・煽らない」は、そのまま使える良い出発点です。ここに、自分のメディアに合わせた条件を足します。</p>
+<ul>
+<li>文体：ですます調／である調。1文の長さの目安（例：1文は60字程度まで）</li>
+<li>人称：「私」を使うか、「編集部」とするか。実際に体験していないことを一人称で書かない</li>
+<li>専門用語：初出で言い換えを添える</li>
+<li>感情表現：断定や煽りを避ける（「必ず」「絶対」を使わない）</li>
+</ul>
+<p>例文：</p>
+<pre><code>ですます調。1文は60字程度まで。専門用語は初出で言い換えを添える。断定や煽りは避け、数字には出典を付ける。主語は「編集部」とし、体験していないことを一人称で書かない。</code></pre>
+<p>トーンの欄は1行の入力欄なので、長くなりすぎないようにします。細かい条件は、運用ルールの欄に移します。</p>
+
+<h2>書き方3：禁止ワード</h2>
+<p>禁止ワードは、AIの出力に含まれてはいけない表現を、カンマ区切りで並べる欄です。初期値は「絶対に稼げる, 誰でも簡単に, 確実に」です。ここに、自分の運用で避けたい表現を足します。</p>
+<h3>入れておくとよい種類</h3>
+<ul>
+<li><strong>効果の断定</strong>：絶対／必ず／100%／確実に／誰でも</li>
+<li><strong>根拠のない最上級</strong>：業界No.1／最安／日本一（根拠と出典があるものは別途扱う）</li>
+<li><strong>不安をあおる表現</strong>：今すぐ始めないと損／放置すると危険</li>
+<li><strong>扱う分野の規制に触れる表現</strong>：医療・金融・不動産など、分野ごとの法令・ガイドラインで言ってはいけない言い回し（具体の内容は所管官庁や業界団体の公式情報で確認する）</li>
+</ul>
+<p>例文：</p>
+<pre><code>絶対, 必ず, 確実に, 誰でも簡単に, 100%, 業界No.1, 今すぐ始めないと損</code></pre>
+<p>注意点は、禁止ワードの欄が万能ではないことです。AIの出力にその言葉が含まれていないか、承認の段階で人が確認することが前提です。言い換え（「間違いなく」「疑いなく」など）をすり抜ける可能性があるため、承認時の読み込みを省略しないでください。承認の基準づくりは<a href="sns-toukou-shonin-flow-muryo.html">SNS投稿の承認フローを無料で作る方法</a>が参考になります。</p>
+
+<h2>書き方4：運用ルール</h2>
+<p>運用ルールは、1行に1つ、AIに守らせたい決まりを書く欄です。最も重要な欄で、内容は「やってはいけないこと」と「必ずやること」に分けると整理できます。</p>
+<h3>やってはいけないこと（例）</h3>
+<ul>
+<li>使っていない商品やサービスを「実際に使った」と書かない</li>
+<li>架空の人物、顧客の声、資格、実績を作らない</li>
+<li>確認できていない数字や固有名詞を書かない</li>
+<li>他社の記事の翻訳・要約で済ませない</li>
+</ul>
+<h3>必ずやること（例）</h3>
+<ul>
+<li>数字・制度・価格には、出典のURLと確認日を付ける</li>
+<li>広告・提携の関係があるリンクには、その旨を明記する</li>
+<li>不確かな点は、断定せずに「公式サイトで要確認」と書く</li>
+<li>公開前に人が全文を読む前提で、確認が必要な箇所を一覧にして末尾に付ける</li>
+</ul>
+<p>初期値のルールは、実体験の捏造や架空の著者プロフィールを禁じるものです。こうしたルールを、AIに毎回読ませることで、承認のときに見落としやすい種類の問題を減らせます。ただし、ルールが書いてあっても、AIが守りきれない場合はあります。最終的な確認は人が行います。何を人に残すかは<a href="ai-agent-marketing-makasete-ikenai-gyomu.html">AIエージェントに任せてはいけないマーケティング業務</a>で詳しく書いています。</p>
+
+<h2>設定の例：まとめて見る</h2>
+<p>以上を組み合わせた、架空の事業を想定した設定例です。数字や固有名詞は意図的に入れていません。自分の運用に合わせて書き換えてください。</p>
+<div class="tw"><table><thead><tr><th>項目</th><th>例</th></tr></thead><tbody>
+<tr><td>ミッション</td><td>一人で小さな事業を運営している人が、週3時間の作業でブログとSNSを続けられるよう、手順と判断基準を具体的に伝える。</td></tr>
+<tr><td>トーン</td><td>ですます調。1文は60字程度まで。専門用語は初出で言い換えを添える。断定や煽りは避ける。</td></tr>
+<tr><td>禁止ワード</td><td>絶対, 必ず, 確実に, 誰でも簡単に, 100%, 業界No.1</td></tr>
+<tr><td>運用ルール</td><td>（1行ずつ）使っていないものを「使った」と書かない／架空の人物・実績を作らない／数字には出典URLと確認日を付ける／広告の関係があるリンクには明記する／不確かな点は「公式サイトで要確認」と書く</td></tr>
+</tbody></table></div>
+
+<h2>設定を育てる：月1回の見直し</h2>
+<p>設定は、一度書いて終わりではありません。承認キューで差し戻しをするたびに、同じ種類の指摘が繰り返されていないかを見て、ルールに追加します。</p>
+<ol>
+<li>差し戻しの理由を、1か月分ざっと見返す</li>
+<li>同じ理由が2回以上あれば、運用ルールに1行足す</li>
+<li>AIの出力に出てきて気になった言い回しを、禁止ワードに足す</li>
+<li>ルールが増えすぎて矛盾していないかを確認し、古いものを削る</li>
+</ol>
+<p>運用ループ全体での位置づけは、<a href="ai-marketing-unyo-loop-muryo.html">AIマーケティングの運用ループを無料で回す手順</a>で説明しています。</p>
+
+<h2>よくある書き間違いと直し方</h2>
+<div class="tw"><table><thead><tr><th>書き間違い</th><th>起きること</th><th>直し方</th></tr></thead><tbody>
+<tr><td>ミッションが「いい記事を書く」のような一般論</td><td>AIが方向を決められず、無難で似たような出力になる</td><td>読者・困りごと・提供するものの3点を入れる</td></tr>
+<tr><td>運用ルールが長すぎて10項目を超える</td><td>項目同士が矛盾したり、重要なルールが埋もれる</td><td>最も事故につながる5〜7項目に絞る</td></tr>
+<tr><td>禁止ワードに、必要な語まで入れてしまう</td><td>自然な文章が書けず、不自然な言い換えが増える</td><td>断定表現と、規制に触れる語に絞る</td></tr>
+<tr><td>トーンに「親しみやすく、かつ専門的に」など相反する指示</td><td>出力のたびに寄り方が変わる</td><td>文体・文の長さ・人称など、判定できる条件で書く</td></tr>
+<tr><td>機密や個人情報を設定に書く</td><td>依頼のたびに、使うAIサービスへ渡る</td><td>設定には方針だけを書き、機密は入れない</td></tr>
+</tbody></table></div>
+<p>ルールは「守れたかどうかを人が確認できる形」で書くのがコツです。「読者に寄り添う」は確認が難しいのに対し、「専門用語は初出で言い換えを添える」は確認できます。承認のときに照らし合わせられる書き方にしておくと、差し戻しの理由も明確になります。</p>
+<h2>設定を書く前の下準備：3つの問い</h2>
+<p>白紙の欄を前にして手が止まる場合は、次の3つの問いに、短くメモで答えてから書き始めると進みます。</p>
+<ol>
+<li>このメディアの読者に、実際に会ったら最初に何と声をかけるか（トーンのヒントになる）</li>
+<li>過去に、公開してから後悔した（または、公開前に気づいて止めた）表現は何か（禁止ワードと運用ルールの種になる）</li>
+<li>AIに絶対に任せたくない判断は何か（運用ルールの「必ず人が確認する」の項目になる）</li>
+</ol>
+<p>答えの一部は、そのまま設定欄の文章になります。書いた後で、承認キューに最初の生成物が戻ってきたら、設定のどこが効いていて、どこが効いていないかを見比べてみてください。足りない部分が、次に書き足す1行です。
+</p>
+<h2>よくある質問</h2>
+<h3>Q. 設定を書かないとどうなりますか</h3>
+<p>初期値（トーン・禁止ワード・運用ルール）がそのまま使われます。ミッションは案内文のままなので、AIは方向を判断できず、出力が一般的な内容になりやすくなります。</p>
+<h3>Q. 設定を変えたら、過去の生成物にも反映されますか</h3>
+<p>反映されません。設定は、これから積む依頼に付くものです。過去の生成物は、必要なら差し戻しや再依頼で作り直します。</p>
+<h3>Q. 設定の内容は外部に送られますか</h3>
+<p>MOAI自体はデータを外部に送りません。ただし、ブラウザ版でコピーした依頼文をAIに貼り付けたり、ローカル版でClaude Codeを実行したりすると、設定の内容は使用するAIサービスに渡ります。機密情報は設定に書かない運用にしてください。</p>
+<h3>Q. 複数のメディアで設定を使い分けられますか</h3>
+<p>設定はMOAI全体で1セットです。メディアごとの違いは、チャネルのメモや、個別の指示に書いて補います。ローカル版なら、フォルダを分けて別々にMOAIを動かす方法もあります。</p>
+<h3>Q. 書いた設定をバックアップできますか</h3>
+<p>設定画面の「データを書き出す（JSON）」で、設定を含む全データを保存できます。ブラウザ版は特に、定期的な書き出しをおすすめします。</p>
+
+<h2>まず自分の設定を書いてみる</h2>
+<p>設定は、MOAIを開いてすぐに書けます。ブラウザ版なら登録も要りません。</p>
+<p><a class="cta" href="../">MOAIをブラウザで開く（無料・登録不要）</a></p>
+<p>AIを自動実行したい場合は、<a href="moai-windows-donyu-tejun.html">導入手順</a>を参照してください。設定の仕組みはソースコードでも確認できます。<a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHubリポジトリ</a>で公開していますので、役に立ったらスターを付けてもらえると開発の励みになります。無料で足りるか迷っている段階の人は、<a href="ai-marketing-tool-muryo-yuryo-hantei-hub.html">判断基準4つの記事</a>から読んでください。</p>
+</article>
+<footer>© 2026 MOAI ・ <a href="./">ブログ一覧</a> ・ <a href="../">アプリを開く</a> ・ <a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHub</a> ・ <a href="https://solederlego8-a11y.github.io/">運営メディア一覧</a></footer>
+</div>
+</body>
+</html>
