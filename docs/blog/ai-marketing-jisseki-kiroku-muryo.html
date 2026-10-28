@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<!-- ga4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSXEBHJSG1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BSXEBHJSG1', { anonymize_ip: true });
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIマーケティングの実績を無料で一元記録する方法｜フォロワー・PV・収益の記録項目 | MOAI ブログ</title>
+<meta name="description" content="AIマーケティングの実績（フォロワー・PV・収益）を無料で一元記録する方法。記録項目と頻度、MOAIの実績記録の仕様、CLIの記録例、週1回5分の手順、スプレッドシートとの判断表を解説する。">
+<link rel="canonical" href="https://solederlego8-a11y.github.io/moai/blog/ai-marketing-jisseki-kiroku-muryo.html">
+<meta property="og:title" content="AIマーケティングの実績を無料で一元記録する方法｜フォロワー・PV・収益の記録項目">
+<meta property="og:description" content="AIマーケティングの実績（フォロワー・PV・収益）を無料で一元記録する方法。記録項目と頻度、MOAIの実績記録の仕様、週1回5分の手順を解説する。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://solederlego8-a11y.github.io/moai/blog/ai-marketing-jisseki-kiroku-muryo.html">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article","image":"https://solederlego8-a11y.github.io/moai/assets/og-default.png", "headline": "AIマーケティングの実績を無料で一元記録する方法｜フォロワー・PV・収益の記録項目", "datePublished": "2026-10-28", "dateModified": "2026-10-28", "author": {"@type": "Organization", "name": "MOAI"}, "publisher": {"@type": "Organization", "name": "MOAI"}, "mainEntityOfPage": "https://solederlego8-a11y.github.io/moai/blog/ai-marketing-jisseki-kiroku-muryo.html"}
+</script>
+<style>
+:root{--bg:#f6f7f9;--paper:#fff;--ink:#1a1d23;--muted:#5b6472;--line:#e3e6eb;--accent:#2f6bff;--accent-soft:#eaf0ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--paper:#161a21;--ink:#e8ebf0;--muted:#9aa3b2;--line:#2a3140;--accent:#5b8cff;--accent-soft:#1b2740}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.9}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+header.top{display:flex;align-items:center;gap:12px;margin-bottom:28px;font-size:14px}
+header.top a{color:var(--muted);text-decoration:none}header.top a:hover{color:var(--accent)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px 28px}
+h1{font-size:26px;line-height:1.45;margin:0 0 8px}.meta{color:var(--muted);font-size:13px;margin:0 0 24px}
+h2{font-size:20px;margin:36px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}h3{font-size:16.5px;margin:24px 0 8px}
+p{margin:0 0 16px}ul,ol{margin:0 0 16px;padding-left:22px}li{margin:0 0 6px}
+.tldr{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 24px}.tldr ul{margin:6px 0 0}
+.tw{overflow-x:auto;margin:0 0 20px}table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--accent-soft)}
+.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font-weight:700;margin:8px 0 20px}
+a{color:var(--accent)}footer{margin-top:28px;color:var(--muted);font-size:13px}
+pre{background:var(--accent-soft);padding:12px 14px;border-radius:8px;overflow-x:auto;font-size:13px;line-height:1.6}code{font-size:.92em}</style>
+<!-- ga4-cv -->
+<script>
+if(typeof gtag==='function'){document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||a.hasAttribute('data-cv-tracked'))return;var h=a.href||'';var has=function(s){return h.indexOf(s)>-1;};var asp=has('a8.net')?'a8':(has('rakuten.co.jp')||has('r10.to'))?'rakuten':(has('amazon.co.jp')||has('amzn.'))?'amazon':'';if(asp){gtag('event','affiliate_click',{asp:asp,link_url:h,link_text:(a.innerText||'').trim().slice(0,80),page_path:location.pathname});}else if(has('buy.stripe.com')){gtag('event','begin_checkout',{link_url:h,page_path:location.pathname});}},true);document.addEventListener('submit',function(e){var f=e.target;gtag('event','generate_lead',{form_id:f.id||f.getAttribute('data-subject')||f.action||'',page_path:location.pathname});},true);}
+</script>
+<!-- faq-schema -->
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "実績は毎日記録したほうがいいですか", "acceptedAnswer": {"@type": "Answer", "text": "毎日である必要はありません。最初は週1回、同じ曜日に記録すれば、推移は十分に読めます。毎日にすると記録が負担になって途切れやすくなります。"}}, {"@type": "Question", "name": "同じ日付で2回記録するとどうなりますか", "acceptedAnswer": {"@type": "Answer", "text": "MOAIでは日付ごとに1レコードで、同じ日付の記録は上書きされます。入力した項目の値が更新され、入力しなかった項目はそのまま残ります。"}}, {"@type": "Question", "name": "過去の日付の実績を入れると、チャネルの現在値が書き換わりますか", "acceptedAnswer": {"@type": "Answer", "text": "書き換わりません。チャネルの現在値に同期されるのは、記録済みの日付のうち最新の日付を保存したときだけです。過去の日付を後から補う場合は、現在値は変わりません。"}}, {"@type": "Question", "name": "ダッシュボードの「今月の収益」は月の合計ですか", "acceptedAnswer": {"@type": "Answer", "text": "月の合計を自動で集計する機能ではありません。画面は、最新の日付の記録に入れた収益額をそのまま表示し、月間収益目標に対する割合を出します。月の累計額を入力する運用にすると、達成率が意味を持ちます。"}}, {"@type": "Question", "name": "ブラウザ版で記録した実績はどこに保存されますか", "acceptedAnswer": {"@type": "Answer", "text": "そのブラウザの中にだけ保存されます。ブラウザの履歴やサイトデータを消すと一緒に消えるため、設定画面の書き出しで定期的にJSONを保存してください。"}}]}
+</script>
+<meta property="og:image" content="https://solederlego8-a11y.github.io/moai/assets/og-default.png">
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a href="../">🗿 MOAI</a><span>›</span><a href="./">ブログ</a></header>
+<article class="card">
+<h1>AIマーケティングの実績を無料で一元記録する方法｜フォロワー・PV・収益の記録項目</h1>
+<p class="meta">公開: 2026-10-28 ・ 更新: 2026-10-28 ・ 運営: MOAI 編集部（オープンソースのMOAI開発チーム）</p>
+
+<div class="tldr"><strong>30秒で判断</strong>
+<ul>
+<li>記録するのは「媒体ごとの数値（フォロワー数、ブログならPV）」と「収益（円）」の2種類で足りる。頻度は週1回、同じ曜日に行う</li>
+<li>MOAIは日付ごとに1レコードで、チャネルごとの数値と収益を入力できる。ダッシュボードで推移グラフと月間収益目標に対する割合が見られる</li>
+<li>「今月の収益」は自動集計ではなく、最新の記録に入れた額の表示。月の累計額を入力する運用にすると読みやすい</li>
+</ul>
+<table><thead><tr><th>あなたの状況</th><th>向く道具</th></tr></thead><tbody>
+<tr><td>媒体が少なく、数値を1か所で眺めたい</td><td>MOAIの実績記録</td></tr>
+<tr><td>流入元別・記事別など、細かい分析をしたい</td><td>スプレッドシート（または各媒体の分析画面）</td></tr>
+<tr><td>他人と同時に編集・共有したい</td><td>スプレッドシート（MOAIは1人用）</td></tr>
+</tbody></table></div>
+
+<p>ブログ、X、Instagramなど複数の媒体を運用すると、数字が媒体ごとの画面に散らばります。散らばったままだと、「どの施策のあとに伸びたか」を振り返れません。この記事では、実績を1か所にまとめる記録項目と頻度、MOAIで記録するときの仕様と手順、スプレッドシートとの使い分けを整理します。</p>
+<p>MOAIの仕様は、README、<code>docs/app.js</code>、<code>cli.js</code> で確認できた内容だけを書いています。</p>
+
+<h2>実績の一元記録とは何か</h2>
+<p>実績の一元記録とは、複数媒体の数値と収益を、同じ日付の軸で1か所に残すことです。目的は、運用ループの最後の「計測」を次の「計画」に渡せる形にすることにあります。ループ全体は<a href="ai-marketing-unyo-loop-muryo.html">AIマーケティングの運用ループを無料で回す手順</a>で説明しています。</p>
+<p>各媒体の分析画面は詳しい反面、媒体をまたいだ比較には向きません。一元記録は詳細ではなく、「推移の概観」を担当させるのが現実的です。</p>
+
+<h2>記録すべき項目と頻度は</h2>
+<p>最初は項目を絞ります。項目が多いと更新が続かず、途切れた記録は比較に使えません。</p>
+<div class="tw"><table><thead><tr><th>項目</th><th>記録する値</th><th>記録のしかた</th></tr></thead><tbody>
+<tr><td>SNSの数値</td><td>フォロワー数</td><td>その日の時点の総数</td></tr>
+<tr><td>ブログの数値</td><td>PV数</td><td>集計期間を決めて固定（例：直近7日）</td></tr>
+<tr><td>収益</td><td>円</td><td>集計期間を決めて固定（例：その月の累計）</td></tr>
+</tbody></table></div>
+<p>頻度は、週1回で足ります。毎日記録すると負担が大きく、1日ごとの増減は偶然のぶれが多いため、判断材料としても弱くなります。曜日を固定すると、前週との比較がしやすくなります。</p>
+<p>注意点は、PVや収益の「集計期間」を毎回同じにすることです。ある週は7日分、別の週は28日分を入れると、グラフが比較できなくなります。</p>
+
+<h2>MOAIの実績記録の仕様</h2>
+<p>MOAIの「チャネル」画面の「実績を記録する」欄に、日付、登録済みチャネルごとの数値、収益（円）の入力欄が並びます。仕様は次のとおりです。</p>
+<div class="tw"><table><thead><tr><th>項目</th><th>仕様</th></tr></thead><tbody>
+<tr><td>記録の単位</td><td>日付ごとに1レコード</td></tr>
+<tr><td>入力できる値</td><td>チャネルごとの数値（ブログ種別の欄はPV数、それ以外はフォロワー数の表記）と、収益（円）</td></tr>
+<tr><td>同じ日付で保存したとき</td><td>既存のレコードを更新（上書き）。入力しなかった項目は残る</td></tr>
+<tr><td>数値を1つも入れずに保存</td><td>エラー（「数値を1つ以上入れてください」）</td></tr>
+<tr><td>チャネルの現在値への同期</td><td>記録済みの日付のうち最新の日付を保存したときだけ、チャネルのフォロワー数を更新。過去の日付を入れても現在値は変わらない</td></tr>
+<tr><td>ダッシュボードでの表示</td><td>登録チャネル（先頭6件まで）の推移グラフと収益の推移グラフ。月間収益目標を設定すると達成率を表示</td></tr>
+</tbody></table></div>
+<p>月間収益目標は、設定画面の「月間収益目標（円）」で入力します。設定画面の使い方は<a href="moai-settings-mission-tone-kakikata.html">MOAIの設定の書き方</a>にあります。</p>
+
+<h3>「今月の収益」の読み方に注意</h3>
+<p>ダッシュボードの「今月の収益」は、月内の記録を足し算した値ではありません。コード上は、最新の日付のレコードに入れた収益額を表示し、その額を月間収益目標で割って達成率を出しています。そのため、記録のたびに「その月の累計額」を入れる運用にすると、表示と実態が一致します。週ごとの増分を入れる運用にすると、達成率は実際より低く出ます。</p>
+<p>また、ダッシュボードのチャネル別グラフのタイトルは「チャネル別フォロワー推移」ですが、ブログ種別のチャネルにはPV数を入れる想定の欄です。数値の意味は、自分で統一して覚えておく必要があります。</p>
+
+<h2>コマンドで記録するには</h2>
+<p>ローカル版では、画面の代わりに <code>cli.js</code> のコマンドでも記録できます。AIに記録を任せるときや、スクリプトから呼ぶときに使えます。</p>
+<pre><code>node cli.js metric --date 2026-11-04 --ch_instagram 132 --revenueJpy 1500</code></pre>
+<p>チャネルの数値は、登録済みチャネルのIDをオプション名にして渡します。上の例の <code>ch_instagram</code> は、チャネルIDが <code>ch_instagram</code> の場合の書き方です。自分のチャネルIDは、チャネル画面の登録内容で確認してください。<code>--date</code> を省略すると、実行した日の日付で記録されます。同じ日付で再実行すると、そのレコードが更新されます。</p>
+<p>README上の運用ルールとして、<code>data/*.json</code> を手で書き換えず、<code>cli.js</code> 経由で読み書きする方針が示されています。ブラウザ版ではこのコマンドは使えません。</p>
+
+<h2>週1回5分の記録手順</h2>
+<ol>
+<li>曜日と時刻を決める（例：毎週月曜の朝）</li>
+<li>各媒体の画面から、フォロワー数とブログのPV（決めた集計期間）を見る</li>
+<li>収益の画面から、その月の累計額を見る</li>
+<li>MOAIの「チャネル」画面で日付を確認し、数値と収益を入力して「この日の実績を保存」</li>
+<li>ダッシュボードで、前週より動いたチャネルを1つだけ確認し、理由の仮説を一言メモする（承認キューやカレンダーの予定と見比べる）</li>
+</ol>
+<p>5番目が、記録を使うための最も重要な手順です。記録して終わりにせず、「その週に何を出したか」と数字を並べて見ると、次の計画に使えます。計画側の作り方は<a href="content-calendar-muryo-ai-shuji.html">ブログとSNSのコンテンツカレンダーを無料で作る手順</a>で説明しています。</p>
+
+<h2>ブラウザ版は書き出しが必要</h2>
+<p>ブラウザ版のデータは、そのブラウザの中にだけ保存されます。READMEにも、ブラウザの履歴やサイトデータを消すと一緒に消えること、設定画面から定期的に書き出すことが明記されています。実績は積み重ねてこそ価値が出るため、週1回の記録のあとに書き出す習慣をつけると安全です。ローカル版は自分のPCのファイル（<code>data/*.json</code>）に保存されます。保存先の違いは<a href="ai-marketing-tool-data-hozonsaki-kakunin.html">データ保存先を導入前に確認する方法</a>にまとめています。</p>
+
+<h2>スプレッドシートで足りる条件とMOAIが向く条件は</h2>
+<div class="tw"><table><thead><tr><th>比べる点</th><th>スプレッドシート</th><th>MOAIの実績記録</th></tr></thead><tbody>
+<tr><td>記録できる項目</td><td>自由に増やせる</td><td>チャネルごとの数値と収益（円）</td></tr>
+<tr><td>記事別・流入元別の記録</td><td>列を足せば可能</td><td>持たない</td></tr>
+<tr><td>推移グラフ</td><td>自分で作る</td><td>ダッシュボードに自動表示</td></tr>
+<tr><td>収益目標との比較</td><td>数式を組む</td><td>月間収益目標を入れると達成率を表示</td></tr>
+<tr><td>依頼・承認・カレンダーと同じ画面</td><td>別ファイル</td><td>同じ画面</td></tr>
+<tr><td>複数人での編集</td><td>共有設定で可能</td><td>1人用</td></tr>
+</tbody></table></div>
+<p>項目が少なく、「全体の推移を1枚で見たい」ならMOAI、「細かく切り分けて分析したい」ならスプレッドシートが向きます。MOAIで始めて、足りなくなったら書き出して移す、という進め方もできます。移行前の確認項目は<a href="ai-marketing-tool-kaiyaku-mae-data-ikou.html">乗り換え前チェックリスト</a>にあります。
+
+</p>
+<h2>よくある質問</h2>
+<h3>Q. 実績は毎日記録したほうがいいですか</h3>
+<p>毎日である必要はありません。最初は週1回、同じ曜日に記録すれば、推移は十分に読めます。毎日にすると記録が負担になって途切れやすくなります。</p>
+<h3>Q. 同じ日付で2回記録するとどうなりますか</h3>
+<p>MOAIでは日付ごとに1レコードで、同じ日付の記録は上書きされます。入力した項目の値が更新され、入力しなかった項目はそのまま残ります。</p>
+<h3>Q. 過去の日付の実績を入れると、チャネルの現在値が書き換わりますか</h3>
+<p>書き換わりません。チャネルの現在値に同期されるのは、記録済みの日付のうち最新の日付を保存したときだけです。過去の日付を後から補う場合は、現在値は変わりません。</p>
+<h3>Q. ダッシュボードの「今月の収益」は月の合計ですか</h3>
+<p>月の合計を自動で集計する機能ではありません。画面は、最新の日付の記録に入れた収益額をそのまま表示し、月間収益目標に対する割合を出します。月の累計額を入力する運用にすると、達成率が意味を持ちます。</p>
+<h3>Q. ブラウザ版で記録した実績はどこに保存されますか</h3>
+<p>そのブラウザの中にだけ保存されます。ブラウザの履歴やサイトデータを消すと一緒に消えるため、設定画面の書き出しで定期的にJSONを保存してください。</p>
+
+<h2>まず今週の数字を1回記録してみる</h2>
+<p>最初の1回は、現在の数字を入れるだけで始められます。ブラウザ版なら登録は要りません。</p>
+<p><a class="cta" href="../">MOAIをブラウザで開く（無料・登録不要）</a></p>
+<p>ローカル版の入れ方は<a href="moai-windows-donyu-tejun.html">MOAIをWindowsに入れる手順</a>、コードは<a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHubリポジトリ</a>（MIT）で確認できます。無料で足りるか迷う段階なら、<a href="ai-marketing-tool-muryo-yuryo-hantei-hub.html">判断基準4つの記事</a>から読んでください。</p>
+</article>
+<footer>© 2026 MOAI ・ <a href="./">ブログ一覧</a> ・ <a href="../">アプリを開く</a> ・ <a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHub</a> ・ <a href="https://solederlego8-a11y.github.io/">運営メディア一覧</a></footer>
+</div>
+</body>
+</html>
