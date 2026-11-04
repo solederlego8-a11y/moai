@@ -20,7 +20,7 @@ gtag('config', 'G-BSXEBHJSG1', { anonymize_ip: true });
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://solederlego8-a11y.github.io/moai/blog/moai-ai-tantosha-tsuika-customize.html">
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "Article", "headline": "MOAIのAI担当者を増やす方法｜エージェント定義の追加と割り当て", "datePublished": "2026-10-13", "dateModified": "2026-10-13", "author": {"@type": "Organization", "name": "MOAI"}, "publisher": {"@type": "Organization", "name": "MOAI"}, "mainEntityOfPage": "https://solederlego8-a11y.github.io/moai/blog/moai-ai-tantosha-tsuika-customize.html"}
+{"@context": "https://schema.org", "@type": "Article","image":"https://solederlego8-a11y.github.io/moai/assets/og-default.png", "headline": "MOAIのAI担当者を増やす方法｜エージェント定義の追加と割り当て", "datePublished": "2026-10-13", "dateModified": "2026-10-13", "author": {"@type": "Organization", "name": "MOAI"}, "publisher": {"@type": "Organization", "name": "MOAI"}, "mainEntityOfPage": "https://solederlego8-a11y.github.io/moai/blog/moai-ai-tantosha-tsuika-customize.html"}
 </script>
 <style>
 :root{--bg:#f6f7f9;--paper:#fff;--ink:#1a1d23;--muted:#5b6472;--line:#e3e6eb;--accent:#2f6bff;--accent-soft:#eaf0ff}
@@ -46,6 +46,7 @@ if(typeof gtag==='function'){document.addEventListener('click',function(e){var a
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "画面から担当を追加できますか", "acceptedAnswer": {"@type": "Answer", "text": "現状の画面には、担当を追加する機能はありません。claude-code/agents/ にエージェント定義を足し、必要なら docs/seed.js に表示用の定義を足す形になります。"}}, {"@type": "Question", "name": "担当を足しても呼ばれないときは、どこを見ますか", "acceptedAnswer": {"@type": "Answer", "text": "まず、定義ファイルが ~/.claude/agents/（Windowsでは %USERPROFILE%\\.claude\\agents）に入っているかを確認します。次に、先頭ブロックの書式、特に description にコロンがある場合のダブルクォートを確認します。"}}, {"@type": "Question", "name": "同梱の8人を削除したり、名前を変えたりしていいですか", "acceptedAnswer": {"@type": "Answer", "text": "MITライセンスの範囲で自由に変更できます。ただし、割り当て先の名前（target）と定義ファイルの name が一致していないと、担当が呼ばれません。名前を変えるときは両方を揃えてください。"}}, {"@type": "Question", "name": "他のAI（ChatGPTなど）でも担当を増やせますか", "acceptedAnswer": {"@type": "Answer", "text": "エージェント定義はClaude Codeのサブエージェントの仕組みを使うため、自動実行はClaude Code前提です。ブラウザ版では、指示をコピーして貼る運用になるため、担当ごとの定義ファイルは働きません。担当名を依頼文に書き添える形になります。"}}, {"@type": "Question", "name": "担当が多いと、費用が増えますか", "acceptedAnswer": {"@type": "Answer", "text": "担当の数自体に費用はかかりません。ただし、実行のたびにAIの利用量は増えるため、使うAIサービスの料金体系に従って費用が増えることがあります。費用の考え方はAIマーケティングを無料で始める本当の費用で整理しています。"}}]}
 </script>
+<meta property="og:image" content="https://solederlego8-a11y.github.io/moai/assets/og-default.png">
 </head>
 <body>
 <div class="wrap">

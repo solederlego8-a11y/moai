@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<!-- ga4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSXEBHJSG1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BSXEBHJSG1', { anonymize_ip: true });
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOAIのAI自動実行の権限｜「おまかせ」と「すべて許可」の違いと選び方 | MOAI ブログ</title>
+<meta name="description" content="MOAIのローカル版でAIに自動実行させるときの権限プリセット「おまかせ」と「すべて許可」の違いを、実際の起動引数から解説。許可範囲の比較表、作業別の選び方、承認キューとの関係、ログイン手順まで。">
+<link rel="canonical" href="https://solederlego8-a11y.github.io/moai/blog/moai-ai-jikko-kengen-preset-erabikata.html">
+<meta property="og:title" content="MOAIのAI自動実行の権限｜「おまかせ」と「すべて許可」の違いと選び方">
+<meta property="og:description" content="MOAIのローカル版の権限プリセット「おまかせ」と「すべて許可」の違いを、起動引数から解説。許可範囲の比較表と作業別の選び方を載せています。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://solederlego8-a11y.github.io/moai/blog/moai-ai-jikko-kengen-preset-erabikata.html">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article","image":"https://solederlego8-a11y.github.io/moai/assets/og-default.png", "headline": "MOAIのAI自動実行の権限｜「おまかせ」と「すべて許可」の違いと選び方", "datePublished": "2026-11-04", "dateModified": "2026-11-04", "author": {"@type": "Organization", "name": "MOAI"}, "publisher": {"@type": "Organization", "name": "MOAI"}, "mainEntityOfPage": "https://solederlego8-a11y.github.io/moai/blog/moai-ai-jikko-kengen-preset-erabikata.html"}
+</script>
+<style>
+:root{--bg:#f6f7f9;--paper:#fff;--ink:#1a1d23;--muted:#5b6472;--line:#e3e6eb;--accent:#2f6bff;--accent-soft:#eaf0ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--paper:#161a21;--ink:#e8ebf0;--muted:#9aa3b2;--line:#2a3140;--accent:#5b8cff;--accent-soft:#1b2740}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.9}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+header.top{display:flex;align-items:center;gap:12px;margin-bottom:28px;font-size:14px}
+header.top a{color:var(--muted);text-decoration:none}header.top a:hover{color:var(--accent)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px 28px}
+h1{font-size:26px;line-height:1.45;margin:0 0 8px}.meta{color:var(--muted);font-size:13px;margin:0 0 24px}
+h2{font-size:20px;margin:36px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}h3{font-size:16.5px;margin:24px 0 8px}
+p{margin:0 0 16px}ul,ol{margin:0 0 16px;padding-left:22px}li{margin:0 0 6px}
+.tldr{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 24px}.tldr ul{margin:6px 0 0}
+.tw{overflow-x:auto;margin:0 0 20px}table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--accent-soft)}
+.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font-weight:700;margin:8px 0 20px}
+a{color:var(--accent)}footer{margin-top:28px;color:var(--muted);font-size:13px}
+pre{background:var(--accent-soft);padding:12px 14px;border-radius:8px;overflow-x:auto;font-size:13px;line-height:1.6}code{font-size:.92em}</style>
+<!-- ga4-cv -->
+<script>
+if(typeof gtag==='function'){document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||a.hasAttribute('data-cv-tracked'))return;var h=a.href||'';var has=function(s){return h.indexOf(s)>-1;};var asp=has('a8.net')?'a8':(has('rakuten.co.jp')||has('r10.to'))?'rakuten':(has('amazon.co.jp')||has('amzn.'))?'amazon':'';if(asp){gtag('event','affiliate_click',{asp:asp,link_url:h,link_text:(a.innerText||'').trim().slice(0,80),page_path:location.pathname});}else if(has('buy.stripe.com')){gtag('event','begin_checkout',{link_url:h,page_path:location.pathname});}},true);document.addEventListener('submit',function(e){var f=e.target;gtag('event','generate_lead',{form_id:f.id||f.getAttribute('data-subject')||f.action||'',page_path:location.pathname});},true);}
+</script>
+<!-- faq-schema -->
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "迷ったら「おまかせ」と「すべて許可」のどちらを選べばいいですか", "acceptedAnswer": {"@type": "Answer", "text": "「おまかせ」を選んでください。MOAIの既定値で、調べもの・執筆・データ更新の範囲に絞られています。「すべて許可」はブラウザ操作を伴う投稿まで任せたい場合だけで足ります。"}}, {"@type": "Question", "name": "「すべて許可」にすると、承認前の記事が勝手に公開されますか", "acceptedAnswer": {"@type": "Answer", "text": "MOAIの設計とスキルの手順では、承認されていないものは公開しないと定められています。ただしこれはAIへの指示であり、「すべて許可」では権限の確認自体が省かれるため、技術的な歯止めはありません。"}}, {"@type": "Question", "name": "ブラウザ版にも権限プリセットはありますか", "acceptedAnswer": {"@type": "Answer", "text": "ありません。権限プリセットはローカル版のサーバーがClaude Codeを起動するときの設定です。ブラウザ版は、指示をコピーしてお使いのAIに貼り付ける使い方になります。"}}, {"@type": "Question", "name": "プリセットは実行のたびに選び直せますか", "acceptedAnswer": {"@type": "Answer", "text": "選べます。「指示する」画面の「AIに実行させる」ボタンの横にあるプルダウンで、実行ごとに切り替えられます。未知の値が渡された場合は「おまかせ」で動きます。"}}, {"@type": "Question", "name": "Claude Codeにログインしていないとどうなりますか", "acceptedAnswer": {"@type": "Answer", "text": "画面にログインの案内が出て、実行できません。Windowsなら login-claude.bat、macOS・Linuxなら node login.js を一度だけ実行してください。"}}]}
+</script>
+<meta property="og:image" content="https://solederlego8-a11y.github.io/moai/assets/og-default.png">
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a href="../">🗿 MOAI</a><span>›</span><a href="./">ブログ</a></header>
+<article class="card">
+<h1>MOAIのAI自動実行の権限｜「おまかせ」と「すべて許可」の違いと選び方</h1>
+<p class="meta">公開: 2026-11-04 ・ 更新: 2026-11-04 ・ 運営: MOAI 編集部（オープンソースのMOAI開発チーム）</p>
+
+<div class="tldr"><strong>30秒で判断</strong>
+<ul>
+<li>迷ったら「おまかせ（推奨）」。調べもの・執筆・MOAIのデータ更新に必要な範囲だけを許可する既定のプリセットで、ほとんどの運用はこれで足りる</li>
+<li>「すべて許可」は、ブラウザ操作を伴う投稿までAIに任せたいときだけ。権限の確認が省かれるため、隔離された環境でない限り慎重に選ぶ</li>
+<li>どちらを選んでも、承認キューを通す設計は変わらない。ただし「すべて許可」では、その約束を守らせるのはAIへの指示だけになる</li>
+</ul>
+<table><thead><tr><th>やらせたい作業</th><th>選ぶプリセット</th></tr></thead><tbody>
+<tr><td>キーワード調査、記事や投稿文の下書き、競合調査</td><td>おまかせ</td></tr>
+<tr><td>実績の記録、レポートの保存</td><td>おまかせ</td></tr>
+<tr><td>ブラウザを操作して投稿・入力まで実行</td><td>すべて許可</td></tr>
+</tbody></table></div>
+
+<p>MOAIのローカル版には、画面のボタンひとつでClaude Codeを起動してAIに仕事をさせる機能があります。その際に選ぶのが「権限プリセット」です。この記事では、起動時の実際の引数をもとに、2つのプリセットで何が許可されるか、どの作業にどちらが向くかを整理します。</p>
+<p>内容は、MOAIのREADMEと <code>server.js</code> で確認できたことに限ります。Claude Code側の仕様は公式ドキュメント（確認日 2026-11-04）で確認した範囲のみ触れます。</p>
+
+<h2>権限プリセットとは何か</h2>
+<p>権限プリセットとは、MOAIのサーバーがClaude Codeを起動するときに付ける「許可の範囲」の設定です。<code>server.js</code> の <code>PERMISSION_PRESETS</code> に2種類が定義されていて、実行ごとに選べます。</p>
+<p>AIは画面の裏で <code>claude -p</code> として動くため、途中で人が「許可しますか？」に答える場面がありません。そのため、事前にどこまで任せるかを決めておく必要があります。これがプリセットの役割です。</p>
+
+<h2>「おまかせ」と「すべて許可」で許可される範囲は</h2>
+<p>「おまかせ」は編集許可モード（acceptEdits）に許可ツールの一覧を足したもの、「すべて許可」は権限確認を省くモード（bypassPermissions）です。</p>
+<div class="tw"><table><thead><tr><th>比べる点</th><th>おまかせ（推奨・既定）</th><th>すべて許可</th></tr></thead><tbody>
+<tr><td>画面上の表示名</td><td>おまかせ（推奨）</td><td>すべて許可（ブラウザ投稿まで任せる）</td></tr>
+<tr><td>起動引数（permission-mode）</td><td>acceptEdits</td><td>bypassPermissions</td></tr>
+<tr><td>追加で許可するツール</td><td>Bash(node *)、Read、Write、Edit、Glob、Grep、WebSearch、WebFetch、Task、Agent、Skill</td><td>指定なし（確認自体を省く）</td></tr>
+<tr><td>MOAIのデータ更新（node cli.js）</td><td>可（Bash(node *)）</td><td>可</td></tr>
+<tr><td>調べもの・ファイルの読み書き</td><td>可</td><td>可</td></tr>
+<tr><td>上記以外のコマンドやブラウザ操作</td><td>許可リストにないため実行されない見込み</td><td>確認なしで実行できる</td></tr>
+<tr><td>READMEでの位置づけ</td><td>node コマンドと調べもの・執筆だけを許可。既定</td><td>ブラウザ操作を伴う投稿まで任せる場合に選ぶ</td></tr>
+</tbody></table></div>
+<p>表の「実行されない見込み」は、Claude Code公式ドキュメント（確認日 2026-11-04）の記述にもとづく読み取りです。公式には、acceptEditsは作業フォルダ内のファイル編集などを自動承認し、それ以外のBashコマンドは確認が入ること、非対話の <code>claude -p</code> では許可ルールで事前承認する方法が示されています。MOAIの「おまかせ」で許可リスト外の操作がどう扱われるかは、実機で動かして確かめたわけではありません。</p>
+
+<h3>「すべて許可」のリスク</h3>
+<p>公式ドキュメント（確認日 2026-11-04）には、bypassPermissionsは権限の確認と安全確認を無効にし、コンテナや仮想マシンのような隔離環境での利用が想定されていること、プロンプトインジェクションや意図しない操作への保護がないことが書かれています。AIが読んだWebページの文面に誘導される可能性もゼロではないため、常用せず、必要な回だけ選ぶ運用が安全側です。</p>
+
+<h2>作業内容別の推奨プリセットは</h2>
+<p>作業が「文章や調査結果を作って承認キューに戻す」だけで終わるなら「おまかせ」で足ります。AI自身が外部サイトで操作を行う必要がある作業だけ、「すべて許可」の検討対象になります。</p>
+<div class="tw"><table><thead><tr><th>作業内容</th><th>推奨</th><th>理由</th></tr></thead><tbody>
+<tr><td>キーワード調査・競合調査</td><td>おまかせ</td><td>WebSearchとWebFetchが許可に含まれる</td></tr>
+<tr><td>記事・投稿文の下書き</td><td>おまかせ</td><td>Read、Write、Editが許可に含まれ、結果は承認キューに入る</td></tr>
+<tr><td>実績の記録、レポートの保存</td><td>おまかせ</td><td>node cli.js を使う作業で、Bash(node *) が許可されている</td></tr>
+<tr><td>週次の戦略立案（「今週の戦略を立てて」）</td><td>おまかせ</td><td>データを読み、タスクを積むだけ</td></tr>
+<tr><td>承認済みの投稿をブラウザ操作で公開</td><td>すべて許可</td><td>ブラウザ操作は「おまかせ」の許可リストにない</td></tr>
+<tr><td>よく分からない作業</td><td>おまかせ</td><td>足りなければ、あとから選び直せる</td></tr>
+</tbody></table></div>
+<p>投稿の自動化は、アカウント側のルールに触れる場合があります。AIに任せる前に、各サービスの利用規約を確認してください。</p>
+
+<h2>承認キューとの関係は｜承認なしに公開されないのか</h2>
+<p>READMEには「承認していないものが勝手に公開されることはありません」と明記されています。MOAIのスキル（<code>claude-code/skills/moai/SKILL.md</code>）でも、生成物は <code>status=review</code> で承認キューに戻し、承認されていないタスクを勝手に公開してはいけないと定められています。</p>
+<p>注意したいのは、この約束の強制のしかたです。コード上で確認できたのは、「おまかせ」では許可ツールが絞られていること、「すべて許可」では権限確認が省かれることまでです。承認前の公開を技術的に止める仕組みは、<code>server.js</code> の起動引数には見当たりません。「すべて許可」では、承認の順守はAIへの指示に依存します。だからこそ、公開を伴う作業は承認キューで内容を読んでから進めるのが前提になります。</p>
+<p>承認フローの考え方は<a href="sns-toukou-shonin-flow-muryo.html">SNS投稿の承認フローを無料で作る方法</a>で、人が残すべき判断は<a href="ai-agent-marketing-makasete-ikenai-gyomu.html">AIエージェントに任せてはいけないマーケティング業務</a>で整理しています。</p>
+
+<h2>ブラウザ版との違いは</h2>
+<p>権限プリセットはローカル版だけの設定です。ブラウザ版はAIを自動で動かさず、指示をまとめてコピーして、お使いのChatGPTやClaudeに貼り付ける使い方になります（READMEの比較表）。そのため、ブラウザ版では権限を選ぶ場面がありません。</p>
+<div class="tw"><table><thead><tr><th>比べる点</th><th>ブラウザ版</th><th>ローカル版</th></tr></thead><tbody>
+<tr><td>AIの自動実行</td><td>なし（コピーして貼る）</td><td>あり（画面のボタン）</td></tr>
+<tr><td>権限プリセット</td><td>なし</td><td>おまかせ／すべて許可</td></tr>
+<tr><td>必要なもの</td><td>URLを開くだけ</td><td>Node.js、Claude Code</td></tr>
+</tbody></table></div>
+<p>導入の手順は<a href="moai-windows-donyu-tejun.html">MOAIをWindowsに入れる手順</a>にまとめています。</p>
+
+<h2>実行前に必要なログイン手順は</h2>
+<p>ローカル版でAIを実行する前に、Claude Codeへのログインを一度だけ済ませます。READMEの手順は次のとおりです。</p>
+<ol>
+<li>Windowsは <code>login-claude.bat</code> をダブルクリック。macOS・Linuxは <code>node login.js</code> を実行する</li>
+<li>ブラウザが開くので「許可（Authorize）」を押す</li>
+<li>画面に <code>✔ ログイン済み</code> と出れば完了。状態は <code>node login.js --status</code> でいつでも確認できる</li>
+</ol>
+<p>READMEによると、デスクトップアプリでログイン済みでも、この手順は別途必要です。アプリは自分の中に認証を持っていて、外部から起動したAIには渡さないためです。</p>
+
+<h2>プリセットの切り替えかた</h2>
+<p>「指示する」画面の「▶ AIに実行させる」ボタンの横にプルダウンがあり、実行ごとに選べます。初期値は「おまかせ」です。サーバー側でも、未知のプリセット名が渡された場合は「おまかせ」に戻す実装になっています。キューにある指示は上から順に実行され、生成物は承認キューに入ります。</p>
+
+<h2>よくある質問</h2>
+<h3>Q. 迷ったら「おまかせ」と「すべて許可」のどちらを選べばいいですか</h3>
+<p>「おまかせ」を選んでください。MOAIの既定値で、調べもの・執筆・データ更新の範囲に絞られています。「すべて許可」はブラウザ操作を伴う投稿まで任せたい場合だけで足ります。</p>
+<h3>Q. 「すべて許可」にすると、承認前の記事が勝手に公開されますか</h3>
+<p>MOAIの設計とスキルの手順では、承認されていないものは公開しないと定められています。ただしこれはAIへの指示であり、「すべて許可」では権限の確認自体が省かれるため、技術的な歯止めはありません。</p>
+<h3>Q. ブラウザ版にも権限プリセットはありますか</h3>
+<p>ありません。権限プリセットはローカル版のサーバーがClaude Codeを起動するときの設定です。ブラウザ版は、指示をコピーしてお使いのAIに貼り付ける使い方になります。</p>
+<h3>Q. プリセットは実行のたびに選び直せますか</h3>
+<p>選べます。「指示する」画面の「AIに実行させる」ボタンの横にあるプルダウンで、実行ごとに切り替えられます。未知の値が渡された場合は「おまかせ」で動きます。</p>
+<h3>Q. Claude Codeにログインしていないとどうなりますか</h3>
+<p>画面にログインの案内が出て、実行できません。Windowsなら login-claude.bat、macOS・Linuxなら node login.js を一度だけ実行してください。</p>
+
+<h2>まずは「おまかせ」で1件実行してみる</h2>
+<p>最初は既定の「おまかせ」で、調べものや下書きを1件頼むところから始められます。ブラウザ版なら登録もインストールも要りません。</p>
+<p><a class="cta" href="../">MOAIをブラウザで開く（無料・登録不要）</a></p>
+<p>コードは<a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHubリポジトリ</a>（MIT）で確認できます。Claude Codeでの自動化の全体像は<a href="claude-code-marketing-jidoka-yarikata.html">Claude Codeでマーケティングを自動化するやり方</a>が参考になります。</p>
+</article>
+<footer>© 2026 MOAI ・ <a href="./">ブログ一覧</a> ・ <a href="../">アプリを開く</a> ・ <a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHub</a> ・ <a href="https://solederlego8-a11y.github.io/">運営メディア一覧</a></footer>
+</div>
+</body>
+</html>
