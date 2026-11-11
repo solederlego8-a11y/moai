@@ -187,7 +187,7 @@ MIT License. 自由に使い、改造し、再配布できます。
 - [SNS投稿の承認フローを無料で作る方法｜必要な3要素とチェックリスト](https://solederlego8-a11y.github.io/moai/blog/sns-toukou-shonin-flow-muryo.html)
 - [Claude Codeでマーケティングを自動化するやり方｜導入5ステップと承認つき運用](https://solederlego8-a11y.github.io/moai/blog/claude-code-marketing-jidoka-yarikata.html)
 - [AIマーケティングツールを無料・オープンソースで選ぶ基準｜5つの確認項目と導入手順](https://solederlego8-a11y.github.io/moai/blog/ai-marketing-tool-muryo-opensource.html)
-- [NoimosAIの代替を無料で｜オープンソースで置き換えられる機能・できない機能](https://solederlego8-a11y.github.io/moai/blog/noimosai-daitai-muryo.html)
+- [NoimosAI代替は無料で可能？置き換えられる機能・できない機能](https://solederlego8-a11y.github.io/moai/blog/noimosai-daitai-muryo.html)
 - [一人社長のマーケティング自動化を無料で始める｜週3時間で回す最小構成](https://solederlego8-a11y.github.io/moai/blog/hitori-shacho-marketing-jidoka-muryo.html)
 - [AIでブログとSNSを同時に回す運用手順｜1本の記事から投稿文を作る週次フロー](https://solederlego8-a11y.github.io/moai/blog/blog-sns-doujiku-ai-unyo-tejun.html)
 - [AIエージェントに任せてはいけないマーケティング業務｜人が残す5つの判断と線引き](https://solederlego8-a11y.github.io/moai/blog/ai-agent-marketing-makasete-ikenai-gyomu.html)
@@ -198,5 +198,11 @@ MIT License. 自由に使い、改造し、再配布できます。
 - [AIマーケティングを無料で始める本当の費用｜隠れコスト5項目](https://solederlego8-a11y.github.io/moai/blog/ai-marketing-muryo-kakureta-cost.html)
 - [MOAIの設定の書き方｜ミッション・トーン・禁止ワードの例文つき](https://solederlego8-a11y.github.io/moai/blog/moai-settings-mission-tone-kakikata.html)
 - [MOAIのAI担当者を増やす方法｜エージェント定義の追加と割り当て](https://solederlego8-a11y.github.io/moai/blog/moai-ai-tantosha-tsuika-customize.html)
+- [ブログとSNSのコンテンツカレンダーを無料で作る手順｜AIに週次の計画を頼む](https://solederlego8-a11y.github.io/moai/blog/content-calendar-muryo-ai-shuji.html)
+- [AIマーケティングの実績を無料で一元記録する方法｜フォロワー・PV・収益の記録項目](https://solederlego8-a11y.github.io/moai/blog/ai-marketing-jisseki-kiroku-muryo.html)
+- [MOAIのAI自動実行の権限｜「おまかせ」と「すべて許可」の違いと選び方](https://solederlego8-a11y.github.io/moai/blog/moai-ai-jikko-kengen-preset-erabikata.html)
+- [競合調査をAIに無料で依頼する手順](https://solederlego8-a11y.github.io/moai/blog/moai-kyogo-chosa-ai-muryo-irai-tejun.html)
+- [週次レポートをAIに無料で作らせる手順](https://solederlego8-a11y.github.io/moai/blog/moai-shuji-report-ai-muryo-sakusei-tejun.html)
+- [投稿が止まっているチャネルをAIに見つけさせる方法](https://solederlego8-a11y.github.io/moai/blog/moai-toukou-teishi-kenshutsu-cadence-tejun.html)
 
 <!-- article-index:end -->
