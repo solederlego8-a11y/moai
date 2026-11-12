@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問い合わせ｜MOAI</title>
+<meta name="description" content="MOAIへのお問い合わせページです。記事内容のご指摘・ご質問などはこちらからお送りください。">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif; color:#222; background:#fafafa; line-height:1.8; }
+  .wrap { max-width:720px; margin:0 auto; padding:24px 16px 64px; }
+  header { padding:16px 0 8px; }
+  header a.home { color:#222; text-decoration:none; font-weight:700; font-size:18px; }
+  h1 { font-size:26px; margin:24px 0 8px; }
+  p.lead { color:#555; font-size:14px; margin-bottom:24px; }
+  form { background:#fff; border:1px solid #e3e3e3; border-radius:10px; padding:24px; }
+  label { display:block; font-size:14px; font-weight:600; margin:16px 0 6px; }
+  label:first-child { margin-top:0; }
+  input, textarea { width:100%; border:1px solid #ccc; border-radius:6px; padding:10px 12px; font-size:15px; font-family:inherit; }
+  textarea { min-height:160px; resize:vertical; }
+  button { margin-top:24px; width:100%; background:#222; color:#fff; border:none; border-radius:6px; padding:14px; font-size:16px; font-weight:700; cursor:pointer; }
+  button:disabled { opacity:.5; }
+  .note { font-size:12px; color:#777; margin-top:16px; }
+  #done { display:none; background:#eef7ee; border:1px solid #bcd8bc; border-radius:10px; padding:24px; }
+  #error { display:none; background:#fdeeec; border:1px solid #e5c0bb; border-radius:10px; padding:16px 24px; margin-top:16px; font-size:14px; }
+  footer { margin-top:40px; font-size:12px; color:#888; text-align:center; }
+  footer a { color:#888; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><a class="home" href="index.html">MOAI</a></header>
+  <main>
+    <h1>お問い合わせ</h1>
+    <p class="lead">MOAIについてのご質問・ご要望・不具合のご報告はこちらからお寄せください。内容を確認のうえ、必要に応じてご返信いたします。</p>
+    <div id="done"><strong>送信しました。</strong><br>お問い合わせありがとうございます。内容を確認のうえ、必要に応じてご入力いただいたメールアドレスへご返信します。</div>
+    <form id="cf" action="https://formsubmit.co/naoren.38@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="【MOAI】お問い合わせ">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none">
+      <label for="c-name">お名前</label>
+      <input id="c-name" name="name" type="text" autocomplete="name" required>
+      <label for="c-email">メールアドレス</label>
+      <input id="c-email" name="email" type="email" autocomplete="email" required>
+      <label for="c-message">お問い合わせ内容</label>
+      <textarea id="c-message" name="message" required></textarea>
+      <button type="submit" id="c-submit">送信する</button>
+      <p class="note">お預かりした個人情報は、ご返信および内容確認のためにのみ使用します。</p>
+    </form>
+    <div id="error">送信に失敗しました。お手数ですが、時間をおいて再度お試しください。</div>
+  </main>
+  <footer><a href="index.html">トップページへ戻る</a> ｜ &copy; MOAI</footer>
+</div>
+<script>
+document.getElementById('cf').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var form = this, btn = document.getElementById('c-submit');
+  btn.disabled = true; btn.textContent = '送信中…';
+  var data = {};
+  new FormData(form).forEach(function (v, k) { data[k] = v; });
+  data._replyto = data.email;
+  fetch('https://formsubmit.co/ajax/naoren.38@gmail.com', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(data)
+  }).then(function (r) { if (!r.ok) throw new Error('bad'); return r.json(); })
+    .then(function () {
+      form.style.display = 'none';
+      document.getElementById('done').style.display = 'block';
+    })
+    .catch(function () {
+      btn.disabled = false; btn.textContent = '送信する';
+      document.getElementById('error').style.display = 'block';
+    });
+});
+</script>
+</body>
+</html>
