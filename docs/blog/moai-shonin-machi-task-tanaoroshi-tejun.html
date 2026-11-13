@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<!-- ga4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BSXEBHJSG1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BSXEBHJSG1', { anonymize_ip: true });
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>承認待ちタスクが溜まったときの棚卸し手順｜MOAIで止まった依頼を週1回ほどく方法 | MOAI ブログ</title>
+<meta name="description" content="MOAIで承認待ちのまま止まったタスクを週1回棚卸しする手順。状態の確認、止まった理由の4分類、承認・差し戻し・取り下げの振り分け、翌週に持ち越す件数の絞り方を整理します。">
+<link rel="canonical" href="https://solederlego8-a11y.github.io/moai/blog/moai-shonin-machi-task-tanaoroshi-tejun.html">
+<meta property="og:title" content="承認待ちタスクが溜まったときの棚卸し手順｜MOAIで止まった依頼を週1回ほどく方法">
+<meta property="og:description" content="MOAIで承認待ちのまま止まったタスクを週1回棚卸しする手順。状態の確認、止まった理由の4分類、承認・差し戻し・取り下げの振り分け、翌週に持ち越す件数の絞り方を整理します。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://solederlego8-a11y.github.io/moai/blog/moai-shonin-machi-task-tanaoroshi-tejun.html">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "image": "https://solederlego8-a11y.github.io/moai/assets/og-default.png", "headline": "承認待ちタスクが溜まったときの棚卸し手順｜MOAIで止まった依頼を週1回ほどく方法", "datePublished": "2026-11-13", "dateModified": "2026-11-13", "author": {"@type": "Organization", "name": "MOAI"}, "publisher": {"@type": "Organization", "name": "MOAI"}, "mainEntityOfPage": "https://solederlego8-a11y.github.io/moai/blog/moai-shonin-machi-task-tanaoroshi-tejun.html"}
+</script>
+<style>
+:root{--bg:#f6f7f9;--paper:#fff;--ink:#1a1d23;--muted:#5b6472;--line:#e3e6eb;--accent:#2f6bff;--accent-soft:#eaf0ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--paper:#161a21;--ink:#e8ebf0;--muted:#9aa3b2;--line:#2a3140;--accent:#5b8cff;--accent-soft:#1b2740}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.9}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+header.top{display:flex;align-items:center;gap:12px;margin-bottom:28px;font-size:14px}
+header.top a{color:var(--muted);text-decoration:none}header.top a:hover{color:var(--accent)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px 28px}
+h1{font-size:26px;line-height:1.45;margin:0 0 8px}.meta{color:var(--muted);font-size:13px;margin:0 0 24px}
+h2{font-size:20px;margin:36px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}h3{font-size:16.5px;margin:24px 0 8px}
+p{margin:0 0 16px}ul,ol{margin:0 0 16px;padding-left:22px}li{margin:0 0 6px}
+.tldr{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 24px}.tldr ul{margin:6px 0 0}
+.tw{overflow-x:auto;margin:0 0 20px}table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--accent-soft)}
+.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font-weight:700;margin:8px 0 20px}
+a{color:var(--accent)}footer{margin-top:28px;color:var(--muted);font-size:13px}
+pre{background:var(--accent-soft);padding:12px 14px;border-radius:8px;overflow-x:auto;font-size:13px;line-height:1.6}code{font-size:.92em}</style>
+<!-- ga4-cv -->
+<script>
+if(typeof gtag==='function'){document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||a.hasAttribute('data-cv-tracked'))return;var h=a.href||'';var has=function(s){return h.indexOf(s)>-1;};var asp=has('a8.net')?'a8':(has('rakuten.co.jp')||has('r10.to'))?'rakuten':(has('amazon.co.jp')||has('amzn.'))?'amazon':'';if(asp){gtag('event','affiliate_click',{asp:asp,link_url:h,link_text:(a.innerText||'').trim().slice(0,80),page_path:location.pathname});}else if(has('buy.stripe.com')){gtag('event','begin_checkout',{link_url:h,page_path:location.pathname});}},true);document.addEventListener('submit',function(e){var f=e.target;gtag('event','generate_lead',{form_id:f.id||f.getAttribute('data-subject')||f.action||'',page_path:location.pathname});},true);}
+</script>
+<!-- faq-schema -->
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "棚卸しはどのくらいの頻度でやればよいですか", "acceptedAnswer": {"@type": "Answer", "text": "週1回が目安です。週次レポートを作る日に合わせて、承認待ちの一覧を通して見る形にすると、別の予定を増やさずに続けられます。この記事では編集部の運用手順として整理しています。"}}, {"@type": "Question", "name": "承認待ちが残っているのは、運用が失敗しているということですか", "acceptedAnswer": {"@type": "Answer", "text": "そうとは限りません。確認に時間がかかる依頼や、公開のタイミングを待つ依頼は止まって見えます。大切なのは、止まっている理由が分かる状態かどうかです。理由が付いていないものから棚卸しします。"}}, {"@type": "Question", "name": "差し戻しと取り下げはどう使い分けますか", "acceptedAnswer": {"@type": "Answer", "text": "内容を直せば進められるものは差し戻し、時期が過ぎた・前提が変わったものは取り下げ、と分けるのが目安です。取り下げた理由を1行残しておくと、同じ依頼を来週また作る無駄を防げます。"}}, {"@type": "Question", "name": "ブラウザ版のMOAIでも棚卸しはできますか", "acceptedAnswer": {"@type": "Answer", "text": "できます。ただしブラウザ版では、タスクの状態を自分で書き出して、この記事の4分類で振り分ける形になります。ローカル版とは渡し方が違う点に注意してください。"}}]}
+</script>
+<meta property="og:image" content="https://solederlego8-a11y.github.io/moai/assets/og-default.png">
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a href="../">🗿 MOAI</a><span>›</span><a href="./">ブログ</a></header>
+<article class="card">
+<h1>承認待ちタスクが溜まったときの棚卸し手順｜MOAIで止まった依頼を週1回ほどく方法</h1>
+<p class="meta">公開: 2026-11-13 ・ 更新: 2026-11-13 ・ 運営: MOAI 編集部（オープンソースのMOAI開発チーム）</p>
+
+<div class="tldr"><strong>30秒で判断</strong>
+<ul>
+<li>承認待ちの滞留は「数」ではなく「理由」でほどく。週1回、止まった理由を4つ（確認待ち・材料不足・時期待ち・前提が変わった）に分ける</li>
+<li>振り分けは承認・差し戻し・取り下げの3つだけ。判断できないものは理由を1行書いて翌週へ回し、無言で残さない</li>
+<li>翌週に持ち越す承認待ちは絞る。棚卸しの結果は週次レポートと月次振り返りの材料になる</li>
+</ul>
+<table><thead><tr><th>あなたの状況</th><th>やること</th></tr></thead><tbody>
+<tr><td>承認待ちが何件あるか分からない</td><td>まず状態ごとの件数を数えるところから始める。この記事の手順1〜2だけ先にやる</td></tr>
+<tr><td>承認待ちは多いが中身は進んでいる</td><td>理由の分類だけを行い、時期待ちのものには再確認する日を書く</td></tr>
+<tr><td>同じ依頼が何度も差し戻される</td><td>差し戻し理由を材料不足か前提の食い違いかに分け、依頼文の型を見直す</td></tr>
+</tbody></table></div>
+
+<p>AIへの依頼を回していると、生成物そのものより「承認待ちのまま止まったタスク」が少しずつ溜まっていきます。溜まった一覧は眺めるだけで負担になり、結局どれも進まなくなります。この記事では、MOAIのタスクの状態（待機・実行中・承認待ち・承認済み・公開済み）を使って、週1回、承認待ちを棚卸しする手順を整理します。手順は編集部の運用案であり、MOAIに棚卸しの自動機能があるという説明ではありません。タスクの状態については、既存記事で確認できた範囲をもとに書いています（確認日 2026-11-13）。</p>
+
+<h2>最初に、状態ごとの件数を数える</h2>
+<p>棚卸しの最初は、承認待ちを1件ずつ読むことではありません。まず状態ごとの件数を数えます。</p>
+<div class="tw"><table><thead><tr><th>状態</th><th>見ること</th><th>関連する既存記事</th></tr></thead><tbody>
+<tr><td>承認待ち</td><td>件数と、いちばん古いものの日付。今回の棚卸しの対象</td><td><a href="sns-toukou-shonin-flow-muryo.html">承認フローを無料で作る方法</a></td></tr>
+<tr><td>承認済み（未公開）</td><td>公開まで進んでいないものがないか。公開済みへの更新漏れもここで見つかる</td><td><a href="moai-getsuji-furikaeri-ai-muryo-tejun.html">月次振り返りをAIに頼む手順</a></td></tr>
+<tr><td>実行中・待機</td><td>承認待ちの後ろに控えている量。ここが多い週は、新しい依頼を増やさない判断も要る</td><td><a href="content-calendar-muryo-ai-shuji.html">コンテンツカレンダーを無料で作る手順</a></td></tr>
+</tbody></table></div>
+<p>件数が分かると、「全部止まっている」という印象と実態のずれが見えます。承認待ちが数件で、古いものが1〜2件だけなら、その古いものに絞って理由を確認すれば十分です。</p>
+
+<h2>止まった理由を4つに分ける</h2>
+<p>承認待ちを1件ずつ開き、止まった理由を次の4つのどれかに当てはめます。当てはまらないものは「その他」として理由を1行書きます。</p>
+<div class="tw"><table><thead><tr><th>理由</th><th>典型例</th><th>次の動き</th></tr></thead><tbody>
+<tr><td>確認待ち</td><td>内容はできているが、運営者がまだ読んでいない</td><td>その場で読んで承認か差し戻しを決める</td></tr>
+<tr><td>材料不足</td><td>数字・画像・リンクなど、判断に要る材料が生成物に付いていない</td><td>不足する材料を明記して差し戻す</td></tr>
+<tr><td>時期待ち</td><td>公開日や告知のタイミングを待っている</td><td>再確認する日を書いて、その日まで触らない</td></tr>
+<tr><td>前提が変わった</td><td>計画の変更で、依頼した内容自体が古くなった</td><td>取り下げて、必要なら新しい依頼として作り直す</td></tr>
+</tbody></table></div>
+<p>材料不足の差し戻しが繰り返される場合は、タスク側の問題ではなく依頼文の型の問題です。材料の渡し方は<a href="moai-shuji-report-ai-muryo-sakusei-tejun.html">週次レポートをAIに作らせる手順</a>など、依頼の種類ごとの記事で扱っている型に寄せると、差し戻しの理由が減っていきます。</p>
+
+<h2>振り分けは3つだけにする</h2>
+<ol>
+<li>承認：内容と材料がそろっているものを承認し、公開までの担当と日を決める</li>
+<li>差し戻し：直せば進むものに、直す点を1〜3個に絞って理由を付けて戻す</li>
+<li>取り下げ：時期が過ぎたもの・前提が変わったものを閉じ、理由を1行残す</li>
+</ol>
+<p>この3つに当てはまらず判断できないものは、無言で残さず「何が決まれば判断できるか」を1行書いて翌週へ回します。書き残すことが、翌週の棚卸しを速くします。承認の基準そのものは<a href="sns-toukou-shonin-flow-muryo.html">承認フローを無料で作る方法</a>のチェックリストが土台になります。</p>
+
+<h2>棚卸しの結果を、週次と月次につなぐ</h2>
+<p>棚卸しで出た数字（承認待ちの件数、差し戻しの理由の内訳、取り下げの件数）は、そのまま週次レポートの材料になります。とくに差し戻し理由の内訳は、翌週の依頼の出し方を変える根拠になります。月単位で見返すと、どの理由で止まることが多いかが傾向として分かるため、<a href="moai-getsuji-furikaeri-ai-muryo-tejun.html">月次振り返り</a>の材料にもそのまま使えます。</p>
+<ul>
+<li>確認待ちが多い週が続くなら、承認に使う時間そのものを予定に入れる</li>
+<li>材料不足が多いなら、依頼文の型に「材料の渡し方」を1項目足す</li>
+<li>前提が変わった取り下げが多いなら、計画を作る単位を短くする</li>
+</ul>
+
+<h2>よくある質問</h2>
+<h3>Q. 棚卸しはどのくらいの頻度でやればよいですか</h3>
+<p>週1回が目安です。週次レポートを作る日に合わせて、承認待ちの一覧を通して見る形にすると、別の予定を増やさずに続けられます。この記事では編集部の運用手順として整理しています。</p>
+<h3>Q. 承認待ちが残っているのは、運用が失敗しているということですか</h3>
+<p>そうとは限りません。確認に時間がかかる依頼や、公開のタイミングを待つ依頼は止まって見えます。大切なのは、止まっている理由が分かる状態かどうかです。理由が付いていないものから棚卸しします。</p>
+<h3>Q. 差し戻しと取り下げはどう使い分けますか</h3>
+<p>内容を直せば進められるものは差し戻し、時期が過ぎた・前提が変わったものは取り下げ、と分けるのが目安です。取り下げた理由を1行残しておくと、同じ依頼を来週また作る無駄を防げます。</p>
+<h3>Q. ブラウザ版のMOAIでも棚卸しはできますか</h3>
+<p>できます。ただしブラウザ版では、タスクの状態を自分で書き出して、この記事の4分類で振り分ける形になります。ローカル版とは渡し方が違う点に注意してください。</p>
+
+<h2>今週分は、まず件数を数えるところから</h2>
+<p>特別な準備は要りません。状態ごとの件数を数え、承認待ちの古いものから理由を4分類で付けてみてください。ブラウザ版なら登録は不要です。</p>
+<p><a class="cta" href="../">MOAIをブラウザで開く（無料・登録不要）</a></p>
+<p>コードは<a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHubリポジトリ</a>（MIT）で確認できます。</p>
+
+</article>
+<footer>© 2026 MOAI ・ <a href="./">ブログ一覧</a> ・ <a href="../">アプリを開く</a> ・ <a href="https://github.com/solederlego8-a11y/moai" target="_blank" rel="noopener">GitHub</a> ・ <a href="https://solederlego8-a11y.github.io/">運営メディア一覧</a></footer>
+</div>
+</body>
+</html>
